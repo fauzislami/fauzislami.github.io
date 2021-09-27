@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Blog · Muhammad Fauzi Islami</title>
-    <link>https://fauzislami.github.io/posts/</link>
+    <link>/posts/</link>
     <description>Recent content in Posts on Blog · Muhammad Fauzi Islami</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 15 Apr 2021 23:39:49 +0530</lastBuildDate><atom:link href="https://fauzislami.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 27 Sep 2021 10:49:57 +0700</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Theme Documentation - Basics</title>
-      <link>https://fauzislami.github.io/posts/theme-documentation-basics/</link>
+      <link>/posts/theme-documentation-basics/</link>
       <pubDate>Fri, 06 Mar 2020 21:29:01 +0800</pubDate>
       
-      <guid>https://fauzislami.github.io/posts/theme-documentation-basics/</guid>
+      <guid>/posts/theme-documentation-basics/</guid>
       <description>Gokarna is an opinionated theme with a focus on minimalism and simplicity.
 Installation The following steps are here to help you initialize your new website. If you don’t know Hugo at all, we strongly suggest you learn more about it by following this great documentation for beginners.
 a. Create Your Project Hugo provides a new command to create a new website:
@@ -21,10 +21,10 @@ hugo new site my_website cd my_website b. Install the Theme The theme’s reposi
     
     <item>
       <title>Theme Documentation - Advanced</title>
-      <link>https://fauzislami.github.io/posts/theme-documentation-advanced/</link>
+      <link>/posts/theme-documentation-advanced/</link>
       <pubDate>Wed, 06 May 2020 21:29:01 +0800</pubDate>
       
-      <guid>https://fauzislami.github.io/posts/theme-documentation-advanced/</guid>
+      <guid>/posts/theme-documentation-advanced/</guid>
       <description>Gokarna is an opinionated theme with a focus on minimalism and simplicity.
 Content Types This theme supports two types of content types: post and page. To specify them, you need to add them in your markdown metadata.
 Post This is the default blog post type which will be shown in your &amp;ldquo;Posts&amp;rdquo; section and who&amp;rsquo;s tags will be indexed. Basically, a normal blog post.
@@ -33,19 +33,19 @@ Post This is the default blog post type which will be shown in your &amp;ldquo;P
     
     <item>
       <title>Markdown Syntax Guide</title>
-      <link>https://fauzislami.github.io/posts/markdown-syntax/</link>
+      <link>/posts/markdown-syntax/</link>
       <pubDate>Wed, 19 Jun 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://fauzislami.github.io/posts/markdown-syntax/</guid>
+      <guid>/posts/markdown-syntax/</guid>
       <description>&lt;p&gt;This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Emoji Support</title>
-      <link>https://fauzislami.github.io/posts/emoji-support/</link>
+      <link>/posts/emoji-support/</link>
       <pubDate>Thu, 01 Oct 2020 17:55:28 +0800</pubDate>
       
-      <guid>https://fauzislami.github.io/posts/emoji-support/</guid>
+      <guid>/posts/emoji-support/</guid>
       <description>Emoji can be enabled in a Hugo project in a number of ways.
 The emojify function can be called directly in templates or Inline Shortcodes.
 To enable emoji globally, set enableEmoji to true in your site configuration and then you can type emoji shorthand codes directly in content files.
@@ -55,10 +55,10 @@ Gone camping! {?:}tent: Be back soon. That is so funny!</description>
     
     <item>
       <title>Hello</title>
-      <link>https://fauzislami.github.io/posts/hello/</link>
+      <link>/posts/hello/</link>
       <pubDate>Sun, 01 Nov 2020 17:55:28 +0800</pubDate>
       
-      <guid>https://fauzislami.github.io/posts/hello/</guid>
+      <guid>/posts/hello/</guid>
       <description>Emoji can be enabled in a Hugo project in a number of ways.
 The emojify function can be called directly in templates or Inline Shortcodes.
 To enable emoji globally, set enableEmoji to true in your site configuration and then you can type emoji shorthand codes directly in content files.
@@ -67,11 +67,20 @@ Gone camping! {?:}tent: Be back soon. That is so funny!</description>
     </item>
     
     <item>
+      <title>Testing Post</title>
+      <link>/posts/testing-post/</link>
+      <pubDate>Mon, 27 Sep 2021 10:49:57 +0700</pubDate>
+      
+      <guid>/posts/testing-post/</guid>
+      <description>hello this is my testing post.</description>
+    </item>
+    
+    <item>
       <title>Lorem Ipsum</title>
-      <link>https://fauzislami.github.io/posts/lorem-ipsum/</link>
+      <link>/posts/lorem-ipsum/</link>
       <pubDate>Thu, 15 Apr 2021 23:39:49 +0530</pubDate>
       
-      <guid>https://fauzislami.github.io/posts/lorem-ipsum/</guid>
+      <guid>/posts/lorem-ipsum/</guid>
       <description>Heading 1 &amp;ldquo;Lorem ipsum dolor sit amet, consectetaur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
     </item>
     

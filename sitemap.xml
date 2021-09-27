@@ -2,68 +2,71 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://fauzislami.github.io/posts/theme-documentation-basics/</loc>
+    <loc>/posts/theme-documentation-basics/</loc>
     <lastmod>2020-03-06T21:29:01+08:00</lastmod>
   </url><url>
-    <loc>https://fauzislami.github.io/posts/theme-documentation-advanced/</loc>
+    <loc>/posts/theme-documentation-advanced/</loc>
     <lastmod>2020-05-06T21:29:01+08:00</lastmod>
   </url><url>
-    <loc>https://fauzislami.github.io/posts/markdown-syntax/</loc>
+    <loc>/posts/markdown-syntax/</loc>
     <lastmod>2019-06-19T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://fauzislami.github.io/posts/emoji-support/</loc>
+    <loc>/posts/emoji-support/</loc>
     <lastmod>2020-10-01T17:55:28+08:00</lastmod>
   </url><url>
-    <loc>https://fauzislami.github.io/posts/hello/</loc>
+    <loc>/posts/hello/</loc>
     <lastmod>2020-11-01T17:55:28+08:00</lastmod>
   </url><url>
-    <loc>https://fauzislami.github.io/</loc>
+    <loc>/</loc>
+    <lastmod>2021-09-27T10:49:57+07:00</lastmod>
+  </url><url>
+    <loc>/posts/</loc>
+    <lastmod>2021-09-27T10:49:57+07:00</lastmod>
+  </url><url>
+    <loc>/posts/testing-post/</loc>
+    <lastmod>2021-09-27T10:49:57+07:00</lastmod>
+  </url><url>
+    <loc>/tags/def/</loc>
     <lastmod>2021-04-15T23:39:49+05:30</lastmod>
   </url><url>
-    <loc>https://fauzislami.github.io/tags/def/</loc>
+    <loc>/posts/lorem-ipsum/</loc>
     <lastmod>2021-04-15T23:39:49+05:30</lastmod>
   </url><url>
-    <loc>https://fauzislami.github.io/posts/lorem-ipsum/</loc>
+    <loc>/tags/</loc>
     <lastmod>2021-04-15T23:39:49+05:30</lastmod>
   </url><url>
-    <loc>https://fauzislami.github.io/posts/</loc>
+    <loc>/tags/xyz/</loc>
     <lastmod>2021-04-15T23:39:49+05:30</lastmod>
   </url><url>
-    <loc>https://fauzislami.github.io/tags/</loc>
-    <lastmod>2021-04-15T23:39:49+05:30</lastmod>
-  </url><url>
-    <loc>https://fauzislami.github.io/tags/xyz/</loc>
-    <lastmod>2021-04-15T23:39:49+05:30</lastmod>
-  </url><url>
-    <loc>https://fauzislami.github.io/tags/hello/</loc>
+    <loc>/tags/hello/</loc>
     <lastmod>2020-11-01T17:55:28+08:00</lastmod>
   </url><url>
-    <loc>https://fauzislami.github.io/tags/emoji/</loc>
+    <loc>/tags/emoji/</loc>
     <lastmod>2020-10-01T17:55:28+08:00</lastmod>
   </url><url>
-    <loc>https://fauzislami.github.io/tags/configuration/</loc>
+    <loc>/tags/configuration/</loc>
     <lastmod>2020-05-06T21:29:01+08:00</lastmod>
   </url><url>
-    <loc>https://fauzislami.github.io/tags/installation/</loc>
+    <loc>/tags/installation/</loc>
     <lastmod>2020-05-06T21:29:01+08:00</lastmod>
   </url><url>
-    <loc>https://fauzislami.github.io/tags/markdown/</loc>
+    <loc>/tags/markdown/</loc>
     <lastmod>2020-05-06T21:29:01+08:00</lastmod>
   </url><url>
-    <loc>https://fauzislami.github.io/tags/css/</loc>
+    <loc>/tags/css/</loc>
     <lastmod>2019-06-19T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://fauzislami.github.io/tags/html/</loc>
+    <loc>/tags/html/</loc>
     <lastmod>2019-06-19T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://fauzislami.github.io/projects/bludhaven/</loc>
+    <loc>/projects/bludhaven/</loc>
   </url><url>
-    <loc>https://fauzislami.github.io/categories/</loc>
+    <loc>/categories/</loc>
   </url><url>
-    <loc>https://fauzislami.github.io/projects/hydra/</loc>
+    <loc>/projects/hydra/</loc>
   </url><url>
-    <loc>https://fauzislami.github.io/projects/</loc>
+    <loc>/projects/</loc>
   </url><url>
-    <loc>https://fauzislami.github.io/projects/tatooine/</loc>
+    <loc>/projects/tatooine/</loc>
   </url>
 </urlset>

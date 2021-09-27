@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>hello on Blog · Muhammad Fauzi Islami</title>
-    <link>https://fauzislami.github.io/tags/hello/</link>
+    <link>/tags/hello/</link>
     <description>Recent content in hello on Blog · Muhammad Fauzi Islami</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 01 Nov 2020 17:55:28 +0800</lastBuildDate><atom:link href="https://fauzislami.github.io/tags/hello/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 01 Nov 2020 17:55:28 +0800</lastBuildDate><atom:link href="/tags/hello/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Hello</title>
-      <link>https://fauzislami.github.io/posts/hello/</link>
+      <link>/posts/hello/</link>
       <pubDate>Sun, 01 Nov 2020 17:55:28 +0800</pubDate>
       
-      <guid>https://fauzislami.github.io/posts/hello/</guid>
+      <guid>/posts/hello/</guid>
       <description>Emoji can be enabled in a Hugo project in a number of ways.
 The emojify function can be called directly in templates or Inline Shortcodes.
 To enable emoji globally, set enableEmoji to true in your site configuration and then you can type emoji shorthand codes directly in content files.
