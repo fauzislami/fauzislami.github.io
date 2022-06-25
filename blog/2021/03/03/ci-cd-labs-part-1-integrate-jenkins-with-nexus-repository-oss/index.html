@@ -172,7 +172,7 @@
 
     <div class="post-content">
         <p>
-            <!-- raw HTML omitted -->
+            <p><img src="/images/ci-cd-labs-part1/1.png" alt="CI/CD Part 1" title="CI/CD Part 1"></p>
 <p>This is the first lab of lab series to learn CI/CD. In this lab, I will only focus on documenting the implementations step by step and not on the installation. Maybe on another occasion, I may also include how to install each of the tools used in this lab.</p>
 <p>The following are some of the parts of this series :</p>
 <ol>
@@ -207,15 +207,15 @@ Specifications :<br>
 <li>Login to nexus as admin, then create one user.</li>
 </ul>
 <p>Here the user is named jenkins-user, don’t forget to grant roles as admin as shown below.</p>
-<!-- raw HTML omitted -->
+<p><img src="/images/ci-cd-labs-part1/2.png" alt="CI/CD Part 1" title="CI/CD Part 1"></p>
 <ul>
 <li>Create a image registry with the specifications as shown below</li>
 </ul>
-<!-- raw HTML omitted -->
+<p><img src="/images/ci-cd-labs-part1/3.png" alt="CI/CD Part 1" title="CI/CD Part 1"></p>
 <ul>
 <li>Next, create an artifactory with specifications like the picture below:</li>
 </ul>
-<!-- raw HTML omitted -->
+<p><img src="/images/ci-cd-labs-part1/4.png" alt="CI/CD Part 1" title="CI/CD Part 1"></p>
 <p>The configuration from the nexus side is completed. In essence, we only need to create a user that will be used by Jenkins, 1 image registry and 1 artifactory.</p>
 <p><strong>Jenkins Configurations</strong></p>
 <p>Jenkins is a powerful open source CI / CD tool because it is supported by many plugins so it will be easier to integrate with any third-party tools.</p>
@@ -223,7 +223,7 @@ Specifications :<br>
 <ul>
 <li>Log in first as an admin to Jenkins</li>
 </ul>
-<!-- raw HTML omitted -->
+<p><img src="/images/ci-cd-labs-part1/5.png" alt="CI/CD Part 1" title="CI/CD Part 1"></p>
 <p>Install the required plugins on the <strong>Manage Jenkins</strong> menu -&gt; <strong>Manage Plugins</strong> -&gt; [TAB] <strong>Available</strong>. Then install the plugin below:<br>
 – Nexus Artifact Uploader<br>
 – Docker Pipeline</p>
@@ -232,33 +232,29 @@ Specifications :<br>
 <ul>
 <li>Maven</li>
 </ul>
-<!-- raw HTML omitted -->
+<p><img src="/images/ci-cd-labs-part1/6.png" alt="CI/CD Part 1" title="CI/CD Part 1"></p>
 <ul>
 <li>Openjdk</li>
 </ul>
-<!-- raw HTML omitted -->
+<p><img src="/images/ci-cd-labs-part1/7.png" alt="CI/CD Part 1" title="CI/CD Part 1"></p>
 <ul>
 <li>Docker Client</li>
 </ul>
-<!-- raw HTML omitted -->
-<ul>
-<li>Git</li>
-</ul>
-<!-- raw HTML omitted -->
+<p><img src="/images/ci-cd-labs-part1/8.png" alt="CI/CD Part 1" title="CI/CD Part 1"></p>
 <p>Then save it.</p>
 <p>Next, we will immediately create a pipeline that will build source code and image to be stored in nexus.</p>
 <p>Then we need to create a credential for nexus on jenkins so that jenkins can interact with nexus. Use the username and password that was created earlier on nexus, namely <strong>jenkins-user</strong></p>
-<!-- raw HTML omitted -->
+<p><img src="/images/ci-cd-labs-part1/10.png" alt="CI/CD Part 1" title="CI/CD Part 1"></p>
 <p>Then the final step is to create a job in which there is a pipeline to build the source code into an artifact and an image which will later be stored on nexus.</p>
-<p>Select <strong>New Item</strong> -&gt; <strong>Pipeline</strong>. Here I create a pipeline in a Jenkinsfile which is stored on my Github repo( <!-- raw HTML omitted --><!-- raw HTML omitted --><a href="https://github.com/fauzislami/jenkins-nexus-integration.git">https://github.com/fauzislami/jenkins-nexus-integration.git</a><!-- raw HTML omitted --><!-- raw HTML omitted --> __).</p>
-<!-- raw HTML omitted -->
+<p>Select <strong>New Item</strong> -&gt; <strong>Pipeline</strong>. Here I create a pipeline in a Jenkinsfile which is stored on my Github repo( <!-- raw HTML omitted --><!-- raw HTML omitted --><a href="https://github.com/fauzislami/jenkins-nexus-integration.git">https://github.com/fauzislami/jenkins-nexus-integration.git</a><!-- raw HTML omitted --><!-- raw HTML omitted -->).</p>
+<p><img src="/images/ci-cd-labs-part1/11.png" alt="CI/CD Part 1" title="CI/CD Part 1"></p>
 <p>Then save it.</p>
 <p>Then trigger the build manually. Here there are 3 previous builds that failed and can be ignored, because those were still an adjustment stage LOL. However, in the next build, it has succeeded to push artifacts and images</p>
-<!-- raw HTML omitted -->
+<p><img src="/images/ci-cd-labs-part1/12.png" alt="CI/CD Part 1" title="CI/CD Part 1"></p>
 <p>This is an artifact that has been successfully stored in nexus :</p>
-<!-- raw HTML omitted -->
+<p><img src="/images/ci-cd-labs-part1/13.png" alt="CI/CD Part 1" title="CI/CD Part 1"></p>
 <p>And this is an image that has been successfully stored to nexus :</p>
-<!-- raw HTML omitted -->
+<p><img src="/images/ci-cd-labs-part1/14.png" alt="CI/CD Part 1" title="CI/CD Part 1"></p>
         </p>
     </div>
 </div>

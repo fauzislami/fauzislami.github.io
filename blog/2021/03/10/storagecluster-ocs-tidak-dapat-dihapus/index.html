@@ -171,10 +171,10 @@
     <div class="post-content">
         <p>
             <p>Ada kalanya keanehan terjadi ketika sedang mengerjakan tasks di project. Salah satu hal aneh tersebut yang penulis adalah menghapus sebuah objek yang tidak berhasil terhapus tanpa alasan yang diketahui sampai saat ini oleh penulis.</p>
-<!-- raw HTML omitted -->
+<p><img src="/images/cannot-delete-storagecluster/1.jpeg" alt="Scratchpad" title="Scratchpad"></p>
 <p>Setelah mencari-cari tahu cara menghapusnya secara paksa, cukup melakukan patch secara manual</p>
-<!-- raw HTML omitted -->
-<p>Pada command di atas , terlihat jelas <strong>finalizers</strong> dibuat valuenya menjadi <strong>null</strong>. Namun sebenarnya, sebelum mengeksekusi command tersebut penulis mencoba untuk melakukannya dengan mengedit <strong>StorageCluster</strong> tersebut secara manual dengan menggunakan perintah <em>oc edit storagecluster ocs-storagecluster</em>, lalu merubah value pada key <strong>finalizers</strong> menjajdi <strong>null</strong>, namun ketika konfigurasi tersebut disimpan tidak terjadi apa-apa dan StorageCluster tetap stuck pada status <strong>Deleting</strong>. Lalu setelah, barulah solusi di atas dieksekusi dan StorageCluster berhasil dihapus.</p>
+<pre tabindex="0"><code>oc patch -n openshift-storage storagecluster/ocs-storagecluster --type=merge -p '{&quot;metadata&quot;: {&quot;finalizers&quot;:null}}'
+</code></pre><p>Pada command di atas , terlihat jelas <strong>finalizers</strong> dibuat valuenya menjadi <strong>null</strong>. Namun sebenarnya, sebelum mengeksekusi command tersebut penulis mencoba untuk melakukannya dengan mengedit <strong>StorageCluster</strong> tersebut secara manual dengan menggunakan perintah <em>oc edit storagecluster ocs-storagecluster</em>, lalu merubah value pada key <strong>finalizers</strong> menjajdi <strong>null</strong>, namun ketika konfigurasi tersebut disimpan tidak terjadi apa-apa dan StorageCluster tetap stuck pada status <strong>Deleting</strong>. Lalu setelah, barulah solusi di atas dieksekusi dan StorageCluster berhasil dihapus.</p>
 <p>Semoga bermanfaat.</p>
         </p>
     </div>

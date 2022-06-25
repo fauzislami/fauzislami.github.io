@@ -13,7 +13,7 @@
       <pubDate>Wed, 10 Mar 2021 05:23:00 +0000</pubDate>
       
       <guid>https://fauzislami.github.io/blog/2021/03/10/menambahkan-trusted-certificate-pada-jvm-di-jenkins/</guid>
-      <description>&lt;!-- raw HTML omitted --&gt;
+      <description>&lt;p&gt;&lt;img src=&#34;https://fauzislami.github.io/images/add-trusted-certificate-in-jvm/1.png&#34; alt=&#34;Scratchpad&#34; title=&#34;Scratchpad&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Pada tulisan ini membahas sebuah kendala yang dialami penulis ketika melakukan integrasi Jenkins dengan Jira, Bitbucket dan Nexus yang menggunakan HTTPS sebagai protokolnya. Pada saat melakukan test connection terdapat error : &lt;strong&gt;&lt;em&gt;“&lt;/em&gt;&lt;/strong&gt;_ &lt;strong&gt;unable to find valid certification path to requested target jenkins&lt;/strong&gt;_ “&lt;/p&gt;</description>
     </item>
     

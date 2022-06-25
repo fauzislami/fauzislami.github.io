@@ -32,8 +32,7 @@
       <pubDate>Mon, 18 Jan 2021 17:20:00 +0000</pubDate>
       
       <guid>https://fauzislami.github.io/blog/2021/01/18/automating-k8s-cluster-installation-with-kubespray/</guid>
-      <description>&lt;!-- raw HTML omitted --&gt;
-&lt;p&gt;&lt;img src=&#34;https://fauzislami.github.io/images/automating-k8s-cluster-kubespray/pic-1.png&#34; alt=&#34;kubespray&#34; title=&#34;kubespray&#34;&gt;&lt;/p&gt;
+      <description>&lt;p&gt;&lt;img src=&#34;https://fauzislami.github.io/images/automating-k8s-cluster-kubespray/pic-1.png&#34; alt=&#34;kubespray&#34; title=&#34;kubespray&#34;&gt;&lt;/p&gt;
 &lt;p&gt;There are various ways to perform a kubernetes installation. If you look at the environment in which kubernetes will be installed on, you have options that can be done, namely:&lt;/p&gt;</description>
     </item>
     

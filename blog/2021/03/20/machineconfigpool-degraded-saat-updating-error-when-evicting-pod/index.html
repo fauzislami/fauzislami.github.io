@@ -170,16 +170,19 @@
 
     <div class="post-content">
         <p>
-            <!-- raw HTML omitted -->
+            <p><img src="/images/machineconfigpool-issue/1.png" alt="Scratchpad" title="Scratchpad"></p>
 <p>Kejadian ini seringkali terjadi ketika melakukan sebuah perubahan cluster yang mengharuskan setiap nodes pada cluster konsolidasi dengan perubahan yang baru saja diterapkan. Pada masalah yang penulis alami, penulis ingin menambahkan private registry ke dalam cluster agar bisa dikenali sebagai insecure registry. Namun setelah selesai dikonfigurasi dan cluster otomatis melakukan konsolidasi konfigurasi ke setiap nodes (menambahkan insecure registry), terdapat suatu hal yang janggal ketika melihat kondisi salah satu node stuck di status <strong><em>“Ready,SchedulingDisabled</em>“</strong> dengan waktu yang lama dan tidak normal. Setelah dilakukan pengecekan pada node ternyata terdapat 1 pod yang bermasalah yang tidak bisa dihapus dari node tersebut :</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<p>Masalah ini diperjelas dengan MCP yang terlihat terdapat 1 node berstatus <strong><em>degraded</em></strong> :</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<p>Setelah dicari tahu akar permasalahannya adalah ketika node tersebut melakukan penyesuaian konfigurasi yang baru, maka akan ada saatnya node tersebut harus dilakukan restart secara otomatis. Namun sebelum node tersebut restart, maka pod yang berjalan di atasnya akan dipindahkan ke node yang lain. Uniknya pod ini tidak bisa dipindahkan karena pada PDB ( Pod Disruption Budget ) konfigurasi <strong><em>maxUnavailable</em></strong> nya adalah 0, yang dimana artinya adalah pod tersebut tidak bisa dimatikan karena ketidaktersediaan maksimumnya adalah tidak ada alias nol, karena pada saat pemindahan pod, pod tersebut akan di-<em>terminate</em> terlebih dahulu. Sebuah PDB membatasi jumlah Pod yang boleh mati secara bersamaan pada aplikasi yang direplikasi dikarenakan disrupsi yang disengaja. Misalnya, sebuah aplikasi yang bekerja secara <em>quorum</em> mau memastikan bahwa jumlah replika yang berjalan tidak jatuh ke bawah yang dibutuhkan untuk membentuk sebuah <em>quorum</em>. Maka dari itu perlu ketidaktersediaan maksimumnya lebih dari 0. Disini penulis set parameter <strong><em>maxUnavailable</em></strong> menjadi 3, dengan cara di bawah ini :</p>
-<!-- raw HTML omitted -->
-<p>Setelah perintah di atas dilakukan maka pod seharusnya berhasil terminated dan MCP akan kembali melakukan update.</p>
+<pre tabindex="0"><code>Last Transition Time:  2021-03-17T07:03:57Z
+Message:               Node storage-1.dev.example.go.id is reporting: &quot;failed to drain node (5 tries): timed out waiting for the condition: error when evicting pod \&quot;rook-ceph-osd-0-7cbdc4d676-5xjgp\&quot;: global timeout reached: 1m30s&quot;
+Reason:                1 nodes are reporting degraded status on sync
+Status:                True              True
+</code></pre><p>Masalah ini diperjelas dengan MCP yang terlihat terdapat 1 node berstatus <strong><em>degraded</em></strong> :</p>
+<pre tabindex="0"><code>NAME     CONFIG                                             UPDATED   UPDATING   DEGRADED   MACHINECOUNT   READYMACHINECOUNT   UPDATEDMACHINECOUNT   DEGRADEDMACHINECOUNT   AGE
+master   rendered-master-5ec33290c470c64d0592f4ca1eab9991   True      False      False      3              3                   3                     0                      88d
+worker   rendered-worker-f8b64999b0def1083501ba286c701aab   False     True       True       22             2                   2                     1                      88d
+</code></pre><p>Setelah dicari tahu akar permasalahannya adalah ketika node tersebut melakukan penyesuaian konfigurasi yang baru, maka akan ada saatnya node tersebut harus dilakukan restart secara otomatis. Namun sebelum node tersebut restart, maka pod yang berjalan di atasnya akan dipindahkan ke node yang lain. Uniknya pod ini tidak bisa dipindahkan karena pada PDB ( Pod Disruption Budget ) konfigurasi <strong><em>maxUnavailable</em></strong> nya adalah 0, yang dimana artinya adalah pod tersebut tidak bisa dimatikan karena ketidaktersediaan maksimumnya adalah tidak ada alias nol, karena pada saat pemindahan pod, pod tersebut akan di-<em>terminate</em> terlebih dahulu. Sebuah PDB membatasi jumlah Pod yang boleh mati secara bersamaan pada aplikasi yang direplikasi dikarenakan disrupsi yang disengaja. Misalnya, sebuah aplikasi yang bekerja secara <em>quorum</em> mau memastikan bahwa jumlah replika yang berjalan tidak jatuh ke bawah yang dibutuhkan untuk membentuk sebuah <em>quorum</em>. Maka dari itu perlu ketidaktersediaan maksimumnya lebih dari 0. Disini penulis set parameter <strong><em>maxUnavailable</em></strong> menjadi 3, dengan cara di bawah ini :</p>
+<pre tabindex="0"><code>oc patch pdb &lt;pdb_name&gt; -n &lt;project_name&gt; --type=merge -p '{&quot;spec&quot;:{&quot;maxUnavailable&quot;:3}}''
+</code></pre><p>Setelah perintah di atas dilakukan maka pod seharusnya berhasil terminated dan MCP akan kembali melakukan update.</p>
 <p>Semoga bermanfaat.</p>
 <p><strong><em>Ref</em></strong> : <a href="https://access.redhat.com/solutions/5838671">https://access.redhat.com/solutions/5838671</a></p>
         </p>
