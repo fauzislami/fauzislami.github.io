@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Kubespray on Blog · Muhammad Fauzi Islami</title>
+    <link>https://fauzislami.github.io/tags/kubespray/</link>
+    <description>Recent content in Kubespray on Blog · Muhammad Fauzi Islami</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 17 Oct 2021 10:16:47 +0000</lastBuildDate><atom:link href="https://fauzislami.github.io/tags/kubespray/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Highly Available Kubernetes Cluster Using HAproxy and Keepalived</title>
+      <link>https://fauzislami.github.io/blog/2021/10/17/highly-available-kubernetes-cluster-with-haproxy-and-keepalived/</link>
+      <pubDate>Sun, 17 Oct 2021 10:16:47 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/blog/2021/10/17/highly-available-kubernetes-cluster-with-haproxy-and-keepalived/</guid>
+      <description>Kubernetes provides us a convenient way to make our application easier to maintain and more scalable. Since kubernetes is only an abstraction that runs on a set of machines and consists of many components, we have some work to do to keep our kubernetes cluster well-established and healthy, especially to make that cluster highly available. In this case, I use two HAproxy instances to balance the load over the network or we usually say that as load balancing.</description>
+    </item>
+    
+    <item>
+      <title>Automating K8S Cluster Installation with Kubespray</title>
+      <link>https://fauzislami.github.io/blog/2021/01/18/automating-k8s-cluster-installation-with-kubespray/</link>
+      <pubDate>Mon, 18 Jan 2021 17:20:00 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/blog/2021/01/18/automating-k8s-cluster-installation-with-kubespray/</guid>
+      <description>&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;img src=&#34;https://fauzislami.github.io/images/automating-k8s-cluster-kubespray/pic-1.png&#34; alt=&#34;kubespray&#34; title=&#34;kubespray&#34;&gt;&lt;/p&gt;
+&lt;p&gt;There are various ways to perform a kubernetes installation. If you look at the environment in which kubernetes will be installed on, you have options that can be done, namely:&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

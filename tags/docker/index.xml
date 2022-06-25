@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Docker on Blog · Muhammad Fauzi Islami</title>
+    <link>https://fauzislami.github.io/tags/docker/</link>
+    <description>Recent content in Docker on Blog · Muhammad Fauzi Islami</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 14 Oct 2021 06:18:27 +0000</lastBuildDate><atom:link href="https://fauzislami.github.io/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Proxying Docker Registry Through Nexus Repository Manager</title>
+      <link>https://fauzislami.github.io/blog/2021/10/14/proxying-docker-registry-through-nexus-repository-manager/</link>
+      <pubDate>Thu, 14 Oct 2021 06:18:27 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/blog/2021/10/14/proxying-docker-registry-through-nexus-repository-manager/</guid>
+      <description>&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;In this &lt;!-- raw HTML omitted --&gt;post&lt;!-- raw HTML omitted --&gt; we’ve learned how to proxy PyPI and make it cached in our local repo, but for this time I want to share similar thing but it’s for docker image. Here we go!&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

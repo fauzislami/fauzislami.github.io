@@ -6,7 +6,7 @@
     <description>Recent content on Blog · Muhammad Fauzi Islami</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 27 Sep 2021 10:49:57 +0700</lastBuildDate><atom:link href="https://fauzislami.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 18 Feb 2022 04:57:55 +0000</lastBuildDate><atom:link href="https://fauzislami.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Theme Documentation - Basics</title>
       <link>https://fauzislami.github.io/posts/theme-documentation-basics/</link>
@@ -67,6 +67,56 @@ Gone camping! {?:}tent: Be back soon. That is so funny!</description>
     </item>
     
     <item>
+      <title>JCasC (Jenkins Configuration as Code) : Setting up Jenkins in a fully reproducible way</title>
+      <link>https://fauzislami.github.io/blog/2022/02/18/jcasc-jenkins-configuration-as-code-setting-up-jenkins-in-a-fully-reproducible-way/</link>
+      <pubDate>Fri, 18 Feb 2022 04:57:55 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/blog/2022/02/18/jcasc-jenkins-configuration-as-code-setting-up-jenkins-in-a-fully-reproducible-way/</guid>
+      <description>&lt;p&gt;Never thought that the ‘as code’ paradigm would spread out to the Infrastructure area. It works like magic while writing code to define what our infrastructure will be. It does make sense considering virtualization has been implemented everywhere these days. Knowing that virtualization itself consists of thousands of lines of codes (my assumption), it’s clearly possible to have an approach to codify every part of the infrastructure in order to build it. That’s how the brief of the emergence of &lt;strong&gt;Infrastructure as Code (IaC)&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Actually, the ‘as code’ paradigm doesn’t only apply on the high-level point of view like Infrastructure, it also even applies to specific tools like Jenkins. It’s called &lt;strong&gt;JCasC (Jenkins Configuration as Code)&lt;/strong&gt;. JCasC means enabling us to reproduce and/or restore a full environment based on recipes and automation which is managed by code. Setting up Jenkins is a quite long and complex process if we do it manually. As both Jenkins and its plugins require some tuning and configuration with dozens of parameters to set within the web UI manage section. JCasC provides the ability to define this whole configuration in a simple and human-friendly yaml syntax. Without any manual steps, this configuration can be validated and applied to Jenkins in a fully reproducible way.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Immutable Infrastructure, treating servers like “cattle”. Does it sound ridiculous ?</title>
+      <link>https://fauzislami.github.io/blog/2022/02/06/immutable-infrastructure-treating-servers-like-cattle-does-it-sound-ridiculous/</link>
+      <pubDate>Sun, 06 Feb 2022 09:50:38 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/blog/2022/02/06/immutable-infrastructure-treating-servers-like-cattle-does-it-sound-ridiculous/</guid>
+      <description>&lt;!-- raw HTML omitted --&gt;
+&lt;h2 id=&#34;chattering&#34;&gt;Chattering&lt;/h2&gt;
+&lt;!-- raw HTML omitted --&gt;</description>
+    </item>
+    
+    <item>
+      <title>Highly Available Kubernetes Cluster Using HAproxy and Keepalived</title>
+      <link>https://fauzislami.github.io/blog/2021/10/17/highly-available-kubernetes-cluster-with-haproxy-and-keepalived/</link>
+      <pubDate>Sun, 17 Oct 2021 10:16:47 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/blog/2021/10/17/highly-available-kubernetes-cluster-with-haproxy-and-keepalived/</guid>
+      <description>Kubernetes provides us a convenient way to make our application easier to maintain and more scalable. Since kubernetes is only an abstraction that runs on a set of machines and consists of many components, we have some work to do to keep our kubernetes cluster well-established and healthy, especially to make that cluster highly available. In this case, I use two HAproxy instances to balance the load over the network or we usually say that as load balancing.</description>
+    </item>
+    
+    <item>
+      <title>Proxying Docker Registry Through Nexus Repository Manager</title>
+      <link>https://fauzislami.github.io/blog/2021/10/14/proxying-docker-registry-through-nexus-repository-manager/</link>
+      <pubDate>Thu, 14 Oct 2021 06:18:27 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/blog/2021/10/14/proxying-docker-registry-through-nexus-repository-manager/</guid>
+      <description>&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;In this &lt;!-- raw HTML omitted --&gt;post&lt;!-- raw HTML omitted --&gt; we’ve learned how to proxy PyPI and make it cached in our local repo, but for this time I want to share similar thing but it’s for docker image. Here we go!&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Proxying PyPI Repository in Nexus Repository Manager</title>
+      <link>https://fauzislami.github.io/blog/2021/10/08/proxying-pypi-repository-in-nexus-repository-manager/</link>
+      <pubDate>Fri, 08 Oct 2021 04:29:58 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/blog/2021/10/08/proxying-pypi-repository-in-nexus-repository-manager/</guid>
+      <description>&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;</description>
+    </item>
+    
+    <item>
       <title>Testing Post</title>
       <link>https://fauzislami.github.io/posts/testing-post/</link>
       <pubDate>Mon, 27 Sep 2021 10:49:57 +0700</pubDate>
@@ -76,12 +126,118 @@ Gone camping! {?:}tent: Be back soon. That is so funny!</description>
     </item>
     
     <item>
+      <title>Securing K8S Secret Object Using SealedSecret</title>
+      <link>https://fauzislami.github.io/blog/2021/09/26/secure-k8s-secret-object-using-sealedsecret/</link>
+      <pubDate>Sun, 26 Sep 2021 08:29:36 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/blog/2021/09/26/secure-k8s-secret-object-using-sealedsecret/</guid>
+      <description>&lt;!-- raw HTML omitted --&gt;</description>
+    </item>
+    
+    <item>
+      <title>Service Mesh : Istio and Kiali Setup</title>
+      <link>https://fauzislami.github.io/blog/2021/08/01/service-mesh-istio-and-kiali-setup/</link>
+      <pubDate>Sun, 01 Aug 2021 12:18:13 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/blog/2021/08/01/service-mesh-istio-and-kiali-setup/</guid>
+      <description>&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;</description>
+    </item>
+    
+    <item>
+      <title>Collecting Network Traffic Using TCPDump on POD Level in Openshift</title>
+      <link>https://fauzislami.github.io/blog/2021/07/23/collecting-network-traffic-using-tcpdump-on-pod-level-in-openshift/</link>
+      <pubDate>Fri, 23 Jul 2021 05:13:00 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/blog/2021/07/23/collecting-network-traffic-using-tcpdump-on-pod-level-in-openshift/</guid>
+      <description>&lt;p&gt;Ada kalanya ketika sebuah aplikasi mengalami masalah dan tidak mengeluarkan log pada stdout secara lengkap dan cenderung tidak membantu untuk kebutuhan troubleshooting. Sehingga diperlukan analisa lebih dalam untuk mendapatkan petunjuk dari masalah tersebut, terutama jika masalahnya dalam ruang lingkup network yang perlu dilakukan analisa dari network traffic yang ada. Maka dari itu kita bisa melakukan TCPDump di level POD, namun pada umumnya tidak semua image aplikasi dibekali utilitas untuk melakukan hal itu. Oleh karena itu berikut adalah cara bagaimana melakukan TCPDump pada level POD di Openshift :&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Lorem Ipsum</title>
       <link>https://fauzislami.github.io/posts/lorem-ipsum/</link>
       <pubDate>Thu, 15 Apr 2021 23:39:49 +0530</pubDate>
       
       <guid>https://fauzislami.github.io/posts/lorem-ipsum/</guid>
       <description>Heading 1 &amp;ldquo;Lorem ipsum dolor sit amet, consectetaur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
+    </item>
+    
+    <item>
+      <title>CI/CD Labs Part 3: Integrate Jenkins with Openshift</title>
+      <link>https://fauzislami.github.io/blog/2021/03/26/ci-cd-labs-part-3-integrate-jenkins-with-openshift/</link>
+      <pubDate>Fri, 26 Mar 2021 09:34:00 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/blog/2021/03/26/ci-cd-labs-part-3-integrate-jenkins-with-openshift/</guid>
+      <description>&lt;!-- raw HTML omitted --&gt;</description>
+    </item>
+    
+    <item>
+      <title>MachineConfigPool degraded saat updating : “Error when evicting pod”</title>
+      <link>https://fauzislami.github.io/blog/2021/03/20/machineconfigpool-degraded-saat-updating-error-when-evicting-pod/</link>
+      <pubDate>Sat, 20 Mar 2021 05:18:00 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/blog/2021/03/20/machineconfigpool-degraded-saat-updating-error-when-evicting-pod/</guid>
+      <description>&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;Kejadian ini seringkali terjadi ketika melakukan sebuah perubahan cluster yang mengharuskan setiap nodes pada cluster konsolidasi dengan perubahan yang baru saja diterapkan. Pada masalah yang penulis alami, penulis ingin menambahkan private registry ke dalam cluster agar bisa dikenali sebagai insecure registry. Namun setelah selesai dikonfigurasi dan cluster otomatis melakukan konsolidasi konfigurasi ke setiap nodes (menambahkan insecure registry), terdapat suatu hal yang janggal ketika melihat kondisi salah satu node stuck di status &lt;strong&gt;&lt;em&gt;“Ready,SchedulingDisabled&lt;/em&gt;“&lt;/strong&gt; dengan waktu yang lama dan tidak normal. Setelah dilakukan pengecekan pada node ternyata terdapat 1 pod yang bermasalah yang tidak bisa dihapus dari node tersebut :&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Menambahkan Trusted Certificate Pada JVM di Jenkins</title>
+      <link>https://fauzislami.github.io/blog/2021/03/10/menambahkan-trusted-certificate-pada-jvm-di-jenkins/</link>
+      <pubDate>Wed, 10 Mar 2021 05:23:00 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/blog/2021/03/10/menambahkan-trusted-certificate-pada-jvm-di-jenkins/</guid>
+      <description>&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;Pada tulisan ini membahas sebuah kendala yang dialami penulis ketika melakukan integrasi Jenkins dengan Jira, Bitbucket dan Nexus yang menggunakan HTTPS sebagai protokolnya. Pada saat melakukan test connection terdapat error : &lt;strong&gt;&lt;em&gt;“&lt;/em&gt;&lt;/strong&gt;_ &lt;strong&gt;unable to find valid certification path to requested target jenkins&lt;/strong&gt;_ “&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Namespace OpenShift Tidak Dapat Dihapus</title>
+      <link>https://fauzislami.github.io/blog/2021/03/10/namespace-openshift-tidak-dapat-dihapus/</link>
+      <pubDate>Wed, 10 Mar 2021 05:22:00 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/blog/2021/03/10/namespace-openshift-tidak-dapat-dihapus/</guid>
+      <description>&lt;p&gt;Ada sebuah kejadian di project yang cukup membuat frustasi penulis ketika melakukan penghapusan sebuah project/namespace pada openshift, yaitu namespace yang akan dihapus tidak terhapus walaupun sudah dipaksa untuk dihapus dengan menggunakan parameter &lt;strong&gt;–force –grace-period=0&lt;/strong&gt; , proses penghapusan stuck seperti gambar di bawah ini :&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;</description>
+    </item>
+    
+    <item>
+      <title>StorageCluster OCS tidak dapat dihapus</title>
+      <link>https://fauzislami.github.io/blog/2021/03/10/storagecluster-ocs-tidak-dapat-dihapus/</link>
+      <pubDate>Wed, 10 Mar 2021 05:20:00 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/blog/2021/03/10/storagecluster-ocs-tidak-dapat-dihapus/</guid>
+      <description>&lt;p&gt;Ada kalanya keanehan terjadi ketika sedang mengerjakan tasks di project. Salah satu hal aneh tersebut yang penulis adalah menghapus sebuah objek yang tidak berhasil terhapus tanpa alasan yang diketahui sampai saat ini oleh penulis.&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;</description>
+    </item>
+    
+    <item>
+      <title>CI/CD Labs Part 2: Integrate Jenkins with Bitbucket Server</title>
+      <link>https://fauzislami.github.io/blog/2021/03/05/ci-cd-labs-part-2-integrate-jenkins-with-bitbucket-server/</link>
+      <pubDate>Fri, 05 Mar 2021 09:18:00 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/blog/2021/03/05/ci-cd-labs-part-2-integrate-jenkins-with-bitbucket-server/</guid>
+      <description>&lt;!-- raw HTML omitted --&gt;</description>
+    </item>
+    
+    <item>
+      <title>CI/CD Labs Part 1: Integrate Jenkins with Nexus Repository OSS</title>
+      <link>https://fauzislami.github.io/blog/2021/03/03/ci-cd-labs-part-1-integrate-jenkins-with-nexus-repository-oss/</link>
+      <pubDate>Wed, 03 Mar 2021 04:02:00 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/blog/2021/03/03/ci-cd-labs-part-1-integrate-jenkins-with-nexus-repository-oss/</guid>
+      <description>&lt;!-- raw HTML omitted --&gt;</description>
+    </item>
+    
+    <item>
+      <title>Automating K8S Cluster Installation with Kubespray</title>
+      <link>https://fauzislami.github.io/blog/2021/01/18/automating-k8s-cluster-installation-with-kubespray/</link>
+      <pubDate>Mon, 18 Jan 2021 17:20:00 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/blog/2021/01/18/automating-k8s-cluster-installation-with-kubespray/</guid>
+      <description>&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;img src=&#34;https://fauzislami.github.io/images/automating-k8s-cluster-kubespray/pic-1.png&#34; alt=&#34;kubespray&#34; title=&#34;kubespray&#34;&gt;&lt;/p&gt;
+&lt;p&gt;There are various ways to perform a kubernetes installation. If you look at the environment in which kubernetes will be installed on, you have options that can be done, namely:&lt;/p&gt;</description>
     </item>
     
     <item>

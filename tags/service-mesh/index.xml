@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Service Mesh on Blog · Muhammad Fauzi Islami</title>
+    <link>https://fauzislami.github.io/tags/service-mesh/</link>
+    <description>Recent content in Service Mesh on Blog · Muhammad Fauzi Islami</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 01 Aug 2021 12:18:13 +0000</lastBuildDate><atom:link href="https://fauzislami.github.io/tags/service-mesh/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Service Mesh : Istio and Kiali Setup</title>
+      <link>https://fauzislami.github.io/blog/2021/08/01/service-mesh-istio-and-kiali-setup/</link>
+      <pubDate>Sun, 01 Aug 2021 12:18:13 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/blog/2021/08/01/service-mesh-istio-and-kiali-setup/</guid>
+      <description>&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

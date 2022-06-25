@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Python on Blog · Muhammad Fauzi Islami</title>
+    <link>https://fauzislami.github.io/tags/python/</link>
+    <description>Recent content in Python on Blog · Muhammad Fauzi Islami</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 08 Oct 2021 04:29:58 +0000</lastBuildDate><atom:link href="https://fauzislami.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Proxying PyPI Repository in Nexus Repository Manager</title>
+      <link>https://fauzislami.github.io/blog/2021/10/08/proxying-pypi-repository-in-nexus-repository-manager/</link>
+      <pubDate>Fri, 08 Oct 2021 04:29:58 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/blog/2021/10/08/proxying-pypi-repository-in-nexus-repository-manager/</guid>
+      <description>&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

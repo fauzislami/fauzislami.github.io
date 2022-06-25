@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SealedSecret on Blog · Muhammad Fauzi Islami</title>
+    <link>https://fauzislami.github.io/tags/sealedsecret/</link>
+    <description>Recent content in SealedSecret on Blog · Muhammad Fauzi Islami</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 26 Sep 2021 08:29:36 +0000</lastBuildDate><atom:link href="https://fauzislami.github.io/tags/sealedsecret/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Securing K8S Secret Object Using SealedSecret</title>
+      <link>https://fauzislami.github.io/blog/2021/09/26/secure-k8s-secret-object-using-sealedsecret/</link>
+      <pubDate>Sun, 26 Sep 2021 08:29:36 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/blog/2021/09/26/secure-k8s-secret-object-using-sealedsecret/</guid>
+      <description>&lt;!-- raw HTML omitted --&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

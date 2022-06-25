@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        :root {
+            --accent-color: #FF4D4D;
+        }
+    </style>
+
+    
+    
+    
+    
+    
+    
+
+    
+    <title>Automating K8S Cluster Installation with Kubespray</title>
+    <meta name="description" content="/home/fauzislami/blog">
+    <meta name="keywords" content='blog, gokarna, hugo, Kubernetes, Kubespray'>
+
+    <meta property="og:url" content="https://fauzislami.github.io/blog/2021/01/18/automating-k8s-cluster-installation-with-kubespray/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Automating K8S Cluster Installation with Kubespray">
+    <meta property="og:description" content="/home/fauzislami/blog">
+    <meta property="og:image" content="/images/logo-blog-oji.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Automating K8S Cluster Installation with Kubespray">
+    <meta name="twitter:description" content="/home/fauzislami/blog">
+    <meta property="twitter:domain" content="https://fauzislami.github.io/blog/2021/01/18/automating-k8s-cluster-installation-with-kubespray/">
+    <meta property="twitter:url" content="https://fauzislami.github.io/blog/2021/01/18/automating-k8s-cluster-installation-with-kubespray/">
+    <meta name="twitter:image" content="/images/logo-blog-oji.png">
+
+    
+    <link rel="canonical" href="https://fauzislami.github.io/blog/2021/01/18/automating-k8s-cluster-installation-with-kubespray/" />
+
+    <link rel="stylesheet" type="text/css" href="/css/normalize.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link disabled id="dark-theme" rel="stylesheet" href="/css/dark.css">
+
+    <script src="/js/svg-injector.min.js"></script>
+    <script src="/js/feather-icons.min.js"></script>
+    <script src="/js/main.js"></script>
+
+    
+    
+        <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.16/dist/katex.min.css" integrity="sha384-6LkG2wmY8FK9E0vU9OOr8UvLwsaqUg9SETfpq4uTCN1agNe8HRdE9ABlk+fVx6gZ" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.16/dist/katex.min.js" integrity="sha384-31El76TwmbHj4rF9DyLsygbq6xoIobG0W+jqXim+a3dU9W53tdH3A/ngRPxOzzaB" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.16/dist/contrib/auto-render.min.js" integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+  
+    
+</head>
+<body>
+        <script type="text/javascript">
+            
+            setThemeByUserPref();
+        </script><header class="header">
+    <nav class="header-nav">
+
+        
+        <div class="avatar">
+            <a href="https://fauzislami.github.io/">
+                <img src="/images/logo-blog-oji.png" alt="avatar" />
+            </a>
+        </div>
+        
+
+        <div class="nav-title">
+            <a class="nav-brand" href="https://fauzislami.github.io/">Blog · Muhammad Fauzi Islami</a>
+        </div>
+
+        <div class="nav-links">
+            
+            <div class="nav-link">
+                <a href="/"> Home </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="/posts/"> Posts </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="/projects/"> Projects </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="https://about.me/fauzislami"> About Me </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="/tags/"> Tags </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="https://github.com/fauzislami"><span data-feather='github'></span>  </a>
+            </div>
+            
+
+            <span class="nav-icons-divider"></span>
+            <div class="nav-link dark-theme-toggle">
+                <a>
+                    <span id="theme-toggle-icon" data-feather="moon"></span>
+                </a>
+            </div>
+
+            <div class="nav-link" id="hamburger-menu-toggle">
+                <a>
+                    <span data-feather="menu"></span>
+                </a>
+            </div>
+
+            
+            <ul class="nav-hamburger-list visibility-hidden">
+                
+                <li class="nav-item">
+                    <a href="/"> Home </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="/posts/"> Posts </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="/projects/"> Projects </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="https://about.me/fauzislami"> About Me </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="/tags/"> Tags </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="https://github.com/fauzislami"><span data-feather='github'></span>  </a>
+                </li>
+                
+                <li class="nav-item dark-theme-toggle">
+                    <a>
+                        <span id="theme-toggle-icon" data-feather="moon"></span>
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+</header>
+<main id="content">
+    <div class="post container">
+
+    <div class="post-header-section">
+        <h1>Automating K8S Cluster Installation with Kubespray</h1>
+        <small role="doc-subtitle"></small>
+        <p class="post-date">
+            January 18, 2021
+        </p>
+
+        <ul class="post-tags">
+        
+            <li class="post-tag"><a href="/tags/kubernetes">Kubernetes</a></li>
+        
+            <li class="post-tag"><a href="/tags/kubespray">Kubespray</a></li>
+        
+        </ul>
+    </div>
+
+    <div class="post-content">
+        <p>
+            <!-- raw HTML omitted -->
+<p><img src="/images/automating-k8s-cluster-kubespray/pic-1.png" alt="kubespray" title="kubespray"></p>
+<p>There are various ways to perform a kubernetes installation. If you look at the environment in which kubernetes will be installed on, you have options that can be done, namely:</p>
+<p><strong>Learning purposes :</strong></p>
+<ul>
+<li><em>Kind</em> tools ( Kubernetes In Docker )</li>
+<li><em>Minikube</em></li>
+</ul>
+<p><strong>Production purposes :</strong></p>
+<ul>
+<li>Bootstrapping K8S with <em>kubeadm</em></li>
+<li>Installing K8S with <em>kubespray</em></li>
+<li>Installing K8S with <em>kops</em></li>
+</ul>
+<p>In this opportunity, I will do the installation of a kubernetes cluster using kubespray. Kubespray itself is a way to install Kubernetes cluster by automating it using ansible playbook.</p>
+<p>Kubespray can be implemented in a variety of environments. Starting from the baremetal environment, virtualization and cloud. Until now, several supported cloud providers are OpenStack, AWS, Google Cloud, and Azure. Meanwhile, the official documentation for virtualization is VMware VSphere. But at this time, I will do it in a baremetal environment, where I have prepared 3 VMs first, namely for master there are 2 VMs and worker there is only 1 VM. With VM specifications as follows:</p>
+<ul>
+<li>OS : Centos 7.8</li>
+<li>CPU : 2vCPU</li>
+<li>RAM : 8GB</li>
+<li>Disk : 100GB</li>
+</ul>
+<p>List of VMs :</p>
+<ul>
+<li>Master-1 : 192.168.1.119</li>
+<li>Master-2 : 192.168.1.120</li>
+<li>Worker : 192.168.1.122</li>
+</ul>
+<p>Of course this is not recommended for a production environment in view of the above specifications and there is also no load balancer that manages the load traffic on the cluster.</p>
+<p>Okay, let’s just get into the execution stage! Bismillah</p>
+<p><em>Requirements:</em></p>
+<ul>
+<li>Internet access</li>
+<li>The SSH public key from the ansible host is copied to all nodes</li>
+<li>Tools installed on ansible host:<br>
+– Ansible v2.9<br>
+– Jinja 2.11 (or newer)<br>
+– Git<br>
+– Python3<br>
+– Kubectl</li>
+</ul>
+<p><strong>Step 1: SSH Passwordless</strong></p>
+<p>Create an SSH Key</p>
+<pre tabindex="0"><code>
+root@fauzislami:~# ssh-keygen
+
+Generating public/private rsa key pair.
+Enter file in which to save the key (/root/.ssh/id_rsa):
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /root/.ssh/id_rsa
+Your public key has been saved in /root/.ssh/id_rsa.pub
+The key fingerprint is:
+SHA256:DSt3Ryf1tdxAoi7Hl1vSBXYiH+rjM8r3sCxGjsrHbmo root@LAPTOP-AGEMNL1C
+The key's randomart image is:
++---[RSA 3072]----+
+|            o.O o|
+|           . B.B+|
+|        . . + oo+|
+|         * o = . |
+|      . S * B o  |
+|       o +.+ =   |
+|       . +  *    |
+|     .E =.+o.=   |
+|     .+*..ooo..  |
++----[SHA256]-----+
+
+
+root@fauzislami:~# cat .ssh/id_rsa.pub
+
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC3zM+kq4oo3GyEU363R7y8dbqD0CWsFG3cUmwkzaU3eWNN8FTLu68UZjHCh5D9i/yaS7kcn0UsmRTSL4U5Eb+JZFGfRVgl5CGRv3ljKi80LfS5KZV2pqDPbq49jLHFeq04a3y8FcyQ5crHvfoL00mMmL6mgFVYcM6BdhvHafyfKhZGuNqqa4ImQsWejcn1lyMhy/bbMBDTYwQAdI/9csWkEUO4V7LQukQk+NWszOOS3q38A1mGN7uROjo9/w1lg4ITX03UonzNjv2zOCHozrC4DeGsdw0m8tSNjjtrOIGtQ9sxFkNU0MoQacFR/orF9cWzZonk0IrFtMZoqf+Pan+1xpwzhA+QuRRceYE0VAv62shlI+ni6PR5xFRXWKIJOw6haMga0UfKi3/KLEHRtY3t+Ej73As7HdwjzgLZm6PfkXhmAbIp/dzeXNJxwXlyztjzexOy9dIGYxxEC1LDBkbwW8lE5aMvZjWv7s/ITKbMqgRx7dT6lWZXyRPIJ+mG9LM= root@LAPTOP-AGEMNL1C&lt;/pre&gt;
+
+</code></pre><p>Copy the public key from the ansible host to each nodes</p>
+<ul>
+<li>Master-1</li>
+</ul>
+<pre tabindex="0"><code>###Master-1
+
+root@fauzislami:~# ssh-copy-id root@192.168.1.119
+
+/usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: &quot;/root/.ssh/id_rsa.pub&quot;
+The authenticity of host 'master-1 (192.168.1.119)' can't be established.
+ECDSA key fingerprint is SHA256:WD3MM3C1C+yfAo55EfJusx0rIcb+Q0BP4h1DutLsUxM.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+/usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
+/usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
+root@master-1's password:
+
+Number of key(s) added: 1
+
+Now try logging into the machine, with:   &quot;ssh 'root@192.168.1.119'&quot;
+and check to make sure that only the key(s) you wanted were added.
+
+
+</code></pre><ul>
+<li>Master-2</li>
+</ul>
+<pre tabindex="0"><code>###Master-2
+
+root@fauzislami:~# ssh-copy-id root@192.168.1.20
+
+/usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: &quot;/root/.ssh/id_rsa.pub&quot;
+The authenticity of host 'master-2 (192.168.1.120)' can't be established.
+ECDSA key fingerprint is SHA256:Ym2FizkXGlO+ESIPNvEhI0SSaFr/9NuAB05eLr/NAus.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+/usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
+/usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
+root@master-2's password:
+bash: warning: setlocale: LC_ALL: cannot change locale (C.UTF-8)
+/bin/sh: warning: setlocale: LC_ALL: cannot change locale (C.UTF-8)
+sh: warning: setlocale: LC_ALL: cannot change locale (C.UTF-8)
+
+Number of key(s) added: 1
+
+Now try logging into the machine, with:   &quot;ssh 'root@192.168.1.120'&quot;
+and check to make sure that only the key(s) you wanted were added.
+
+</code></pre><ul>
+<li>Worker</li>
+</ul>
+<pre tabindex="0"><code>###Worker
+
+root@fauzislami:~# ssh-copy-id root@192.168.1.122
+
+/usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: &quot;/root/.ssh/id_rsa.pub&quot;
+The authenticity of host 'worker (192.168.1.122)' can't be established.
+ECDSA key fingerprint is SHA256:MGVRcMxTBzixZPMlGk9NPEM0izTxqQtmEHBm3Ksh/hg.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+/usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
+/usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
+root@worker's password:
+bash: warning: setlocale: LC_ALL: cannot change locale (C.UTF-8)
+/bin/sh: warning: setlocale: LC_ALL: cannot change locale (C.UTF-8)
+sh: warning: setlocale: LC_ALL: cannot change locale (C.UTF-8)
+
+Number of key(s) added: 1
+
+Now try logging into the machine, with:   &quot;ssh 'root@192.168.1.122'&quot;
+and check to make sure that only the key(s) you wanted were added.
+
+</code></pre><p>Test login to each nodes and make sure you can log in without having to enter a password (passwordless)</p>
+<pre tabindex="0"><code>###Master-1
+
+root@fauzislami:~# ssh root@192.168.1.119
+Last login: Thu Jan  7 14:16:14 2021
+[root@localhost ~]#
+
+                         ###Master-2
+
+root@fauzislami:~# ssh root@192.168.1.120
+Last login: Thu Jan  7 14:16:30 2021
+[root@localhost ~]#
+
+                         ###Worker
+
+root@fauzislami:~# ssh root@192.168.1.122
+Last login: Thu Jan  7 14:17:05 2021
+[root@localhost ~]#
+</code></pre><p><strong>Step 2: Installation requirements</strong></p>
+<p>Do a <em>git clone</em></p>
+<pre tabindex="0"><code>root@fauzislami:~# git clone https://github.com/fauzislami/kubespray-deployment.git
+root@fauzislami:~# cd kubespray
+root@fauzislami:~/kubespray#
+</code></pre><blockquote>
+<p>The original Project: <!-- raw HTML omitted --><a href="https://github.com/kubernetes-sigs/kubespray.git">https://github.com/kubernetes-sigs/kubespray.git</a></p>
+</blockquote>
+<p>If <em>pip3</em> is not available, you can install it using the command below</p>
+<pre tabindex="0"><code>root@fauzislami:~/kubespray# apt install python3-pip -y
+</code></pre><p>Requirement installation</p>
+<pre tabindex="0"><code>root@fauzislami:~/kubespray# pip3 install -r requirements.txt
+</code></pre><p>Copy and update existing sample inventory</p>
+<pre tabindex="0"><code>root@fauzislami:~/kubespray# cp -rfp inventory/sample inventory/mycluster
+</code></pre><pre tabindex="0"><code>### env var IPS contains IP nodes&amp;lt;br&gt;&amp;lt;br&gt;root@fauzislami:~/kubespray# declare -a IPS=(192.168.1.119 192.168.1.120 192.168.1.122)
+</code></pre><pre tabindex="0"><code>CONFIG_FILE=inventory/mycluster/hosts.yaml python3 contrib/inventory_builder/inventory.py ${IPS[@]}
+</code></pre><p>Edit inventory</p>
+<ul>
+<li>Here I choose CRI for the container runtime (default: docker)</li>
+</ul>
+<pre tabindex="0"><code>root@fauzislami:~/kubespray# vim inventory/mycluster/group_vars/k8s-cluster/k8s-cluster.yml
+
+//
+container_manager: crio
+//
+</code></pre><ul>
+<li>I change the prefix of node naming (default: node)</li>
+</ul>
+<pre tabindex="0"><code>root@fauzislami:~/kubespray# vim inventory/mycluster/hosts.yaml
+
+//
+all:
+  hosts:
+    master-1:
+      ansible_host: 192.168.1.119
+      ip: 192.168.1.119
+      access_ip: 192.168.1.119
+    master-2:
+      ansible_host: 192.168.1.120
+      ip: 192.168.1.120
+      access_ip: 192.168.1.120
+    worker:
+      ansible_host: 192.168.1.122
+      ip: 192.168.1.122
+      access_ip: 192.168.1.122
+  children:
+    kube-master:
+      hosts:
+        master-1:
+        master-2:
+    kube-node:
+      hosts:
+        master-1:
+        master-2:
+        worker:
+    etcd:
+      hosts:
+        master-1:
+        master-2:
+        worker:
+    k8s-cluster:
+      children:
+        kube-master:
+        kube-node:
+    calico-rr:
+      hosts: {}
+</code></pre><blockquote>
+<p>To reproduce the further things, such as changing the pod prefix, the version of the cluster to be installed, the name of the cluster, etc., I don’t do this in this lab.</p>
+</blockquote>
+<p><strong>Step 3: Installations</strong></p>
+<p>This step is the final stage for installing kubernetes using kubespray, which is executing the ansible playbook.</p>
+<pre tabindex="0"><code>root@fauzislami:~/kubespray# ansible-playbook -i inventory/mycluster/hosts.yaml --user root cluster.yml
+
+Output: 
+
+PLAY [localhost] *******************************************************************************************************************************************************************************************
+Thursday 07 January 2021  15:05:04 +0700 (0:00:00.511)       0:00:00.512 ******
+
+TASK [Check ansible version &gt;=2.8.0] ***********************************************************************************************************************************************************************
+ok: [localhost] =&gt; {
+    &quot;changed&quot;: false,
+    &quot;msg&quot;: &quot;All assertions passed&quot;
+}
+
+...........
+...........
+...........
+
+PLAY RECAP *************************************************************************************************************************************************************************************************
+localhost                  : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+master-1                   : ok=595  changed=94   unreachable=0    failed=0    skipped=1068 rescued=0    ignored=0
+master-2                   : ok=516  changed=84   unreachable=0    failed=0    skipped=918  rescued=0    ignored=0
+worker                     : ok=436  changed=66   unreachable=0    failed=0    skipped=607  rescued=0    ignored=0
+
+Thursday 07 January 2021  15:57:37 +0700 (0:00:00.084)       0:23:18.899 ******
+===============================================================================
+container-engine/cri-o : Install cri-o packages ---------------------------------------------------------------------------------------------------------------------------------------------------- 87.72s
+download : download_container | Download image if required ----------------------------------------------------------------------------------------------------------------------------------------- 57.78s
+download : download_container | Download image if required ----------------------------------------------------------------------------------------------------------------------------------------- 47.56s
+download : download_container | Download image if required ----------------------------------------------------------------------------------------------------------------------------------------- 46.71s
+download : download_container | Download image if required ----------------------------------------------------------------------------------------------------------------------------------------- 43.55s
+etcd : Gen_certs | Write etcd master certs --------------------------------------------------------------------------------------------------------------------------------------------------------- 39.07s
+etcd : Gen_certs | Write etcd master certs --------------------------------------------------------------------------------------------------------------------------------------------------------- 38.68s
+download : download_container | Download image if required ----------------------------------------------------------------------------------------------------------------------------------------- 35.67s
+download : download_container | Download image if required ----------------------------------------------------------------------------------------------------------------------------------------- 35.35s
+kubernetes/master : Joining control plane node to the cluster. ------------------------------------------------------------------------------------------------------------------------------------- 30.43s
+download : download_container | Download image if required ----------------------------------------------------------------------------------------------------------------------------------------- 27.58s
+download : download_container | Download image if required ----------------------------------------------------------------------------------------------------------------------------------------- 26.47s
+download : download_container | Download image if required ----------------------------------------------------------------------------------------------------------------------------------------- 23.80s
+kubernetes/master : kubeadm | Initialize first master ---------------------------------------------------------------------------------------------------------------------------------------------- 21.49s
+container-engine/crictl : download_file | Download item -------------------------------------------------------------------------------------------------------------------------------------------- 21.42s
+Gather necessary facts ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 19.82s
+etcd : Gen_certs | Gather etcd master certs -------------------------------------------------------------------------------------------------------------------------------------------------------- 19.77s
+kubernetes/kubeadm : Join to cluster --------------------------------------------------------------------------------------------------------------------------------------------------------------- 19.47s
+etcd : Gen_certs | Gather etcd master certs -------------------------------------------------------------------------------------------------------------------------------------------------------- 19.06s
+kubernetes-apps/ansible : Kubernetes Apps | Lay Down CoreDNS Template ------------------------------------------------------------------------------------------------------------------------------ 17.82s
+</code></pre><p>Based on the output snippet above, the installation process will take about 23 minutes. The installation process will take longer depending on how many nodes will be made into one cluster and of course the internet connection. Here the installed kubernetes is version 1.19.6</p>
+<p>Copy the certificate from one master to the host which will be used to manage the cluster. Here I still use ansible host.</p>
+<pre tabindex="0"><code>root@fauzislami:~/kubespray# scp root@master-2:/etc/kubernetes/admin.conf /root/.kube/config
+</code></pre><p>Testing</p>
+<pre tabindex="0"><code>root@fauzislami:~# kubectl get nodes
+NAME       STATUS   ROLES    AGE    VERSION
+master-1   Ready    master   121m   v1.19.6
+master-2   Ready    master   120m   v1.19.6
+worker     Ready    &amp;lt;none&gt;   119m   v1.19.6
+
+root@fauzislami:~# kubectl get ns
+NAME              STATUS   AGE
+default           Active   121m
+kube-node-lease   Active   121m
+kube-public       Active   121m
+kube-system       Active   121m
+</code></pre><p>Thank you for reading this article and I hope it is useful. See ya!</p>
+        </p>
+    </div>
+</div>
+
+
+
+    
+
+        </main><footer class="footer">
+    <span>&copy; 2022 Fauzi Islami</span>
+</footer>
+</body>
+</html>

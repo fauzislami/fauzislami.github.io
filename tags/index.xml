@@ -6,7 +6,151 @@
     <description>Recent content in Tags on Blog · Muhammad Fauzi Islami</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 15 Apr 2021 23:39:49 +0530</lastBuildDate><atom:link href="https://fauzislami.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 18 Feb 2022 04:57:55 +0000</lastBuildDate><atom:link href="https://fauzislami.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Jcasc</title>
+      <link>https://fauzislami.github.io/tags/jcasc/</link>
+      <pubDate>Fri, 18 Feb 2022 04:57:55 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/tags/jcasc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Jenkins</title>
+      <link>https://fauzislami.github.io/tags/jenkins/</link>
+      <pubDate>Fri, 18 Feb 2022 04:57:55 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/tags/jenkins/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>IaC</title>
+      <link>https://fauzislami.github.io/tags/iac/</link>
+      <pubDate>Sun, 06 Feb 2022 09:50:38 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/tags/iac/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Infrastructure as Code</title>
+      <link>https://fauzislami.github.io/tags/infrastructure-as-code/</link>
+      <pubDate>Sun, 06 Feb 2022 09:50:38 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/tags/infrastructure-as-code/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>HAproxy</title>
+      <link>https://fauzislami.github.io/tags/haproxy/</link>
+      <pubDate>Sun, 17 Oct 2021 10:16:47 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/tags/haproxy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Keepalived</title>
+      <link>https://fauzislami.github.io/tags/keepalived/</link>
+      <pubDate>Sun, 17 Oct 2021 10:16:47 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/tags/keepalived/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Kubespray</title>
+      <link>https://fauzislami.github.io/tags/kubespray/</link>
+      <pubDate>Sun, 17 Oct 2021 10:16:47 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/tags/kubespray/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Docker</title>
+      <link>https://fauzislami.github.io/tags/docker/</link>
+      <pubDate>Thu, 14 Oct 2021 06:18:27 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/tags/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Nexus</title>
+      <link>https://fauzislami.github.io/tags/nexus/</link>
+      <pubDate>Thu, 14 Oct 2021 06:18:27 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/tags/nexus/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Pip</title>
+      <link>https://fauzislami.github.io/tags/pip/</link>
+      <pubDate>Fri, 08 Oct 2021 04:29:58 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/tags/pip/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>https://fauzislami.github.io/tags/python/</link>
+      <pubDate>Fri, 08 Oct 2021 04:29:58 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Kubernetes</title>
+      <link>https://fauzislami.github.io/tags/kubernetes/</link>
+      <pubDate>Sun, 26 Sep 2021 08:29:36 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/tags/kubernetes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SealedSecret</title>
+      <link>https://fauzislami.github.io/tags/sealedsecret/</link>
+      <pubDate>Sun, 26 Sep 2021 08:29:36 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/tags/sealedsecret/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Istio</title>
+      <link>https://fauzislami.github.io/tags/istio/</link>
+      <pubDate>Sun, 01 Aug 2021 12:18:13 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/tags/istio/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Service Mesh</title>
+      <link>https://fauzislami.github.io/tags/service-mesh/</link>
+      <pubDate>Sun, 01 Aug 2021 12:18:13 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/tags/service-mesh/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ScratchpadOpenshift</title>
+      <link>https://fauzislami.github.io/tags/scratchpadopenshift/</link>
+      <pubDate>Fri, 23 Jul 2021 05:13:00 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/tags/scratchpadopenshift/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>def</title>
       <link>https://fauzislami.github.io/tags/def/</link>
@@ -22,6 +166,33 @@
       <pubDate>Thu, 15 Apr 2021 23:39:49 +0530</pubDate>
       
       <guid>https://fauzislami.github.io/tags/xyz/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>OpenShift</title>
+      <link>https://fauzislami.github.io/tags/openshift/</link>
+      <pubDate>Fri, 26 Mar 2021 09:34:00 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/tags/openshift/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ScratchpadJenkins</title>
+      <link>https://fauzislami.github.io/tags/scratchpadjenkins/</link>
+      <pubDate>Wed, 10 Mar 2021 05:23:00 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/tags/scratchpadjenkins/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>BitBucket</title>
+      <link>https://fauzislami.github.io/tags/bitbucket/</link>
+      <pubDate>Fri, 05 Mar 2021 09:18:00 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/tags/bitbucket/</guid>
       <description></description>
     </item>
     
@@ -85,6 +256,15 @@
       <pubDate>Wed, 19 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>https://fauzislami.github.io/tags/html/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>CI/CD</title>
+      <link>https://fauzislami.github.io/tags/ci/cd/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/tags/ci/cd/</guid>
       <description></description>
     </item>
     

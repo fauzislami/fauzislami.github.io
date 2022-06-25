@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>BitBucket on Blog · Muhammad Fauzi Islami</title>
+    <link>https://fauzislami.github.io/tags/bitbucket/</link>
+    <description>Recent content in BitBucket on Blog · Muhammad Fauzi Islami</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 05 Mar 2021 09:18:00 +0000</lastBuildDate><atom:link href="https://fauzislami.github.io/tags/bitbucket/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CI/CD Labs Part 2: Integrate Jenkins with Bitbucket Server</title>
+      <link>https://fauzislami.github.io/blog/2021/03/05/ci-cd-labs-part-2-integrate-jenkins-with-bitbucket-server/</link>
+      <pubDate>Fri, 05 Mar 2021 09:18:00 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/blog/2021/03/05/ci-cd-labs-part-2-integrate-jenkins-with-bitbucket-server/</guid>
+      <description>&lt;!-- raw HTML omitted --&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

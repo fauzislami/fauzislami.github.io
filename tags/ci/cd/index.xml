@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>CI/CD on Blog · Muhammad Fauzi Islami</title>
+    <link>https://fauzislami.github.io/tags/ci/cd/</link>
+    <description>Recent content in CI/CD on Blog · Muhammad Fauzi Islami</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language><atom:link href="https://fauzislami.github.io/tags/ci/cd/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CI/CD Labs Part 3: Integrate Jenkins with Openshift</title>
+      <link>https://fauzislami.github.io/blog/2021/03/26/ci-cd-labs-part-3-integrate-jenkins-with-openshift/</link>
+      <pubDate>Fri, 26 Mar 2021 09:34:00 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/blog/2021/03/26/ci-cd-labs-part-3-integrate-jenkins-with-openshift/</guid>
+      <description>&lt;!-- raw HTML omitted --&gt;</description>
+    </item>
+    
+    <item>
+      <title>CI/CD Labs Part 2: Integrate Jenkins with Bitbucket Server</title>
+      <link>https://fauzislami.github.io/blog/2021/03/05/ci-cd-labs-part-2-integrate-jenkins-with-bitbucket-server/</link>
+      <pubDate>Fri, 05 Mar 2021 09:18:00 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/blog/2021/03/05/ci-cd-labs-part-2-integrate-jenkins-with-bitbucket-server/</guid>
+      <description>&lt;!-- raw HTML omitted --&gt;</description>
+    </item>
+    
+    <item>
+      <title>CI/CD Labs Part 1: Integrate Jenkins with Nexus Repository OSS</title>
+      <link>https://fauzislami.github.io/blog/2021/03/03/ci-cd-labs-part-1-integrate-jenkins-with-nexus-repository-oss/</link>
+      <pubDate>Wed, 03 Mar 2021 04:02:00 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/blog/2021/03/03/ci-cd-labs-part-1-integrate-jenkins-with-nexus-repository-oss/</guid>
+      <description>&lt;!-- raw HTML omitted --&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Jenkins on Blog · Muhammad Fauzi Islami</title>
+    <link>https://fauzislami.github.io/tags/jenkins/</link>
+    <description>Recent content in Jenkins on Blog · Muhammad Fauzi Islami</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 18 Feb 2022 04:57:55 +0000</lastBuildDate><atom:link href="https://fauzislami.github.io/tags/jenkins/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>JCasC (Jenkins Configuration as Code) : Setting up Jenkins in a fully reproducible way</title>
+      <link>https://fauzislami.github.io/blog/2022/02/18/jcasc-jenkins-configuration-as-code-setting-up-jenkins-in-a-fully-reproducible-way/</link>
+      <pubDate>Fri, 18 Feb 2022 04:57:55 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/blog/2022/02/18/jcasc-jenkins-configuration-as-code-setting-up-jenkins-in-a-fully-reproducible-way/</guid>
+      <description>&lt;p&gt;Never thought that the ‘as code’ paradigm would spread out to the Infrastructure area. It works like magic while writing code to define what our infrastructure will be. It does make sense considering virtualization has been implemented everywhere these days. Knowing that virtualization itself consists of thousands of lines of codes (my assumption), it’s clearly possible to have an approach to codify every part of the infrastructure in order to build it. That’s how the brief of the emergence of &lt;strong&gt;Infrastructure as Code (IaC)&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Actually, the ‘as code’ paradigm doesn’t only apply on the high-level point of view like Infrastructure, it also even applies to specific tools like Jenkins. It’s called &lt;strong&gt;JCasC (Jenkins Configuration as Code)&lt;/strong&gt;. JCasC means enabling us to reproduce and/or restore a full environment based on recipes and automation which is managed by code. Setting up Jenkins is a quite long and complex process if we do it manually. As both Jenkins and its plugins require some tuning and configuration with dozens of parameters to set within the web UI manage section. JCasC provides the ability to define this whole configuration in a simple and human-friendly yaml syntax. Without any manual steps, this configuration can be validated and applied to Jenkins in a fully reproducible way.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>CI/CD Labs Part 3: Integrate Jenkins with Openshift</title>
+      <link>https://fauzislami.github.io/blog/2021/03/26/ci-cd-labs-part-3-integrate-jenkins-with-openshift/</link>
+      <pubDate>Fri, 26 Mar 2021 09:34:00 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/blog/2021/03/26/ci-cd-labs-part-3-integrate-jenkins-with-openshift/</guid>
+      <description>&lt;!-- raw HTML omitted --&gt;</description>
+    </item>
+    
+    <item>
+      <title>CI/CD Labs Part 2: Integrate Jenkins with Bitbucket Server</title>
+      <link>https://fauzislami.github.io/blog/2021/03/05/ci-cd-labs-part-2-integrate-jenkins-with-bitbucket-server/</link>
+      <pubDate>Fri, 05 Mar 2021 09:18:00 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/blog/2021/03/05/ci-cd-labs-part-2-integrate-jenkins-with-bitbucket-server/</guid>
+      <description>&lt;!-- raw HTML omitted --&gt;</description>
+    </item>
+    
+    <item>
+      <title>CI/CD Labs Part 1: Integrate Jenkins with Nexus Repository OSS</title>
+      <link>https://fauzislami.github.io/blog/2021/03/03/ci-cd-labs-part-1-integrate-jenkins-with-nexus-repository-oss/</link>
+      <pubDate>Wed, 03 Mar 2021 04:02:00 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/blog/2021/03/03/ci-cd-labs-part-1-integrate-jenkins-with-nexus-repository-oss/</guid>
+      <description>&lt;!-- raw HTML omitted --&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

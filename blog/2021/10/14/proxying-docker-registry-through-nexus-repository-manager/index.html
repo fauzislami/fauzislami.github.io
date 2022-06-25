@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        :root {
+            --accent-color: #FF4D4D;
+        }
+    </style>
+
+    
+    
+    
+    
+    
+    
+
+    
+    <title>Proxying Docker Registry Through Nexus Repository Manager</title>
+    <meta name="description" content="/home/fauzislami/blog">
+    <meta name="keywords" content='blog, gokarna, hugo, Docker, Nexus'>
+
+    <meta property="og:url" content="https://fauzislami.github.io/blog/2021/10/14/proxying-docker-registry-through-nexus-repository-manager/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Proxying Docker Registry Through Nexus Repository Manager">
+    <meta property="og:description" content="/home/fauzislami/blog">
+    <meta property="og:image" content="/images/logo-blog-oji.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Proxying Docker Registry Through Nexus Repository Manager">
+    <meta name="twitter:description" content="/home/fauzislami/blog">
+    <meta property="twitter:domain" content="https://fauzislami.github.io/blog/2021/10/14/proxying-docker-registry-through-nexus-repository-manager/">
+    <meta property="twitter:url" content="https://fauzislami.github.io/blog/2021/10/14/proxying-docker-registry-through-nexus-repository-manager/">
+    <meta name="twitter:image" content="/images/logo-blog-oji.png">
+
+    
+    <link rel="canonical" href="https://fauzislami.github.io/blog/2021/10/14/proxying-docker-registry-through-nexus-repository-manager/" />
+
+    <link rel="stylesheet" type="text/css" href="/css/normalize.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link disabled id="dark-theme" rel="stylesheet" href="/css/dark.css">
+
+    <script src="/js/svg-injector.min.js"></script>
+    <script src="/js/feather-icons.min.js"></script>
+    <script src="/js/main.js"></script>
+
+    
+    
+        <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.16/dist/katex.min.css" integrity="sha384-6LkG2wmY8FK9E0vU9OOr8UvLwsaqUg9SETfpq4uTCN1agNe8HRdE9ABlk+fVx6gZ" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.16/dist/katex.min.js" integrity="sha384-31El76TwmbHj4rF9DyLsygbq6xoIobG0W+jqXim+a3dU9W53tdH3A/ngRPxOzzaB" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.16/dist/contrib/auto-render.min.js" integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+  
+    
+</head>
+<body>
+        <script type="text/javascript">
+            
+            setThemeByUserPref();
+        </script><header class="header">
+    <nav class="header-nav">
+
+        
+        <div class="avatar">
+            <a href="https://fauzislami.github.io/">
+                <img src="/images/logo-blog-oji.png" alt="avatar" />
+            </a>
+        </div>
+        
+
+        <div class="nav-title">
+            <a class="nav-brand" href="https://fauzislami.github.io/">Blog · Muhammad Fauzi Islami</a>
+        </div>
+
+        <div class="nav-links">
+            
+            <div class="nav-link">
+                <a href="/"> Home </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="/posts/"> Posts </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="/projects/"> Projects </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="https://about.me/fauzislami"> About Me </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="/tags/"> Tags </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="https://github.com/fauzislami"><span data-feather='github'></span>  </a>
+            </div>
+            
+
+            <span class="nav-icons-divider"></span>
+            <div class="nav-link dark-theme-toggle">
+                <a>
+                    <span id="theme-toggle-icon" data-feather="moon"></span>
+                </a>
+            </div>
+
+            <div class="nav-link" id="hamburger-menu-toggle">
+                <a>
+                    <span data-feather="menu"></span>
+                </a>
+            </div>
+
+            
+            <ul class="nav-hamburger-list visibility-hidden">
+                
+                <li class="nav-item">
+                    <a href="/"> Home </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="/posts/"> Posts </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="/projects/"> Projects </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="https://about.me/fauzislami"> About Me </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="/tags/"> Tags </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="https://github.com/fauzislami"><span data-feather='github'></span>  </a>
+                </li>
+                
+                <li class="nav-item dark-theme-toggle">
+                    <a>
+                        <span id="theme-toggle-icon" data-feather="moon"></span>
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+</header>
+<main id="content">
+    <div class="post container">
+
+    <div class="post-header-section">
+        <h1>Proxying Docker Registry Through Nexus Repository Manager</h1>
+        <small role="doc-subtitle"></small>
+        <p class="post-date">
+            October 14, 2021
+        </p>
+
+        <ul class="post-tags">
+        
+            <li class="post-tag"><a href="/tags/docker">Docker</a></li>
+        
+            <li class="post-tag"><a href="/tags/nexus">Nexus</a></li>
+        
+        </ul>
+    </div>
+
+    <div class="post-content">
+        <p>
+            <!-- raw HTML omitted -->
+<p>In this <!-- raw HTML omitted -->post<!-- raw HTML omitted --> we’ve learned how to proxy PyPI and make it cached in our local repo, but for this time I want to share similar thing but it’s for docker image. Here we go!</p>
+<ul>
+<li>Make docker group and docker proxy<!-- raw HTML omitted --></li>
+</ul>
+<p><!-- raw HTML omitted --> <!-- raw HTML omitted --></p>
+<p>We can see the configurations below :<!-- raw HTML omitted --></p>
+<p><!-- raw HTML omitted --> <!-- raw HTML omitted --></p>
+<p>Explanation :</p>
+<ol>
+<li>Name of proxy repository</li>
+<li>Allow anonymous user for pulling the image</li>
+<li>Remote registry. <strong><a href="https://registry-1.docker.io">https://registry-1.docker.io</a></strong> is docker hub remote storage URL.</li>
+<li>Use docker hub as docker index<!-- raw HTML omitted --></li>
+</ol>
+<p><!-- raw HTML omitted --> <!-- raw HTML omitted --></p>
+<p>Explanation :</p>
+<ol>
+<li>Name of group repository</li>
+<li>5000 is port number for pulling the image through nexus registry</li>
+<li>Allow anonymous user for pulling the image.</li>
+<li>Set <strong>docker-proxy</strong> ( proxied docker registry we’ve created before ) to be a member of this group repo</li>
+</ol>
+<ul>
+<li>Tell docker to consider the image registry we’ve created as registry mirrors to cache the image and as insecure registry, so there’s no need to verify TLS ( <em><strong>not recommended for production env</strong></em> ) by creating new file called <!-- raw HTML omitted -->daemon.json<!-- raw HTML omitted --> in <!-- raw HTML omitted -->/etc/docker directory<!-- raw HTML omitted --><!-- raw HTML omitted --></li>
+</ul>
+<p><!-- raw HTML omitted --> <!-- raw HTML omitted --></p>
+<p>Restart docker service afterwards. Then verify by executing <!-- raw HTML omitted -->docker info<!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><!-- raw HTML omitted --> <!-- raw HTML omitted --></p>
+<ul>
+<li>Try to pull an image <!-- raw HTML omitted --></li>
+</ul>
+<p><!-- raw HTML omitted --> <!-- raw HTML omitted --></p>
+<p>And it works like a charm !<!-- raw HTML omitted --></p>
+<p><!-- raw HTML omitted --> <!-- raw HTML omitted --></p>
+        </p>
+    </div>
+</div>
+
+
+
+    
+
+        </main><footer class="footer">
+    <span>&copy; 2022 Fauzi Islami</span>
+</footer>
+</body>
+</html>

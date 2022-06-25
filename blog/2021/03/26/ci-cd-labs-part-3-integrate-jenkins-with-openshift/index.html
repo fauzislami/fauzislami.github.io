@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        :root {
+            --accent-color: #FF4D4D;
+        }
+    </style>
+
+    
+    
+    
+    
+    
+    
+
+    
+    <title>CI/CD Labs Part 3: Integrate Jenkins with Openshift</title>
+    <meta name="description" content="/home/fauzislami/blog">
+    <meta name="keywords" content='blog, gokarna, hugo, CI/CD, Jenkins, OpenShift'>
+
+    <meta property="og:url" content="https://fauzislami.github.io/blog/2021/03/26/ci-cd-labs-part-3-integrate-jenkins-with-openshift/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="CI/CD Labs Part 3: Integrate Jenkins with Openshift">
+    <meta property="og:description" content="/home/fauzislami/blog">
+    <meta property="og:image" content="/images/logo-blog-oji.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="CI/CD Labs Part 3: Integrate Jenkins with Openshift">
+    <meta name="twitter:description" content="/home/fauzislami/blog">
+    <meta property="twitter:domain" content="https://fauzislami.github.io/blog/2021/03/26/ci-cd-labs-part-3-integrate-jenkins-with-openshift/">
+    <meta property="twitter:url" content="https://fauzislami.github.io/blog/2021/03/26/ci-cd-labs-part-3-integrate-jenkins-with-openshift/">
+    <meta name="twitter:image" content="/images/logo-blog-oji.png">
+
+    
+    <link rel="canonical" href="https://fauzislami.github.io/blog/2021/03/26/ci-cd-labs-part-3-integrate-jenkins-with-openshift/" />
+
+    <link rel="stylesheet" type="text/css" href="/css/normalize.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link disabled id="dark-theme" rel="stylesheet" href="/css/dark.css">
+
+    <script src="/js/svg-injector.min.js"></script>
+    <script src="/js/feather-icons.min.js"></script>
+    <script src="/js/main.js"></script>
+
+    
+    
+        <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.16/dist/katex.min.css" integrity="sha384-6LkG2wmY8FK9E0vU9OOr8UvLwsaqUg9SETfpq4uTCN1agNe8HRdE9ABlk+fVx6gZ" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.16/dist/katex.min.js" integrity="sha384-31El76TwmbHj4rF9DyLsygbq6xoIobG0W+jqXim+a3dU9W53tdH3A/ngRPxOzzaB" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.16/dist/contrib/auto-render.min.js" integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+  
+    
+</head>
+<body>
+        <script type="text/javascript">
+            
+            setThemeByUserPref();
+        </script><header class="header">
+    <nav class="header-nav">
+
+        
+        <div class="avatar">
+            <a href="https://fauzislami.github.io/">
+                <img src="/images/logo-blog-oji.png" alt="avatar" />
+            </a>
+        </div>
+        
+
+        <div class="nav-title">
+            <a class="nav-brand" href="https://fauzislami.github.io/">Blog · Muhammad Fauzi Islami</a>
+        </div>
+
+        <div class="nav-links">
+            
+            <div class="nav-link">
+                <a href="/"> Home </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="/posts/"> Posts </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="/projects/"> Projects </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="https://about.me/fauzislami"> About Me </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="/tags/"> Tags </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="https://github.com/fauzislami"><span data-feather='github'></span>  </a>
+            </div>
+            
+
+            <span class="nav-icons-divider"></span>
+            <div class="nav-link dark-theme-toggle">
+                <a>
+                    <span id="theme-toggle-icon" data-feather="moon"></span>
+                </a>
+            </div>
+
+            <div class="nav-link" id="hamburger-menu-toggle">
+                <a>
+                    <span data-feather="menu"></span>
+                </a>
+            </div>
+
+            
+            <ul class="nav-hamburger-list visibility-hidden">
+                
+                <li class="nav-item">
+                    <a href="/"> Home </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="/posts/"> Posts </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="/projects/"> Projects </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="https://about.me/fauzislami"> About Me </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="/tags/"> Tags </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="https://github.com/fauzislami"><span data-feather='github'></span>  </a>
+                </li>
+                
+                <li class="nav-item dark-theme-toggle">
+                    <a>
+                        <span id="theme-toggle-icon" data-feather="moon"></span>
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+</header>
+<main id="content">
+    <div class="post container">
+
+    <div class="post-header-section">
+        <h1>CI/CD Labs Part 3: Integrate Jenkins with Openshift</h1>
+        <small role="doc-subtitle"></small>
+        <p class="post-date">
+            March 26, 2021
+        </p>
+
+        <ul class="post-tags">
+        
+            <li class="post-tag"><a href="/tags/ci/cd">CI/CD</a></li>
+        
+            <li class="post-tag"><a href="/tags/jenkins">Jenkins</a></li>
+        
+            <li class="post-tag"><a href="/tags/openshift">OpenShift</a></li>
+        
+        </ul>
+    </div>
+
+    <div class="post-content">
+        <p>
+            <!-- raw HTML omitted -->
+<p>In this part 3 CI / CD lab the author will document how to integrate Jenkins with the OpenShift.</p>
+<p>What should be prepared :</p>
+<p>– 1 VM Jenkins<br>
+Spec:<br>
+OS: Centos 7.9 (optional)<br>
+• RAM: 16GB (this will be used until labs finish)<br>
+• CPU: 4vCPU<br>
+• HDD: 100GB<br>
+• Internet connection</p>
+<ul>
+<li>1 VM CRC (CodeReady Container) Mini OpenShift<br>
+Spec:<br>
+OS: Centos 7.9 (optional)<br>
+• RAM: 16GB (this will be used until labs finish)<br>
+• CPU: 4vCPU<br>
+• HDD: 100GB<br>
+• Internet connection</li>
+</ul>
+<p>Inside the VM is installed:</p>
+<p><strong>Jenkins (run as service)</strong><br>
+– Openjdk1.8<br>
+– Maven 3.6.3<br>
+– Docker client<br>
+– Git<br>
+– IP Address = 192.168.1.116:8080</p>
+<p><strong>CodeReady Container</strong><br>
+– IP Address = 192.168.1.114</p>
+<p><strong>OpenShift Configurations</strong></p>
+<p>In this lab the author uses a CRC (CodeReady Container) which is a lightweight version of OpenShift and is only for development needs. However, the resources that will be used will be the same as production-ready OpenShift. For crc installation, see the official documentation link here <!-- raw HTML omitted --><a href="https://code-ready.github.io/crc/">https://code-ready.github.io/crc/</a><!-- raw HTML omitted --></p>
+<p>First, log into the cluster by using a user who has the cluster-admin role. Here I used a virtual user who has been generated during the CRC installation process, namely kubeadmin.</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>After successfully logging in, it’s time to create projects. The projects that will be made are dev (development), sim (simulation), and prod (production).</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>Then create a service account in each of these projects for Jenkins to use in order to manage the project.</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>Then give a role to the service account that has been created in each of these projects with role <strong>edit</strong> so that Jenkins can create, delete, and modify any resources in its project.</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>Now the last step from the openshift side is to create credentials from the image registry for each project. Here I used nexus which in part 1 has been configured to save the image. However, for this part 3 lab it is not yet used, it will be used on the last lab. It is the implementation of full CI / CD.</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p><strong>Jenkins</strong></p>
+<p>First, Login as an admin to Jenkins<!-- raw HTML omitted --></p>
+<p><img src="https://cdn-images-1.medium.com/max/800/1*4vaLImsUarCKavH7gqg3BA.png" alt=""> <!-- raw HTML omitted --></p>
+<p>Install the required plugins on the <strong>Manage Jenkins menu</strong> -&gt; <strong>Manage Plugins</strong> -&gt; <strong>[TAB] Available</strong>. Then install the plugin below:<br>
+– OpenShift Login Plugin<br>
+– OpenShift Client Jenkins Plugin</p>
+<p>Then select <strong><em>Install without restarting</em></strong></p>
+<p>Now I will create a credential in jenkins using the token in the service account that was created in openshift. To view these tokens you can use the command below:</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>Perintah di atas akan menampilkan token. Selanjutnya <em>copy-paste</em> token tersebut untuk ditambahkan pada credential jenkins.</p>
+<p><strong>Credential ocp-dev</strong></p>
+<!-- raw HTML omitted -->
+<p><strong>Credential ocp-sim</strong></p>
+<!-- raw HTML omitted -->
+<p><strong>Credential ocp-prod</strong></p>
+<!-- raw HTML omitted -->
+<p>Next, I’ll integrate jenkins to bitbucket by going to the <strong>Manage Jenkins</strong> menu -&gt; <strong>Configure System</strong> -&gt; <strong>OpenShift Client Plugin</strong>. Provide the cluster name for openshift and the URL for the apiserver from openshift to integrate. Then for the token enter the token that was previously created. In this lab, because I’m using CRC, the environment will be simulated only with different projects but in the same cluster. At the time of its implementation, the best practice is to separate each environment with a different cluster.</p>
+<p>Then to test the connection, I made a job containing a pipeline to check the availability of each cluster.</p>
+<p>Select <strong>New Item</strong> -&gt; <strong>Pipeline</strong>, then name the job. Then the Pipeline field can be adjusted as shown below :</p>
+<!-- raw HTML omitted -->
+<p>Pipeline :</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>Then save.</p>
+<p>Then do a build. It can be seen that the pipeline was going well and successful.</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+        </p>
+    </div>
+</div>
+
+
+
+    
+
+        </main><footer class="footer">
+    <span>&copy; 2022 Fauzi Islami</span>
+</footer>
+</body>
+</html>

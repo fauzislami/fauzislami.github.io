@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        :root {
+            --accent-color: #FF4D4D;
+        }
+    </style>
+
+    
+    
+    
+    
+    
+    
+
+    
+    <title>Highly Available Kubernetes Cluster Using HAproxy and Keepalived</title>
+    <meta name="description" content="/home/fauzislami/blog">
+    <meta name="keywords" content='blog, gokarna, hugo, HAproxy, Keepalived, Kubespray'>
+
+    <meta property="og:url" content="https://fauzislami.github.io/blog/2021/10/17/highly-available-kubernetes-cluster-with-haproxy-and-keepalived/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Highly Available Kubernetes Cluster Using HAproxy and Keepalived">
+    <meta property="og:description" content="/home/fauzislami/blog">
+    <meta property="og:image" content="/images/logo-blog-oji.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Highly Available Kubernetes Cluster Using HAproxy and Keepalived">
+    <meta name="twitter:description" content="/home/fauzislami/blog">
+    <meta property="twitter:domain" content="https://fauzislami.github.io/blog/2021/10/17/highly-available-kubernetes-cluster-with-haproxy-and-keepalived/">
+    <meta property="twitter:url" content="https://fauzislami.github.io/blog/2021/10/17/highly-available-kubernetes-cluster-with-haproxy-and-keepalived/">
+    <meta name="twitter:image" content="/images/logo-blog-oji.png">
+
+    
+    <link rel="canonical" href="https://fauzislami.github.io/blog/2021/10/17/highly-available-kubernetes-cluster-with-haproxy-and-keepalived/" />
+
+    <link rel="stylesheet" type="text/css" href="/css/normalize.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link disabled id="dark-theme" rel="stylesheet" href="/css/dark.css">
+
+    <script src="/js/svg-injector.min.js"></script>
+    <script src="/js/feather-icons.min.js"></script>
+    <script src="/js/main.js"></script>
+
+    
+    
+        <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.16/dist/katex.min.css" integrity="sha384-6LkG2wmY8FK9E0vU9OOr8UvLwsaqUg9SETfpq4uTCN1agNe8HRdE9ABlk+fVx6gZ" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.16/dist/katex.min.js" integrity="sha384-31El76TwmbHj4rF9DyLsygbq6xoIobG0W+jqXim+a3dU9W53tdH3A/ngRPxOzzaB" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.16/dist/contrib/auto-render.min.js" integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+  
+    
+</head>
+<body>
+        <script type="text/javascript">
+            
+            setThemeByUserPref();
+        </script><header class="header">
+    <nav class="header-nav">
+
+        
+        <div class="avatar">
+            <a href="https://fauzislami.github.io/">
+                <img src="/images/logo-blog-oji.png" alt="avatar" />
+            </a>
+        </div>
+        
+
+        <div class="nav-title">
+            <a class="nav-brand" href="https://fauzislami.github.io/">Blog · Muhammad Fauzi Islami</a>
+        </div>
+
+        <div class="nav-links">
+            
+            <div class="nav-link">
+                <a href="/"> Home </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="/posts/"> Posts </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="/projects/"> Projects </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="https://about.me/fauzislami"> About Me </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="/tags/"> Tags </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="https://github.com/fauzislami"><span data-feather='github'></span>  </a>
+            </div>
+            
+
+            <span class="nav-icons-divider"></span>
+            <div class="nav-link dark-theme-toggle">
+                <a>
+                    <span id="theme-toggle-icon" data-feather="moon"></span>
+                </a>
+            </div>
+
+            <div class="nav-link" id="hamburger-menu-toggle">
+                <a>
+                    <span data-feather="menu"></span>
+                </a>
+            </div>
+
+            
+            <ul class="nav-hamburger-list visibility-hidden">
+                
+                <li class="nav-item">
+                    <a href="/"> Home </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="/posts/"> Posts </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="/projects/"> Projects </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="https://about.me/fauzislami"> About Me </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="/tags/"> Tags </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="https://github.com/fauzislami"><span data-feather='github'></span>  </a>
+                </li>
+                
+                <li class="nav-item dark-theme-toggle">
+                    <a>
+                        <span id="theme-toggle-icon" data-feather="moon"></span>
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+</header>
+<main id="content">
+    <div class="post container">
+
+    <div class="post-header-section">
+        <h1>Highly Available Kubernetes Cluster Using HAproxy and Keepalived</h1>
+        <small role="doc-subtitle"></small>
+        <p class="post-date">
+            October 17, 2021
+        </p>
+
+        <ul class="post-tags">
+        
+            <li class="post-tag"><a href="/tags/haproxy">HAproxy</a></li>
+        
+            <li class="post-tag"><a href="/tags/keepalived">Keepalived</a></li>
+        
+            <li class="post-tag"><a href="/tags/kubespray">Kubespray</a></li>
+        
+        </ul>
+    </div>
+
+    <div class="post-content">
+        <p>
+            <p>Kubernetes provides us a convenient way to make our application easier to maintain and more scalable. Since kubernetes is only an abstraction that runs on a set of machines and consists of many components, we have some work to do to keep our kubernetes cluster well-established and healthy, especially to make that cluster highly available. In this case, I use two HAproxy instances to balance the load over the network or we usually say that as load balancing. Not only that, I also use Keepalived which will make it redundant between the two HAproxy instances. The diagram below depicts how HAproxy and Keepalived play their role :</p>
+<p><img src="/images/k8s-keepalived/k8s-keepalived.png" alt="k8s keepalived architecture" title="k8s keepalived architecture"></p>
+<p>It simply tells us that there is an virtual IP that will be a central point where client / kubectl and worker should connect to in order to reach master nodes. This virtual IP will travel between HAproxy 1 and HAproxy 2 and it’s provided by Keepalived. So whenever a nasty network failure happens, Keepalived will be responsible to look for which HAproxy instance is available and choose it as master or designated instance to continue the traffic over the networks. It’s not only a high available kubernetes cluster itself but also a high available load balancer.</p>
+<p>For comparison, see the picture below :</p>
+<p><img src="/images/k8s-keepalived/k8s-without-keepalived.png" alt="k8s keepalived architecture" title="k8s keepalived architecture"></p>
+<p>There&rsquo;s only one HAproxy and no Keepalived being used. It might result an obvious answer if there’s a failure in HAproxy, what is it ? It’s guessable question I think hahaha, but yeah the cluster would be inaccessible and it’s usually called as single point of failure. Should we give it a shot on production area ? Of course that should never have been done.</p>
+<p>Let&rsquo;s have a practice! Anyway, before going through this lab, I recommend you to see this <a href="https://fauzislami.com/blog/2021/01/18/automating-k8s-cluster-installation-with-kubespray">post</a> which is about how to automate kubernetes cluster installation using kubespray. Hopefully it will make you understand a bit how kubespray works and how to make a setup for it. Because in this scenario, we will learn how to make a highly available kubernetes cluster with the help of kubespray to get all the installation stuff done and I will not mention them much in this time.</p>
+<ul>
+<li>Install HAproxy and Keepalived on both of HAproxy instances</li>
+</ul>
+<pre tabindex="0"><code class="language-command" data-lang="command">yum install -y keepalived haproxy</code></pre>
+<p><strong>Note : Because I use centos 7 for this lab, if you want to follow along, don’t forget to give the proper rules to firewalld and selinux. But for the simplicity of this lab, I consider to stop firewalld and set selinux to permissive.</strong></p>
+<ul>
+<li>Configure HAproxy &amp; Keepalived <strong>( LB-1 )</strong></li>
+</ul>
+<p><strong>HAproxy</strong> :</p>
+<pre tabindex="0"><code class="language-haproxy" data-lang="haproxy">frontend kubernetes-frontend
+  bind *:6443
+  mode tcp
+  option tcplog
+  default_backend kubernetes-backend
+
+backend kubernetes-backend
+  option httpchk GET /healthz
+  http-check expect status 200
+  mode tcp
+  option ssl-hello-chk
+  balance roundrobin
+    server master-1 192.168.1.101:6443 check fall 3 rise 2
+    server master-2 192.168.1.103:6443 check fall 3 rise 2
+    server master-3 192.168.1.115:6443 check fall 3 rise 2</code></pre>
+<p><strong>Keepalived</strong> :
+<pre tabindex="0"><code class="language-keepalived" data-lang="keepalived">vrrp_script check_apiserver {
+  script &#34;/etc/keepalived/check_apiserver.sh&#34;
+  interval 3
+  timeout 10
+  fall 5
+  rise 2
+  weight -2
+}
+
+vrrp_instance VI_1 {
+    state BACKUP
+    interface eth0
+    virtual_router_id 1
+    priority 100
+    advert_int 5
+    authentication {
+        auth_type PASS
+        auth_pass mysecret
+    }
+    virtual_ipaddress {
+        192.168.1.110
+    }
+    track_script {
+        check_apiserver
+    }
+}</code></pre></p>
+<ul>
+<li>Configure HAproxy &amp; Keepalived <strong>( LB-2 )</strong></li>
+</ul>
+<p><strong>HAproxy</strong> :</p>
+<pre tabindex="0"><code class="language-haproxy" data-lang="haproxy">frontend kubernetes-frontend
+  bind *:6443
+  mode tcp
+  option tcplog
+  default_backend kubernetes-backend
+
+backend kubernetes-backend
+  option httpchk GET /healthz
+  http-check expect status 200
+  mode tcp
+  option ssl-hello-chk
+  balance roundrobin
+    server master-1 192.168.1.101:6443 check fall 3 rise 2
+    server master-2 192.168.1.103:6443 check fall 3 rise 2
+    server master-3 192.168.1.115:6443 check fall 3 rise 2</code></pre>
+<p><strong>Keepalived :</strong></p>
+<pre tabindex="0"><code class="language-keepalived" data-lang="keepalived">vrrp_script check_apiserver {
+  script &#34;/etc/keepalived/check_apiserver.sh&#34;
+  interval 3 
+  timeout 10  
+  fall 5
+  rise 2 
+  weight -2
+}
+
+vrrp_instance VI_1 {
+    state BACKUP
+    interface eth0
+    virtual_router_id 1
+    priority 100
+    advert_int 5
+    authentication {
+        auth_type PASS
+        auth_pass mysecret
+    }
+    virtual_ipaddress {
+        192.168.1.110
+    }
+    track_script {
+        check_apiserver
+    }
+}</code></pre>
+<p>A bit explanation of those configurations :</p>
+<ol>
+<li>HAproxy will listen and receive any request on port 6443 and afterwards it will forward the request to the backend connection which are master-1, master-2, and master-3 ( kubernetes cluster ) using round robin scheduling algorithm. Therefore we are able to connect to the cluster with 1 fault-tolerance (I found good article that discusses about fault-tolerance in kubernetes <!-- raw HTML omitted -->here<!-- raw HTML omitted -->).</li>
+<li>Keepalived will be responsible to listen the “heartbeat” to each HAproxy instances by using a script called <code>check_apiserver.sh</code> as it&rsquo;s mentioned in <code>/etc/keepalived/keepalived.conf</code> on <code>vrrp_script check_apiserver {}</code> section , here what it looks like :</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/sh
+</span><span style="color:#75715e"></span>
+errorExit<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+  echo <span style="color:#e6db74">&#34;*** &#34;</span> 1&gt;&amp;<span style="color:#ae81ff">2</span>
+  exit <span style="color:#ae81ff">1</span>
+<span style="color:#f92672">}</span>
+
+curl --silent --max-time <span style="color:#ae81ff">2</span> --insecure https://localhost:6443/ -o /dev/null <span style="color:#f92672">||</span> errorExit <span style="color:#e6db74">&#34;Error GET https://localhost:6443/&#34;</span>
+<span style="color:#66d9ef">if</span> ip addr | grep -q 192.168.1.110; <span style="color:#66d9ef">then</span>
+  curl --silent --max-time <span style="color:#ae81ff">2</span> --insecure https://192.168.1.110:6443/ -o /dev/null <span style="color:#f92672">||</span> errorExit <span style="color:#e6db74">&#34;Error GET https://192.168.1.110:6443/&#34;</span>
+<span style="color:#66d9ef">fi</span></code></pre></div>
+<p>Keepalived refers to this healthcheck script to check continuously the response of HAproxy master while it&rsquo;s running (the current instance) and whenever it losts the connection, then Keepalived would evaluate by giving it some time to make sure whether the current designated instance is healthy or run into failure. If there is no any response until the time is up, Keepalived is going to switch the virtual IP to the backup one. Let&rsquo;s look back to Keepalived configuration on <code>vrrp_script check_apiserver {}</code> section !</p>
+<pre tabindex="0"><code>  1. script &quot;/etc/keepalived/check_apiserver.sh&quot; ---&gt; healtcheck script file
+  2. interval 3 ---&gt; will run healthcheck script every 3 seconds
+  3. timeout 10 ---&gt; if it waits longer than 10 seconds, it assumes that particular healthcheck run has failed 
+  4. fall 5 ---&gt; it has to fail 5 times consecutively in order to assume that node is actually failed
+  5. rise 2 ---&gt; it has to suceed 2 times consecutive in order to assume that node is back online again
+  6. weight -2 ---&gt; when it fails consecutively for n-times of fall ( which is in this case is 5 ), it's going to reduce the priority of LB node by 2. In the future, when the instance restart, Keepalived will specify which one is master and backup by refering to the priority number. The highest priority number will be elected as master. But in this time, I just want to make it simple by giving the two instances 100 as priority number.
+
+</code></pre><ul>
+<li>Start HAproxy and Keepalived on both instances</li>
+</ul>
+<pre tabindex="0"><code>systemctl enable --now keepalived &amp;&amp; systemctl enable --now haproxy
+
+</code></pre><p>If there’s no any failure, it means HAproxy and keepalived has been ready to be used. But we still some works to do now, so let’s get all the things done. Now we are going to setup kubernetes using kubespray.</p>
+<ul>
+<li>Prepare the inventory in <code>inventory.ini</code> file</li>
+</ul>
+<pre tabindex="0"><code>[all]
+
+[kube_control_plane]
+
+master-1.lab-home.com
+master-2.lab-home.com
+master-3.lab-home.com
+
+[etcd]
+
+master-1.lab-home.com
+master-2.lab-home.com
+master-3.lab-home.com
+
+[kube_node]
+
+master-1.lab-home.com
+master-2.lab-home.com
+master-3.lab-home.com
+worker-1.lab-home.com
+worker-1.lab-home.com
+
+[calico_rr]
+
+[k8s_cluster:children]
+kube_control_plane
+kube_node
+calico_rr&lt;/pre&gt;
+
+</code></pre><ul>
+<li>Fulfill the hosts in <code>hosts.yaml</code> file. Make sure all of the machines get recorded in that file with the proper nodes name and IP Address</li>
+</ul>
+<pre tabindex="0"><code>all:
+  hosts:
+    master-1.lab-home.com:
+      ansible_host: 192.168.1.101
+      ip: 192.168.1.101
+      access_ip: 192.168.1.101
+    master-2.lab-home.com:
+      ansible_host: 192.168.1.103
+      ip: 192.168.1.103
+      access_ip: 192.168.1.103
+    master-3.lab-home.com:
+      ansible_host: 192.168.1.105
+      ip: 192.168.1.105
+      access_ip: 192.168.1.105
+    worker-1.lab-home.com:
+      ansible_host: 192.168.1.115
+      ip: 192.168.1.115
+      access_ip: 192.168.1.115
+    worker-2.lab-home.com:
+      ansible_host: 192.168.1.124
+      ip: 192.168.1.124
+      access_ip: 192.168.1.124
+  children:
+    kube_control_plane:
+      hosts:
+        master-1.lab-home.com:
+        master-2.lab-home.com:
+        master-3.lab-home.com:        
+    kube_node:
+      hosts:
+        master-1.lab-home.com:
+        master-2.lab-home.com:
+        master-3.lab-home.com:
+        worker-1.lab-home.com:
+        worker-2.lab-home.com:
+    etcd:
+      hosts:
+        master-1.lab-home.com:
+        master-2.lab-home.com:
+        master-3.lab-home.com:
+    k8s_cluster:
+      children:
+        kube_control_plane:
+        kube_node:
+    calico_rr:
+      hosts: {}
+</code></pre><ul>
+<li>Activate DNS mode to be manual in <code>k8s-cluster.yml</code> ( full path -&gt; <code>inventory/${inventory_name}/group_vars/k8s_cluster/k8s-cluster.yml</code> )</li>
+</ul>
+<pre tabindex="0"><code>dns_mode: manual
+# Set manual server if using a custom cluster DNS server
+manual_dns_server: 192.168.1.176 #specify and replace your DNS here
+</code></pre><ul>
+<li>Activate External Load Balancer in <!-- raw HTML omitted -->all.yml<!-- raw HTML omitted --> ( full path –&gt; <!-- raw HTML omitted -->inventory/${inventory_name}/group_vars/all/all.yml<!-- raw HTML omitted --> )</li>
+</ul>
+<pre tabindex="0"><code>## External LB example config
+apiserver_loadbalancer_domain_name: &quot;lb.lab-home.com&quot; #specify and replace your LB FQDN here
+loadbalancer_apiserver:
+   address: 192.168.1.110 #specify and replace your LB here
+   port: 6443&lt;/pre&gt;
+</code></pre><ul>
+<li>it&rsquo;s ready to launch. Here we go!!</li>
+</ul>
+<pre tabindex="0"><code>ansible-playbook -i inventory/mycluster/hosts.yaml --become --user root cluster.yml
+</code></pre><p>It probably will be a lengthy process, so take a cup of coffee and wait a while until the cluster is ready 😄</p>
+<p>Wa i t i n g . . . . .</p>
+<p><img src="/images/k8s-keepalived/waiting.jpg" alt="k8s keepalived architecture" title="k8s keepalived architecture"></p>
+<ul>
+<li>Once the installation process has done, don&rsquo;t forget to copy <code>admin.conf</code> from one of the master nodes to our host</li>
+</ul>
+<pre tabindex="0"><code>scp root@master-1:/etc/kubernetes/admin.conf /home/oji/.kube/config
+</code></pre><p>then replace <code>127.0.0.1</code> which is localhost IP Address to virtual IP that have been prepared ( <code>192.168.1.110</code> )</p>
+<pre tabindex="0"><code>sed -i &quot;s/127.0.0.1/192.168.1.110/g&quot; /home/oji/.kube/config
+</code></pre><p>Make sure the ownership and permissions is already set properly. So what are we waiting for ? let&rsquo;s check it out !</p>
+<pre tabindex="0"><code>oji@LAPTOP-AGEMNL1C:~$ kubectl get nodes
+NAME                    STATUS   ROLES                  AGE     VERSION
+master-1.lab-home.com   Ready    control-plane,master   6d18h   v1.22.2
+master-2.lab-home.com   Ready    control-plane,master   6d18h   v1.22.2
+master-3.lab-home.com   Ready    control-plane,master   6d18h   v1.22.2
+worker-1.lab-home.com   Ready    worker                 6d18h   v1.22.2
+worker-2.lab-home.com   Ready    worker                 6d18h   v1.22.2
+
+</code></pre><ul>
+<li>High Availability Testing</li>
+</ul>
+<p>Here is the current condition of HAproxy 1 &amp; 2 consecutively :<!-- raw HTML omitted --></p>
+<p><img src="/images/k8s-keepalived/test-ha-1.png" alt="test high availability 1" title="test high availability 1"></p>
+<p><img src="/images/k8s-keepalived/test-ha-2.png" alt="test high availability 2" title="test high availability 2"></p>
+<p>As we can see the pictures above, virtual IP belongs to <strong>lb-1.lab-home.com</strong> or HAproxy 1. Now what to do in order to test the Availability between HAproxy instance is reboot HAproxy 1 instance to assume it runs into machine failure and it might be caused by power outage or whatsoever.</p>
+<p><img src="/images/k8s-keepalived/test-ha-3.png" alt="test high availability 3" title="test high availability 3"></p>
+<p><img src="/images/k8s-keepalived/test-ha-4.png" alt="test high availability 4" title="test high availability 4"></p>
+<p>After that, we&rsquo;ll see that virtual IP Address has been moved eventually to <strong>lb-2.lab-home.com</strong> or HAproxy 2. It means we&rsquo;re still be able to access the cluster even though there is a down time for a split second.</p>
+<p>But it doesn&rsquo;t stop on this step, we still have one more case if HAproxy service in lb-2.lab-home.com is no longer available to receive the request. So just stop HAproxy service on lb-2.lab-home.com and wait until the virtual IP has been switched to HAproxy 1 again.</p>
+<p><img src="/images/k8s-keepalived/test-ha-5.png" alt="test high availability 5" title="test high availability 5"></p>
+<p>Yeahhh finally</p>
+<p><img src="/images/k8s-keepalived/finally-done.jpg" alt="finally" title="finallyyy"></p>
+<p>I hope it might be useful! See you later!</p>
+
+        </p>
+    </div>
+</div>
+
+
+
+    
+
+        </main><footer class="footer">
+    <span>&copy; 2022 Fauzi Islami</span>
+</footer>
+</body>
+</html>

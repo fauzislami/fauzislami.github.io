@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Scratchpad on Blog · Muhammad Fauzi Islami</title>
+    <link>https://fauzislami.github.io/categories/scratchpad/</link>
+    <description>Recent content in Scratchpad on Blog · Muhammad Fauzi Islami</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 23 Jul 2021 05:13:00 +0000</lastBuildDate><atom:link href="https://fauzislami.github.io/categories/scratchpad/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Collecting Network Traffic Using TCPDump on POD Level in Openshift</title>
+      <link>https://fauzislami.github.io/blog/2021/07/23/collecting-network-traffic-using-tcpdump-on-pod-level-in-openshift/</link>
+      <pubDate>Fri, 23 Jul 2021 05:13:00 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/blog/2021/07/23/collecting-network-traffic-using-tcpdump-on-pod-level-in-openshift/</guid>
+      <description>&lt;p&gt;Ada kalanya ketika sebuah aplikasi mengalami masalah dan tidak mengeluarkan log pada stdout secara lengkap dan cenderung tidak membantu untuk kebutuhan troubleshooting. Sehingga diperlukan analisa lebih dalam untuk mendapatkan petunjuk dari masalah tersebut, terutama jika masalahnya dalam ruang lingkup network yang perlu dilakukan analisa dari network traffic yang ada. Maka dari itu kita bisa melakukan TCPDump di level POD, namun pada umumnya tidak semua image aplikasi dibekali utilitas untuk melakukan hal itu. Oleh karena itu berikut adalah cara bagaimana melakukan TCPDump pada level POD di Openshift :&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>MachineConfigPool degraded saat updating : “Error when evicting pod”</title>
+      <link>https://fauzislami.github.io/blog/2021/03/20/machineconfigpool-degraded-saat-updating-error-when-evicting-pod/</link>
+      <pubDate>Sat, 20 Mar 2021 05:18:00 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/blog/2021/03/20/machineconfigpool-degraded-saat-updating-error-when-evicting-pod/</guid>
+      <description>&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;Kejadian ini seringkali terjadi ketika melakukan sebuah perubahan cluster yang mengharuskan setiap nodes pada cluster konsolidasi dengan perubahan yang baru saja diterapkan. Pada masalah yang penulis alami, penulis ingin menambahkan private registry ke dalam cluster agar bisa dikenali sebagai insecure registry. Namun setelah selesai dikonfigurasi dan cluster otomatis melakukan konsolidasi konfigurasi ke setiap nodes (menambahkan insecure registry), terdapat suatu hal yang janggal ketika melihat kondisi salah satu node stuck di status &lt;strong&gt;&lt;em&gt;“Ready,SchedulingDisabled&lt;/em&gt;“&lt;/strong&gt; dengan waktu yang lama dan tidak normal. Setelah dilakukan pengecekan pada node ternyata terdapat 1 pod yang bermasalah yang tidak bisa dihapus dari node tersebut :&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Menambahkan Trusted Certificate Pada JVM di Jenkins</title>
+      <link>https://fauzislami.github.io/blog/2021/03/10/menambahkan-trusted-certificate-pada-jvm-di-jenkins/</link>
+      <pubDate>Wed, 10 Mar 2021 05:23:00 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/blog/2021/03/10/menambahkan-trusted-certificate-pada-jvm-di-jenkins/</guid>
+      <description>&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;Pada tulisan ini membahas sebuah kendala yang dialami penulis ketika melakukan integrasi Jenkins dengan Jira, Bitbucket dan Nexus yang menggunakan HTTPS sebagai protokolnya. Pada saat melakukan test connection terdapat error : &lt;strong&gt;&lt;em&gt;“&lt;/em&gt;&lt;/strong&gt;_ &lt;strong&gt;unable to find valid certification path to requested target jenkins&lt;/strong&gt;_ “&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Namespace OpenShift Tidak Dapat Dihapus</title>
+      <link>https://fauzislami.github.io/blog/2021/03/10/namespace-openshift-tidak-dapat-dihapus/</link>
+      <pubDate>Wed, 10 Mar 2021 05:22:00 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/blog/2021/03/10/namespace-openshift-tidak-dapat-dihapus/</guid>
+      <description>&lt;p&gt;Ada sebuah kejadian di project yang cukup membuat frustasi penulis ketika melakukan penghapusan sebuah project/namespace pada openshift, yaitu namespace yang akan dihapus tidak terhapus walaupun sudah dipaksa untuk dihapus dengan menggunakan parameter &lt;strong&gt;–force –grace-period=0&lt;/strong&gt; , proses penghapusan stuck seperti gambar di bawah ini :&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;</description>
+    </item>
+    
+    <item>
+      <title>StorageCluster OCS tidak dapat dihapus</title>
+      <link>https://fauzislami.github.io/blog/2021/03/10/storagecluster-ocs-tidak-dapat-dihapus/</link>
+      <pubDate>Wed, 10 Mar 2021 05:20:00 +0000</pubDate>
+      
+      <guid>https://fauzislami.github.io/blog/2021/03/10/storagecluster-ocs-tidak-dapat-dihapus/</guid>
+      <description>&lt;p&gt;Ada kalanya keanehan terjadi ketika sedang mengerjakan tasks di project. Salah satu hal aneh tersebut yang penulis adalah menghapus sebuah objek yang tidak berhasil terhapus tanpa alasan yang diketahui sampai saat ini oleh penulis.&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

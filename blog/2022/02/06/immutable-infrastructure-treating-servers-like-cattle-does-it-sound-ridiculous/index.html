@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        :root {
+            --accent-color: #FF4D4D;
+        }
+    </style>
+
+    
+    
+    
+    
+    
+    
+
+    
+    <title>Immutable Infrastructure, treating servers like “cattle”. Does it sound ridiculous ?</title>
+    <meta name="description" content="/home/fauzislami/blog">
+    <meta name="keywords" content='blog, gokarna, hugo, IaC, Infrastructure as Code'>
+
+    <meta property="og:url" content="https://fauzislami.github.io/blog/2022/02/06/immutable-infrastructure-treating-servers-like-cattle-does-it-sound-ridiculous/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Immutable Infrastructure, treating servers like “cattle”. Does it sound ridiculous ?">
+    <meta property="og:description" content="/home/fauzislami/blog">
+    <meta property="og:image" content="/images/logo-blog-oji.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Immutable Infrastructure, treating servers like “cattle”. Does it sound ridiculous ?">
+    <meta name="twitter:description" content="/home/fauzislami/blog">
+    <meta property="twitter:domain" content="https://fauzislami.github.io/blog/2022/02/06/immutable-infrastructure-treating-servers-like-cattle-does-it-sound-ridiculous/">
+    <meta property="twitter:url" content="https://fauzislami.github.io/blog/2022/02/06/immutable-infrastructure-treating-servers-like-cattle-does-it-sound-ridiculous/">
+    <meta name="twitter:image" content="/images/logo-blog-oji.png">
+
+    
+    <link rel="canonical" href="https://fauzislami.github.io/blog/2022/02/06/immutable-infrastructure-treating-servers-like-cattle-does-it-sound-ridiculous/" />
+
+    <link rel="stylesheet" type="text/css" href="/css/normalize.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link disabled id="dark-theme" rel="stylesheet" href="/css/dark.css">
+
+    <script src="/js/svg-injector.min.js"></script>
+    <script src="/js/feather-icons.min.js"></script>
+    <script src="/js/main.js"></script>
+
+    
+    
+        <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.16/dist/katex.min.css" integrity="sha384-6LkG2wmY8FK9E0vU9OOr8UvLwsaqUg9SETfpq4uTCN1agNe8HRdE9ABlk+fVx6gZ" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.16/dist/katex.min.js" integrity="sha384-31El76TwmbHj4rF9DyLsygbq6xoIobG0W+jqXim+a3dU9W53tdH3A/ngRPxOzzaB" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.16/dist/contrib/auto-render.min.js" integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+  
+    
+</head>
+<body>
+        <script type="text/javascript">
+            
+            setThemeByUserPref();
+        </script><header class="header">
+    <nav class="header-nav">
+
+        
+        <div class="avatar">
+            <a href="https://fauzislami.github.io/">
+                <img src="/images/logo-blog-oji.png" alt="avatar" />
+            </a>
+        </div>
+        
+
+        <div class="nav-title">
+            <a class="nav-brand" href="https://fauzislami.github.io/">Blog · Muhammad Fauzi Islami</a>
+        </div>
+
+        <div class="nav-links">
+            
+            <div class="nav-link">
+                <a href="/"> Home </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="/posts/"> Posts </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="/projects/"> Projects </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="https://about.me/fauzislami"> About Me </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="/tags/"> Tags </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="https://github.com/fauzislami"><span data-feather='github'></span>  </a>
+            </div>
+            
+
+            <span class="nav-icons-divider"></span>
+            <div class="nav-link dark-theme-toggle">
+                <a>
+                    <span id="theme-toggle-icon" data-feather="moon"></span>
+                </a>
+            </div>
+
+            <div class="nav-link" id="hamburger-menu-toggle">
+                <a>
+                    <span data-feather="menu"></span>
+                </a>
+            </div>
+
+            
+            <ul class="nav-hamburger-list visibility-hidden">
+                
+                <li class="nav-item">
+                    <a href="/"> Home </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="/posts/"> Posts </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="/projects/"> Projects </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="https://about.me/fauzislami"> About Me </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="/tags/"> Tags </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="https://github.com/fauzislami"><span data-feather='github'></span>  </a>
+                </li>
+                
+                <li class="nav-item dark-theme-toggle">
+                    <a>
+                        <span id="theme-toggle-icon" data-feather="moon"></span>
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+</header>
+<main id="content">
+    <div class="post container">
+
+    <div class="post-header-section">
+        <h1>Immutable Infrastructure, treating servers like “cattle”. Does it sound ridiculous ?</h1>
+        <small role="doc-subtitle"></small>
+        <p class="post-date">
+            February 6, 2022
+        </p>
+
+        <ul class="post-tags">
+        
+            <li class="post-tag"><a href="/tags/iac">IaC</a></li>
+        
+            <li class="post-tag"><a href="/tags/infrastructure-as-code">Infrastructure as Code</a></li>
+        
+        </ul>
+    </div>
+
+    <div class="post-content">
+        <p>
+            <!-- raw HTML omitted -->
+<h2 id="chattering">Chattering</h2>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<h2 id="circle-of-server8217s-life">Circle of Server’s Life</h2>
+<ul>
+<li>Initial provisioning &amp; Basic Setup</li>
+</ul>
+<!-- raw HTML omitted -->
+<ul>
+<li>Continuous Updates and Applying Changes (Configurations)</li>
+</ul>
+<!-- raw HTML omitted -->
+<ul>
+<li>Decommissioning A Server</li>
+</ul>
+<!-- raw HTML omitted -->
+<h2 id="what8217s-the-problem-">What’s the problem ?</h2>
+<!-- raw HTML omitted -->
+<p>Okay I think it’s time to jump to the main problem before it’s going to be more and more long-winded tedious explanation 🥱</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<h2 id="treat-servers-like-cattle-not-petsfigure-classwp-block-gallery-columns-1-is-cropped">Treat Servers Like Cattle, not Pets<!-- raw HTML omitted --></h2>
+<!-- raw HTML omitted -->
+<p>I know it sounds ridiculous but it’s only an analogy to make it easier to understand. Why should we treat servers like cattle, instead of pets ? Let’s compare them !</p>
+<ul>
+<li>Pets have a name, we care about them. They are unique and lovingly hand raised and cared for.</li>
+<li>Cattle is replaceable, we have many of them. They are almost identical to one another</li>
+</ul>
+<p>It drives to a conclusion, that’s most servers should be treated like cattle, not pets. Treating entire servers as a built artifact. So if we need to change something, build and run a new server then terminate the old one.</p>
+<h2 id="the-benefits-of-immutable-infrastructure">The benefits of Immutable Infrastructure</h2>
+<p>After knowing how this approach works, we can get some benefits of it.</p>
+<ul>
+<li>More consistency and reliability</li>
+<li>More predictable deployment</li>
+<li>Prevent configuration drift.</li>
+</ul>
+<p>This means resulting less error-prone of deployment and reducing the chance of applying unexpected changes in particular servers <strong>a.k.a</strong> prevent configuration drift.</p>
+<h2 id="immutable-infra-vs-mutable-infrafigure-classwp-block-gallery-columns-1-is-cropped">Immutable Infra VS Mutable Infra<!-- raw HTML omitted --></h2>
+<!-- raw HTML omitted -->
+<p>The picture above depicts how Immutable Infrastructure and Mutable Infrastructure are compared to each other.</p>
+<ul>
+<li><strong>Mutable Infrastructure</strong> will be repeatedly applying configuration to bring it into line with the latest specifications.</li>
+</ul>
+<p>A deep dive into Mutable Infrastructure :</p>
+<p>As we can see a common flow for this approach below, configuring server will be conducted after deployment process.<!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<p>I know on this situation has no a big deal since only one server we’re going to manage. But wait until until you scroll down to the next picture.<!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<p>What if we have many servers ? Should we manage them manually to each of them ?<!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<p>We can use a tool for configuration management instead.<!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<ul>
+<li><strong>Immutable Infrastructure</strong> will be frequently destroying, rebuilding and running servers from the base image, 100% of the server’s elements are reset to a known state, without spending a ridiculous amount of time specifying and maintaining detailed configuration specifications.</li>
+</ul>
+<p>A deep dive into Immutable Infrastructure :</p>
+<p>From the picture below, it reminds us how container contains everything including <em>source code, system configurations,</em> and <em>all other dependencies</em> it needs to work during the runtime. Why ? Because container is also one of the implementation of Immutable Infrastructure approach. It also applies on how we can create custom VM images.<!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<p>To make it easier to understand, here on the first picture below depicts whenever App/Config changes occurs, it will create new custom image then running the new instance with the latest expected changes.</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>Then the older instance will be decommissioned. So all of the traffic request will only served by the new instance.<!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<h2 id="pros-and-consfigure-classwp-block-table">Pros and Cons<!-- raw HTML omitted --></h2>
+<!-- raw HTML omitted -->
+<pre><code>&lt;td class=&quot;has-text-align-center&quot; data-align=&quot;center&quot;&gt;
+  &lt;strong&gt;Immutable Infrastructure&lt;/strong&gt;
+&lt;/td&gt;
+</code></pre>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<pre><code>&lt;td class=&quot;has-text-align-center&quot; data-align=&quot;center&quot;&gt;
+  &lt;strong&gt;&lt;em&gt;&lt;span style=&quot;color:#ba0835&quot; class=&quot;has-inline-color&quot;&gt;Pros&lt;/span&gt;&lt;/em&gt;&lt;/strong&gt;
+&lt;/td&gt;
+</code></pre>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<pre><code>&lt;td class=&quot;has-text-align-center&quot; data-align=&quot;center&quot;&gt;
+  &lt;strong&gt;Discrete versioning&lt;/strong&gt;, means tracking and rollbacks are much easier.
+&lt;/td&gt;
+</code></pre>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<pre><code>&lt;td class=&quot;has-text-align-center&quot; data-align=&quot;center&quot;&gt;
+  &lt;strong&gt;Testing is easier&lt;/strong&gt; to run because of the consistency in configurations between different servers.
+&lt;/td&gt;
+</code></pre>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<pre><code>&lt;td class=&quot;has-text-align-center&quot; data-align=&quot;center&quot;&gt;
+  &lt;strong&gt;Predictable&lt;/strong&gt; &lt;strong&gt;state&lt;/strong&gt; since the infrastructure is never modified in-place, it means reducing complexity.
+&lt;/td&gt;
+</code></pre>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<pre><code>&lt;td class=&quot;has-text-align-center&quot; data-align=&quot;center&quot;&gt;
+  &lt;strong&gt;Suitable for DevOps implementation&lt;/strong&gt;, in addition to virtualization and cloud computing are powerful technology that supports agile development.
+&lt;/td&gt;
+</code></pre>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<pre><code>&lt;td class=&quot;has-text-align-center&quot; data-align=&quot;center&quot;&gt;
+  &lt;strong&gt;&lt;em&gt;&lt;span style=&quot;color:#0b9870&quot; class=&quot;has-inline-color&quot;&gt;Cons&lt;/span&gt;&lt;/em&gt;&lt;/strong&gt;
+&lt;/td&gt;
+</code></pre>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<pre><code>&lt;td class=&quot;has-text-align-center&quot; data-align=&quot;center&quot;&gt;
+  The infrastructure is completely &lt;strong&gt;unable to be modified in-place and need a complete overhaul&lt;/strong&gt;. It will take time if we expect immediate changes. In the event of a &lt;em&gt;zero-day &lt;/em&gt;vulnerability for example, all servers with the same configuration must receive a security update.
+&lt;/td&gt;
+</code></pre>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<pre><code>&lt;td class=&quot;has-text-align-center&quot; data-align=&quot;center&quot;&gt;
+  Improved agility and dynamism of immutable infrastructure can sometimes be &lt;strong&gt;misaligned with traditional IT security practices.&lt;/strong&gt;
+&lt;/td&gt;
+</code></pre>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<pre><code>&lt;td class=&quot;has-text-align-center&quot; data-align=&quot;center&quot;&gt;
+  Overhead associated with copying &lt;strong&gt;array data &lt;/strong&gt;from one location to another. Externalizing data instead of writing data to the local disk.
+&lt;/td&gt;
+</code></pre>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<pre><code>&lt;td class=&quot;has-text-align-center&quot; data-align=&quot;center&quot;&gt;
+&lt;/td&gt;
+</code></pre>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<pre><code>&lt;td class=&quot;has-text-align-center&quot; data-align=&quot;center&quot;&gt;
+&lt;/td&gt;
+</code></pre>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<pre><code>&lt;td class=&quot;has-text-align-center&quot; data-align=&quot;center&quot;&gt;
+&lt;/td&gt;
+</code></pre>
+<!-- raw HTML omitted -->
+<h2 id="packer-comes-into-play">Packer Comes Into Play</h2>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p><strong>How Packer Works</strong></p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<h2 id="it8217s-time-to-practice">It’s Time to Practice</h2>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>The first thing before doing this practice, I want to elaborate a bit what will be done for this one. As we can see on the picture above, there are Packer, Ansible and Terraform. Packer is used to build the image while invoking Ansible as its provisioner to customize it. When the building and provisioning process are all set, Terraform will take control to deploy a VM using the image that previously built. For this moment I decide to use AWS as the environment.</p>
+<p><strong>Let’s have a walkthrough</strong></p>
+<ul>
+<li><strong>Packer</strong></li>
+</ul>
+<p>This configuration below is Packer directives to define a source we’re going to build, which is AMI. It consists of required plugins section, source definition, builder block and provisioner block. In this point, we tell Packer to build an image with the specifications as written below and it will invoke Ansible to run a playbook which has purposes to install Nginx and configure Nginx. In the end, the Image will be stored as AMI.</p>
+<p><em><strong>N</strong></em><strong><em>ote : AMI will be stored based on region we</em> designate to.</strong></p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<ul>
+<li><strong>Ansible</strong></li>
+</ul>
+<p>Ansible will run the playbook to apply the necessary configurations once it’s invoked by Packer.</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<ul>
+<li><strong>Terraform</strong></li>
+</ul>
+<p>Once the AMI is ready to use, Terraform will take control to create new instance using that AMI.</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<h2 id="let8217s-get-the-job-done-">Let’s Get The Job Done !</h2>
+<ul>
+<li><strong>Run Packer as the below picture</strong></li>
+</ul>
+<p>See what happens when <code>packer build .</code> is being executed. Packer will instantiate a temporary instance and access it through SSH in order to apply all the expected states and wait until the process is done. It might take a few minutes to be ready btw. In the meantime, let’s have a cup of tea!</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>If we get the result like below, it looks good as expected.<!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<p>Check out to AWS console and we’ll see an instance is already terminated. It was a created temporary instance during the last build.<!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<p>And here it is! AMI is ready to use.<!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<p>After feel pretty sure the AMI is ready, Terraform will take its turn. By executing <code>terraform apply</code> and yeah we’re good to go! Don’t forget to verify the planning output is all we expect, type <code>yes</code> and hit <strong>Enter</strong>.<!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<p>If we see the result looks like below, yeah we did it! We can check it out later by accessing the generated output for Public IP of our instance.<!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<p>Let’s back to AWS console and take a look there is a running instance which is deployed recently by Terraform.<!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<p>Here is the expected result. It shows a simple display which is considered as Version 1. And later we want to update the upper version.<!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<p>As shown below, it shows the changes. This is needed to have another version of the web server display. The current version is Version 1 and I want to make it as Version 2. This is done by only modifying <code>index.html</code> and create another name of AMI.<!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<p>And there you go, just repeat to build, provision and deploy it.<!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<p>See there is a new AMI has been built.<!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<p>And let’s jump to execute terraform right away !<!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>Bammm! Our website is updated to Version 2 already.<!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<p>Just in case you want to follow along, feel free to see my repo : <!-- raw HTML omitted --><a href="https://github.com/fauzislami/immutable-infra-using-packer.git">https://github.com/fauzislami/immutable-infra-using-packer.git</a><!-- raw HTML omitted --></p>
+<h2 id="conclusion-"><strong>Conclusion :</strong></h2>
+<p>Immutable Infra and Mutable Infra have their own pros and cons. Moreover, it depends on what type of business we’re running on, financial ability, what culture and values we pursue in our organization. Choose which one is more suitable for our circumstances and preferences. But if we want to make our operations more flexible, reliable, faster and robust, there’s no harm in practicing Immutable Infra paradigm.</p>
+<p>Hey folks! Thank you for coming to my blog. I hope you find it useful 🙂</p>
+<p>References :</p>
+<ul>
+<li><!-- raw HTML omitted --><a href="https://itnext.io/immutable-infrastructure-using-packer-ansible-and-terraform-7ca6f79582b8">https://itnext.io/immutable-infrastructure-using-packer-ansible-and-terraform-7ca6f79582b8</a><!-- raw HTML omitted --></li>
+<li><!-- raw HTML omitted --><a href="https://martinfowler.com/bliki/ImmutableServer.html">https://martinfowler.com/bliki/ImmutableServer.html</a><!-- raw HTML omitted --></li>
+<li><!-- raw HTML omitted --><a href="https://sport-net.org/how-does-a-packer-work">https://sport-net.org/how-does-a-packer-work</a><!-- raw HTML omitted --></li>
+<li><!-- raw HTML omitted --><a href="https://eplexity.com/blog/a-side-by-side-comparison-of-immutable-vs-mutable-infrastructure">https://eplexity.com/blog/a-side-by-side-comparison-of-immutable-vs-mutable-infrastructure</a><!-- raw HTML omitted --></li>
+</ul>
+        </p>
+    </div>
+</div>
+
+
+
+    
+
+        </main><footer class="footer">
+    <span>&copy; 2022 Fauzi Islami</span>
+</footer>
+</body>
+</html>

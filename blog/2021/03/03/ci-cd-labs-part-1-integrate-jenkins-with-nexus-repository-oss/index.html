@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        :root {
+            --accent-color: #FF4D4D;
+        }
+    </style>
+
+    
+    
+    
+    
+    
+    
+
+    
+    <title>CI/CD Labs Part 1: Integrate Jenkins with Nexus Repository OSS</title>
+    <meta name="description" content="/home/fauzislami/blog">
+    <meta name="keywords" content='blog, gokarna, hugo, CI/CD, Jenkins'>
+
+    <meta property="og:url" content="https://fauzislami.github.io/blog/2021/03/03/ci-cd-labs-part-1-integrate-jenkins-with-nexus-repository-oss/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="CI/CD Labs Part 1: Integrate Jenkins with Nexus Repository OSS">
+    <meta property="og:description" content="/home/fauzislami/blog">
+    <meta property="og:image" content="/images/logo-blog-oji.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="CI/CD Labs Part 1: Integrate Jenkins with Nexus Repository OSS">
+    <meta name="twitter:description" content="/home/fauzislami/blog">
+    <meta property="twitter:domain" content="https://fauzislami.github.io/blog/2021/03/03/ci-cd-labs-part-1-integrate-jenkins-with-nexus-repository-oss/">
+    <meta property="twitter:url" content="https://fauzislami.github.io/blog/2021/03/03/ci-cd-labs-part-1-integrate-jenkins-with-nexus-repository-oss/">
+    <meta name="twitter:image" content="/images/logo-blog-oji.png">
+
+    
+    <link rel="canonical" href="https://fauzislami.github.io/blog/2021/03/03/ci-cd-labs-part-1-integrate-jenkins-with-nexus-repository-oss/" />
+
+    <link rel="stylesheet" type="text/css" href="/css/normalize.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link disabled id="dark-theme" rel="stylesheet" href="/css/dark.css">
+
+    <script src="/js/svg-injector.min.js"></script>
+    <script src="/js/feather-icons.min.js"></script>
+    <script src="/js/main.js"></script>
+
+    
+    
+        <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.16/dist/katex.min.css" integrity="sha384-6LkG2wmY8FK9E0vU9OOr8UvLwsaqUg9SETfpq4uTCN1agNe8HRdE9ABlk+fVx6gZ" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.16/dist/katex.min.js" integrity="sha384-31El76TwmbHj4rF9DyLsygbq6xoIobG0W+jqXim+a3dU9W53tdH3A/ngRPxOzzaB" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.16/dist/contrib/auto-render.min.js" integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+  
+    
+</head>
+<body>
+        <script type="text/javascript">
+            
+            setThemeByUserPref();
+        </script><header class="header">
+    <nav class="header-nav">
+
+        
+        <div class="avatar">
+            <a href="https://fauzislami.github.io/">
+                <img src="/images/logo-blog-oji.png" alt="avatar" />
+            </a>
+        </div>
+        
+
+        <div class="nav-title">
+            <a class="nav-brand" href="https://fauzislami.github.io/">Blog · Muhammad Fauzi Islami</a>
+        </div>
+
+        <div class="nav-links">
+            
+            <div class="nav-link">
+                <a href="/"> Home </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="/posts/"> Posts </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="/projects/"> Projects </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="https://about.me/fauzislami"> About Me </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="/tags/"> Tags </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="https://github.com/fauzislami"><span data-feather='github'></span>  </a>
+            </div>
+            
+
+            <span class="nav-icons-divider"></span>
+            <div class="nav-link dark-theme-toggle">
+                <a>
+                    <span id="theme-toggle-icon" data-feather="moon"></span>
+                </a>
+            </div>
+
+            <div class="nav-link" id="hamburger-menu-toggle">
+                <a>
+                    <span data-feather="menu"></span>
+                </a>
+            </div>
+
+            
+            <ul class="nav-hamburger-list visibility-hidden">
+                
+                <li class="nav-item">
+                    <a href="/"> Home </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="/posts/"> Posts </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="/projects/"> Projects </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="https://about.me/fauzislami"> About Me </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="/tags/"> Tags </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="https://github.com/fauzislami"><span data-feather='github'></span>  </a>
+                </li>
+                
+                <li class="nav-item dark-theme-toggle">
+                    <a>
+                        <span id="theme-toggle-icon" data-feather="moon"></span>
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+</header>
+<main id="content">
+    <div class="post container">
+
+    <div class="post-header-section">
+        <h1>CI/CD Labs Part 1: Integrate Jenkins with Nexus Repository OSS</h1>
+        <small role="doc-subtitle"></small>
+        <p class="post-date">
+            March 3, 2021
+        </p>
+
+        <ul class="post-tags">
+        
+            <li class="post-tag"><a href="/tags/ci/cd">CI/CD</a></li>
+        
+            <li class="post-tag"><a href="/tags/jenkins">Jenkins</a></li>
+        
+        </ul>
+    </div>
+
+    <div class="post-content">
+        <p>
+            <!-- raw HTML omitted -->
+<p>This is the first lab of lab series to learn CI/CD. In this lab, I will only focus on documenting the implementations step by step and not on the installation. Maybe on another occasion, I may also include how to install each of the tools used in this lab.</p>
+<p>The following are some of the parts of this series :</p>
+<ol>
+<li>Integrate Jenkins with Nexus Repository OSS</li>
+<li>Integrate Jenkins with Bitbucket</li>
+<li>Integrate Jenkins with OpenShift</li>
+<li>Integrate Jenkins with Jira</li>
+<li>Full CI / CD Pipeline</li>
+</ol>
+<p><strong><em>*Note : These labs don’t involve any tests.</em></strong></p>
+<p>What should be prepared :</p>
+<p>1 VM (Jenkins + Nexus)<br>
+Specifications :<br>
+• OS Centos 7.9 (optional)<br>
+• RAM: 16GB (this will be used until labs get finished)<br>
+• CPU: 4vCPU<br>
+• HDD: 100GB<br>
+• Internet connection</p>
+<p>Inside the VM are installed as follows :</p>
+<p><strong>Jenkins (run as a service)</strong><br>
+– Openjdk1.8<br>
+– Maven 3.6.3<br>
+– Docker client<br>
+– Git<br>
+– IP address = 192.168.1.116:8080</p>
+<p><strong>Nexus (run as a container)</strong><br>
+– IP address = 192.168.1.116:8081</p>
+<p><strong>Nexus Configurations</strong></p>
+<p>Nexus is an open source repository that supports storing artifacts and docker images.</p>
+<p>Here are the configuration steps:</p>
+<ul>
+<li>Login to nexus as admin, then create one user.</li>
+</ul>
+<p>Here the user is named jenkins-user, don’t forget to grant roles as admin as shown below.</p>
+<!-- raw HTML omitted -->
+<ul>
+<li>Create a image registry with the specifications as shown below</li>
+</ul>
+<!-- raw HTML omitted -->
+<ul>
+<li>Next, create an artifactory with specifications like the picture below:</li>
+</ul>
+<!-- raw HTML omitted -->
+<p>The configuration from the nexus side is completed. In essence, we only need to create a user that will be used by Jenkins, 1 image registry and 1 artifactory.</p>
+<p><strong>Jenkins Configurations</strong></p>
+<p>Jenkins is a powerful open source CI / CD tool because it is supported by many plugins so it will be easier to integrate with any third-party tools.</p>
+<p>Here are the configuration steps:</p>
+<ul>
+<li>Log in first as an admin to Jenkins</li>
+</ul>
+<!-- raw HTML omitted -->
+<p>Install the required plugins on the <strong>Manage Jenkins</strong> menu -&gt; <strong>Manage Plugins</strong> -&gt; [TAB] <strong>Available</strong>. Then install the plugin below:<br>
+– Nexus Artifact Uploader<br>
+– Docker Pipeline</p>
+<p>Then select <strong>Install without restarting</strong></p>
+<p>And configure the tools that will be used :</p>
+<ul>
+<li>Maven</li>
+</ul>
+<!-- raw HTML omitted -->
+<ul>
+<li>Openjdk</li>
+</ul>
+<!-- raw HTML omitted -->
+<ul>
+<li>Docker Client</li>
+</ul>
+<!-- raw HTML omitted -->
+<ul>
+<li>Git</li>
+</ul>
+<!-- raw HTML omitted -->
+<p>Then save it.</p>
+<p>Next, we will immediately create a pipeline that will build source code and image to be stored in nexus.</p>
+<p>Then we need to create a credential for nexus on jenkins so that jenkins can interact with nexus. Use the username and password that was created earlier on nexus, namely <strong>jenkins-user</strong></p>
+<!-- raw HTML omitted -->
+<p>Then the final step is to create a job in which there is a pipeline to build the source code into an artifact and an image which will later be stored on nexus.</p>
+<p>Select <strong>New Item</strong> -&gt; <strong>Pipeline</strong>. Here I create a pipeline in a Jenkinsfile which is stored on my Github repo( <!-- raw HTML omitted --><!-- raw HTML omitted --><a href="https://github.com/fauzislami/jenkins-nexus-integration.git">https://github.com/fauzislami/jenkins-nexus-integration.git</a><!-- raw HTML omitted --><!-- raw HTML omitted --> __).</p>
+<!-- raw HTML omitted -->
+<p>Then save it.</p>
+<p>Then trigger the build manually. Here there are 3 previous builds that failed and can be ignored, because those were still an adjustment stage LOL. However, in the next build, it has succeeded to push artifacts and images</p>
+<!-- raw HTML omitted -->
+<p>This is an artifact that has been successfully stored in nexus :</p>
+<!-- raw HTML omitted -->
+<p>And this is an image that has been successfully stored to nexus :</p>
+<!-- raw HTML omitted -->
+        </p>
+    </div>
+</div>
+
+
+
+    
+
+        </main><footer class="footer">
+    <span>&copy; 2022 Fauzi Islami</span>
+</footer>
+</body>
+</html>
