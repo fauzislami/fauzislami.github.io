@@ -117,15 +117,6 @@ Gone camping! {?:}tent: Be back soon. That is so funny!</description>
     </item>
     
     <item>
-      <title>Testing Post</title>
-      <link>https://fauzislami.github.io/posts/testing-post/</link>
-      <pubDate>Mon, 27 Sep 2021 10:49:57 +0700</pubDate>
-      
-      <guid>https://fauzislami.github.io/posts/testing-post/</guid>
-      <description>hello this is my testing post.</description>
-    </item>
-    
-    <item>
       <title>Securing K8S Secret Object Using SealedSecret</title>
       <link>https://fauzislami.github.io/blog/2021/09/26/secure-k8s-secret-object-using-sealedsecret/</link>
       <pubDate>Sun, 26 Sep 2021 08:29:36 +0000</pubDate>
@@ -151,15 +142,6 @@ Gone camping! {?:}tent: Be back soon. That is so funny!</description>
       
       <guid>https://fauzislami.github.io/blog/2021/07/23/collecting-network-traffic-using-tcpdump-on-pod-level-in-openshift/</guid>
       <description>&lt;p&gt;Ada kalanya ketika sebuah aplikasi mengalami masalah dan tidak mengeluarkan log pada stdout secara lengkap dan cenderung tidak membantu untuk kebutuhan troubleshooting. Sehingga diperlukan analisa lebih dalam untuk mendapatkan petunjuk dari masalah tersebut, terutama jika masalahnya dalam ruang lingkup network yang perlu dilakukan analisa dari network traffic yang ada. Maka dari itu kita bisa melakukan TCPDump di level POD, namun pada umumnya tidak semua image aplikasi dibekali utilitas untuk melakukan hal itu. Oleh karena itu berikut adalah cara bagaimana melakukan TCPDump pada level POD di Openshift :&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Lorem Ipsum</title>
-      <link>https://fauzislami.github.io/posts/lorem-ipsum/</link>
-      <pubDate>Thu, 15 Apr 2021 23:39:49 +0530</pubDate>
-      
-      <guid>https://fauzislami.github.io/posts/lorem-ipsum/</guid>
-      <description>Heading 1 &amp;ldquo;Lorem ipsum dolor sit amet, consectetaur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
     </item>
     
     <item>
