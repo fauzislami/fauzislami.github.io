@@ -2,21 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://fauzislami.github.io/posts/theme-documentation-basics/</loc>
-    <lastmod>2020-03-06T21:29:01+08:00</lastmod>
-  </url><url>
-    <loc>https://fauzislami.github.io/posts/theme-documentation-advanced/</loc>
-    <lastmod>2020-05-06T21:29:01+08:00</lastmod>
-  </url><url>
-    <loc>https://fauzislami.github.io/posts/markdown-syntax/</loc>
-    <lastmod>2019-06-19T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://fauzislami.github.io/posts/emoji-support/</loc>
-    <lastmod>2020-10-01T17:55:28+08:00</lastmod>
-  </url><url>
-    <loc>https://fauzislami.github.io/posts/hello/</loc>
-    <lastmod>2020-11-01T17:55:28+08:00</lastmod>
-  </url><url>
     <loc>https://fauzislami.github.io/categories/blog/</loc>
     <lastmod>2022-02-18T04:57:55+00:00</lastmod>
   </url><url>
@@ -152,37 +137,8 @@
     <loc>https://fauzislami.github.io/blog/2021/01/18/automating-k8s-cluster-installation-with-kubespray/</loc>
     <lastmod>2021-01-18T17:20:00+00:00</lastmod>
   </url><url>
-    <loc>https://fauzislami.github.io/tags/hello/</loc>
-    <lastmod>2020-11-01T17:55:28+08:00</lastmod>
-  </url><url>
-    <loc>https://fauzislami.github.io/tags/emoji/</loc>
-    <lastmod>2020-10-01T17:55:28+08:00</lastmod>
-  </url><url>
-    <loc>https://fauzislami.github.io/tags/configuration/</loc>
-    <lastmod>2020-05-06T21:29:01+08:00</lastmod>
-  </url><url>
-    <loc>https://fauzislami.github.io/tags/installation/</loc>
-    <lastmod>2020-05-06T21:29:01+08:00</lastmod>
-  </url><url>
-    <loc>https://fauzislami.github.io/tags/markdown/</loc>
-    <lastmod>2020-05-06T21:29:01+08:00</lastmod>
-  </url><url>
-    <loc>https://fauzislami.github.io/tags/css/</loc>
-    <lastmod>2019-06-19T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://fauzislami.github.io/tags/html/</loc>
-    <lastmod>2019-06-19T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://fauzislami.github.io/projects/bludhaven/</loc>
-  </url><url>
     <loc>https://fauzislami.github.io/tags/ci/cd/</loc>
   </url><url>
     <loc>https://fauzislami.github.io/categories/ci/cd/</loc>
-  </url><url>
-    <loc>https://fauzislami.github.io/projects/hydra/</loc>
-  </url><url>
-    <loc>https://fauzislami.github.io/projects/</loc>
-  </url><url>
-    <loc>https://fauzislami.github.io/projects/tatooine/</loc>
   </url>
 </urlset>
