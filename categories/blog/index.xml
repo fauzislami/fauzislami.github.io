@@ -63,8 +63,8 @@
       <pubDate>Sun, 01 Aug 2021 12:18:13 +0000</pubDate>
       
       <guid>https://fauzislami.github.io/blog/2021/08/01/service-mesh-istio-and-kiali-setup/</guid>
-      <description>&lt;!-- raw HTML omitted --&gt;
-&lt;!-- raw HTML omitted --&gt;</description>
+      <description>&lt;p&gt;&lt;img src=&#34;https://fauzislami.github.io/images/service-mesh-istio-kiali-setup/1.png&#34; alt=&#34;Scratchpad&#34; title=&#34;Scratchpad&#34;&gt;&lt;/p&gt;
+&lt;p&gt;It’s the first time for me to learn what service mesh is, how it works, and how to start the lab to deep dive on this stuff. In this article, there will be some of my notes about how to install Istio and see the visualization of some microservices that will have been monitored by Istio and I’m going to write it up now.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -73,7 +73,19 @@
       <pubDate>Fri, 26 Mar 2021 09:34:00 +0000</pubDate>
       
       <guid>https://fauzislami.github.io/blog/2021/03/26/ci-cd-labs-part-3-integrate-jenkins-with-openshift/</guid>
-      <description>&lt;!-- raw HTML omitted --&gt;</description>
+      <description>In this part 3 CI / CD lab the author will document how to integrate Jenkins with the OpenShift.
+What should be prepared:
+  1 VM Jenkins
+Spec:
+OS: Centos 7.9 (optional)
+• RAM: 16GB (this will be used until labs finish)
+• CPU: 4vCPU
+• HDD: 100GB
+• Internet connection
+  1 VM CRC (CodeReady Container) Mini OpenShift
+Spec:
+OS: Centos 7.9 (optional)
+• RAM: 16GB (this will be used until labs finish)</description>
     </item>
     
     <item>

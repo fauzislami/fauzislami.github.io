@@ -13,7 +13,7 @@
       <pubDate>Sun, 26 Sep 2021 08:29:36 +0000</pubDate>
       
       <guid>https://fauzislami.github.io/blog/2021/09/26/secure-k8s-secret-object-using-sealedsecret/</guid>
-      <description>&lt;!-- raw HTML omitted --&gt;</description>
+      <description>Managing kubernetes manifest on Git or any other SCM is a common task nowadays. It makes life easier if we talk about continuous deployment. However, there is a manifest that should not be stored on SCM, it&amp;rsquo;s secret object. Secret object on Kubernetes was made to hide any sensitive data including user credentials and key. Unfortunately, secret object is not completely secure, it does not encrypt but only uses base64 encoding scheme to hide the data and it can be easily decoded.</description>
     </item>
     
   </channel>

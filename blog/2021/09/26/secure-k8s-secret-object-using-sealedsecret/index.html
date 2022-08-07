@@ -172,19 +172,20 @@
 
     <div class="post-content">
         <p>
-            <!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+            <p><img src="/images/sealed-secret/1.png" alt="Scratchpad" title="Scratchpad"></p>
+<p>Managing kubernetes manifest on Git or any other SCM is a common task nowadays. It makes life easier if we talk about continuous deployment. However, there is a manifest that should not be stored on SCM, it&rsquo;s secret object. Secret object on Kubernetes was made to hide any sensitive data including user credentials and key. Unfortunately, secret object is not completely secure, it does not encrypt but only uses base64 encoding scheme to hide the data and it can be easily decoded. Therefore, Sealed Secret is one of the solution to make the secret more secure and can be securely stored on SCM.</p>
 <h3 id="what-is-secret-object-"><strong>What is Secret Object ?</strong></h3>
-<!-- raw HTML omitted -->
-<p><!-- raw HTML omitted --><!-- raw HTML omitted -->Source : <a href="https://kubernetes.io/docs/concepts/configuration/secret/">https://kubernetes.io/docs/concepts/configuration/secret/</a><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
+<blockquote>
+<p>A secret is an object that contains a small amount of sensitive data such as a password, certificate, a token, or a key.</p>
+</blockquote>
+<p>Source : <a href="https://kubernetes.io/docs/concepts/configuration/secret/">https://kubernetes.io/docs/concepts/configuration/secret/</a></p>
 <h3 id="how-secret-works"><strong>How Secret Works</strong></h3>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<p><img src="/images/sealed-secret/2.png" alt="Scratchpad" title="Scratchpad"></p>
+<p>It decouples any confidential data from application code. Besides, it will be reusable for other resources. So, any confidential data is not embedded on the pod itself, it will make easier to maintain if there are some changes regarding the data on secret.</p>
 <h3 id="the-concern-of-managing-secret-manifest"><strong>The Concern of Managing Secret Manifest</strong></h3>
-<!-- raw HTML omitted -->
-<p><!-- raw HTML omitted --> <!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
+<p>Secret Object is not as secret as it supposed to be. We manage all of the configurations of K8S cluster in a shared git repository, run automated tests, and automatically deploy changes to the cluster from master except <strong><em>Secret</em></strong>. Because it only contains encrypted encoded data. Take a look on the picture below:</p>
+<p><img src="/images/sealed-secret/3.png" alt="Scratchpad" title="Scratchpad"></p>
+<p>As we can see on the picture above, it only contains encoded data. We can simply decode that encoded data into readable data / plaintext by using a simple command like above. So, it&rsquo;s not completely secure. What we&rsquo;re going to do is how to make it more secure rather than only encoding the data. The only possible way is encryption, because to return the original data we need a file called private key which should be hidden somewhere and just a particular entity/person who knows it. But some concerns we need to consider before doing that are:</p>
 <ol>
 <li><strong>Secure the secret object</strong><br>
 The data on secret object must be secured and not easily obtained.</li>
@@ -193,109 +194,118 @@ Must be manageable and stored in SCM safely</li>
 <li><strong>Secret object remains reusable for other resources</strong><br>
 Still reusable to be used by other deployment</li>
 <li><strong>Secret object should work as usual in cluster</strong><br>
-The most important one is able to work like usual in the cluster. The previous points will be useless if it can’t be used.</li>
+The most important one is able to work like usual in the cluster. The previous points will be useless if it can&rsquo;t be used.</li>
 </ol>
 <h3 id="secure-k8s-secret-object-using-sealedsecret"><strong>Secure K8S Secret</strong> <strong>Object Using SealedSecret</strong></h3>
-<!-- raw HTML omitted -->
-<p><img src="https://engineering.bitnami.com/images/sealed-secrets/life-of-a-64c71420.png" alt=""> <!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
+<p>Encrypt your Secret into a SealedSecret. <strong>SealedSecrets</strong> is a kubernetes controller that is developed by bitnami-labs which has a purpose to make a <strong>one-way encrypted Secret</strong> that can be created by anyone, but can <strong>only</strong> be decrypted by the controller running in the target cluster. The Sealed Secret is safe to share publicly, including to public git repository.</p>
+<p><img src="/images/sealed-secret/4.png" alt="Scratchpad" title="Scratchpad"></p>
+<p>SealedSecret works as a controller and a CRD called <strong>SealedSecret</strong> on the cluster. The picture above depicts how SealedSecret encrypts a Secret manifest file and generates SealedSecret manifest file. After the manifest file already exist, it would be safe to store it to SCM such as GitHub. Then, whenever we need to deploy an application which requires the data contained by the secret object, we should simply deploy SealedSecret manifest to cluster and let SealedSecret controller takes the control to decrypt the data then creates secret object when decryption is done. So, it&rsquo;s still only secret object that will be accessed by the application, not SealedSecret object.</p>
 <h3 id="sealedsecret-component"><strong>SealedSecret Component</strong></h3>
-<!-- raw HTML omitted -->
+<p>The <!-- raw HTML omitted -->SealedSecret<!-- raw HTML omitted -->implementation consists of two components:</p>
 <ol>
-<li>A controller that runs in-cluster, and implements a new SealedSecret Kubernetes API object via the “third party resource” mechanism.</li>
+<li>A controller that runs in-cluster, and implements a new SealedSecret Kubernetes API object via the <strong>third party resource</strong> mechanism.</li>
 <li>A <em>kubeseal</em> command line tool that encrypts a regular Kubernetes Secret object (as YAML or JSON) into a SealedSecret.</li>
 </ol>
 <h3 id="how-to-use-sealedsecret"><strong>How to use SealedSecret</strong></h3>
 <p>There are two possible ways to use SealedSecret based on the condition below.</p>
 <ol>
-<li>Having access to cluster<!-- raw HTML omitted --></li>
+<li>Having access to cluster</li>
 </ol>
-<p><!-- raw HTML omitted --> <!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
+<p><img src="/images/sealed-secret/5.png" alt="Scratchpad" title="Scratchpad"></p>
+<p>Kubeseal require connection to cluster by default. So, whenever we have an access to cluster, we could use it right away.</p>
 <ol start="2">
-<li>Not have any access to cluster<!-- raw HTML omitted --></li>
+<li>Not have any access to cluster</li>
 </ol>
-<p><!-- raw HTML omitted --> <!-- raw HTML omitted --></p>
-<p>In some cases we don’t have any access to cluster but don’t worry, we still have a way to create SealedSecret. But it requires a public key from the controller and once again, we don’t have any access to cluster but we can ask kubernetes administrator to fetch the public key from SealedSecret controller. Public key is necessary because we use it to encrypt the secret manifest.</p>
+<p><img src="/images/sealed-secret/6.png" alt="Scratchpad" title="Scratchpad"></p>
+<p>In some cases we don&rsquo;t have any access to cluster but don&rsquo;t worry, we still have a way to create SealedSecret. But it requires a public key from the controller and once again, we don&rsquo;t have any access to cluster but we can ask kubernetes administrator to fetch the public key from SealedSecret controller. Public key is necessary because we use it to encrypt the secret manifest.</p>
 <h3 id="sealedsecret-scopes"><strong>SealedSecret Scopes</strong></h3>
 <p>SealedSecret has 3 scopes in order to make boundaries and certain rules.</p>
 <p>There are 3 scopes we can create our SealedSecrets with :</p>
 <ol>
 <li><strong>Strict</strong> (default) : In this case, we need to seal our Secret considering the name and the namespace. We can’t change the name and the namespaces of SealedSecret once we have created it. If we try to do that, we get a decryption error.</li>
-<li><strong>Namespace-wide __</strong>: This scope allows us to freely rename the SealedSecret within the namespace for which we have sealed the Secret.</li>
+<li><strong>Namespace-wide</strong>: This scope allows us to freely rename the SealedSecret within the namespace for which we have sealed the Secret.</li>
 <li><strong>Cluster-wide</strong> : This scope allows us to freely move the Secret to any namespace and give it any name we wish.</li>
 </ol>
-<!-- raw HTML omitted -->
-<p><img src="https://memegenerator.net/img/instances/54260948.jpg" alt=""> <!-- raw HTML omitted --></p>
+<p>After reading all these explanation which might be quite boring, why don&rsquo;t we give it a try?</p>
 <p>To make easier to follow along, I have created a video that cover this labs. So if you want to follow along, feel free to watch the video. I use bahasa (indonesian language) on that video.</p>
-<!-- raw HTML omitted -->
-<p><a href=""></a></p>
 <h3 id="installations"><strong>Installations</strong></h3>
 <p><strong>Cluster Side</strong></p>
 <p>We can deploy the controller either by applying manifest or using helm :</p>
 <ul>
 <li>Applying Manifest</li>
 </ul>
-<!-- raw HTML omitted -->
-<ul>
+<pre tabindex="0"><code>$ kubectl apply -f https://github.com/bitnami-labs/sealedsecrets/releases/download/v0.16.0/controller.yaml
+</code></pre><ul>
 <li>Using Helm</li>
 </ul>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<p><strong>Client Side</strong></p>
-<p>In this step we’re going to install kubeseal CLI.</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<h3 id="secret-object-creation"><strong>Secret Object Creation</strong></h3>
+<pre tabindex="0"><code>helm repo add sealed-secrets https://bitnami-labs.github.io/sealed-secrets
+helm repo update
+helm install -n kube-system demo-sealed-secrets sealed-secrets/sealed-secrets
+</code></pre><p><strong>Client Side</strong></p>
+<p>In this step we&rsquo;re going to install kubeseal CLI.</p>
+<pre tabindex="0"><code>wget https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.16.0/kubeseal-linux-amd64 -O kubeseal
+sudo install -m 755 kubeseal /usr/local/bin/kubeseal
+</code></pre><h3 id="secret-object-creation"><strong>Secret Object Creation</strong></h3>
 <ul>
 <li>Create Secret #1</li>
 </ul>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<ul>
+<pre tabindex="0"><code>kubectl create secret generic dummy-auth \
+  --from-literal=user=admin \
+  --from-literal=password=admin123 \
+  --dry-run=client -o yaml &gt; dummy-auth.yaml
+</code></pre><ul>
 <li>Create Secret #2</li>
 </ul>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<h3 id="sealedsecret-creation-need-access-to-the-cluster"><strong>SealedSecret Creation (Need access to the cluster)</strong></h3>
+<pre tabindex="0"><code>kubectl create secret generic db-auth \
+  --from-literal=user=dbadmin \
+  --from-literal=password=dbadmin123 \
+  --dry-run=client -o yaml &gt; db-auth.yaml
+</code></pre><h3 id="sealedsecret-creation-need-access-to-the-cluster"><strong>SealedSecret Creation (Need access to the cluster)</strong></h3>
 <ul>
 <li>Encrypt secret using SealedSecret</li>
 </ul>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<ul>
+<pre tabindex="0"><code>kubeseal --format=yaml --controller-namespace=kube-system \
+  --controller-name=sealed-secrets-controller &amp;lt; dummy-auth.yaml \
+  &gt; sealed-dummy-auth.yaml
+</code></pre><ul>
 <li>Apply SealedSecret Manifest</li>
 </ul>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<h3 id="sealedsecret-creation-no-need-access-to-the-cluster"><strong>SealedSecret Creation (NO Need access to the cluster)</strong></h3>
+<pre tabindex="0"><code>kubectl apply -f sealed-dummy-auth.yaml
+kubectl get secret
+kubectl get sealedsecret
+</code></pre><h3 id="sealedsecret-creation-no-need-access-to-the-cluster"><strong>SealedSecret Creation (NO Need access to the cluster)</strong></h3>
 <ul>
 <li>Fetch public key ( Only if public key doesn’t exist )</li>
 </ul>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<ul>
+<pre tabindex="0"><code>kubeseal --fetch-cert --controller-namespace=kube-system \
+  --controller-name=sealed-secrets-controller &gt; sealedsecret-pubkey.pem
+</code></pre><ul>
 <li>Encrypt secret using SealedSecret and Apply it</li>
 </ul>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<h3 id="compare-strict-with-cluster-wide"><strong>Compare strict with cluster-wide</strong></h3>
+<pre tabindex="0"><code>kubeseal --format=yaml \
+  --cert=sealedsecret-pubkey.pem &lt; db-auth.yaml &gt; sealed-db-auth.yaml
+
+kubectl apply -f sealed-db-auth.yaml
+</code></pre><h3 id="compare-strict-with-cluster-wide"><strong>Compare strict with cluster-wide</strong></h3>
 <ul>
 <li>Change SealedSecret name (Strict)</li>
 </ul>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<p>SealedSecret object should be created but Secret object not. It is because we use strict mode for the scope of SealedSecret. Therefore, any modification would be prohibited.</p>
+<p>Do a modification to sealed-db-auth.yaml file → Name: db-auth &mdash;&gt; Name: db-auth-2</p>
+<p>Then re-apply</p>
+<pre tabindex="0"><code>kubectl apply -f sealed-db-auth.yaml
+</code></pre><p>SealedSecret object should be created but Secret object not. It is because we use strict mode for the scope of SealedSecret. Therefore, any modification would be prohibited.</p>
 <ul>
 <li>Change SealedSecret name (Cluster-Wide)</li>
 </ul>
 <p>Recreate sealed-db-auth.yaml to make it using cluster-wide as its scope.</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<p>See what happen, SealedSecret object should be created and Secret object as well. It works like a charm!</p>
+<pre tabindex="0"><code>kubeseal --scope=cluster-wide \
+  --format=yaml --cert=sealedsecret-pubkey.pem &lt; \
+  db-auth.yaml &gt; sealed-db-auth.yaml
+</code></pre><p>Do a modification to sealed-db-auth.yaml file → Name: db-auth &mdash;&gt; Name: db-auth-2</p>
+<pre tabindex="0"><code>kubectl apply -f sealed-db-auth.yaml
+</code></pre><p>See what happen, SealedSecret object should be created and Secret object as well. It works like a charm!</p>
 <p>I hope it will be useful. Thanks !</p>
+
         </p>
     </div>
 </div>

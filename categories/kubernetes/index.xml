@@ -22,7 +22,7 @@
       <pubDate>Sun, 26 Sep 2021 08:29:36 +0000</pubDate>
       
       <guid>https://fauzislami.github.io/blog/2021/09/26/secure-k8s-secret-object-using-sealedsecret/</guid>
-      <description>&lt;!-- raw HTML omitted --&gt;</description>
+      <description>Managing kubernetes manifest on Git or any other SCM is a common task nowadays. It makes life easier if we talk about continuous deployment. However, there is a manifest that should not be stored on SCM, it&amp;rsquo;s secret object. Secret object on Kubernetes was made to hide any sensitive data including user credentials and key. Unfortunately, secret object is not completely secure, it does not encrypt but only uses base64 encoding scheme to hide the data and it can be easily decoded.</description>
     </item>
     
     <item>
@@ -31,8 +31,8 @@
       <pubDate>Sun, 01 Aug 2021 12:18:13 +0000</pubDate>
       
       <guid>https://fauzislami.github.io/blog/2021/08/01/service-mesh-istio-and-kiali-setup/</guid>
-      <description>&lt;!-- raw HTML omitted --&gt;
-&lt;!-- raw HTML omitted --&gt;</description>
+      <description>&lt;p&gt;&lt;img src=&#34;https://fauzislami.github.io/images/service-mesh-istio-kiali-setup/1.png&#34; alt=&#34;Scratchpad&#34; title=&#34;Scratchpad&#34;&gt;&lt;/p&gt;
+&lt;p&gt;It’s the first time for me to learn what service mesh is, how it works, and how to start the lab to deep dive on this stuff. In this article, there will be some of my notes about how to install Istio and see the visualization of some microservices that will have been monitored by Istio and I’m going to write it up now.&lt;/p&gt;</description>
     </item>
     
     <item>

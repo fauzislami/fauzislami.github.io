@@ -174,83 +174,156 @@
 
     <div class="post-content">
         <p>
-            <!-- raw HTML omitted -->
-<p>In this part 3 CI / CD lab the author will document how to integrate Jenkins with the OpenShift.</p>
-<p>What should be prepared :</p>
-<p>– 1 VM Jenkins<br>
+            <p>In this part 3 CI / CD lab the author will document how to integrate Jenkins with the OpenShift.</p>
+<p>What should be prepared:</p>
+<ul>
+<li>
+<p>1 VM Jenkins<br>
 Spec:<br>
 OS: Centos 7.9 (optional)<br>
 • RAM: 16GB (this will be used until labs finish)<br>
 • CPU: 4vCPU<br>
 • HDD: 100GB<br>
 • Internet connection</p>
-<ul>
-<li>1 VM CRC (CodeReady Container) Mini OpenShift<br>
+</li>
+<li>
+<p>1 VM CRC (CodeReady Container) Mini OpenShift<br>
 Spec:<br>
 OS: Centos 7.9 (optional)<br>
 • RAM: 16GB (this will be used until labs finish)<br>
 • CPU: 4vCPU<br>
 • HDD: 100GB<br>
-• Internet connection</li>
+• Internet connection</p>
+</li>
 </ul>
 <p>Inside the VM is installed:</p>
-<p><strong>Jenkins (run as service)</strong><br>
-– Openjdk1.8<br>
-– Maven 3.6.3<br>
-– Docker client<br>
-– Git<br>
-– IP Address = 192.168.1.116:8080</p>
-<p><strong>CodeReady Container</strong><br>
-– IP Address = 192.168.1.114</p>
+<p><strong>Jenkins (run as service)</strong></p>
+<ul>
+<li>Openjdk1.8</li>
+<li>Maven 3.6.3</li>
+<li>Docker client</li>
+<li>Git</li>
+<li>IP Address = 192.168.1.116:8080</li>
+</ul>
+<p><strong>CodeReady Container</strong></p>
+<ul>
+<li>IP Address = 192.168.1.114</li>
+</ul>
 <p><strong>OpenShift Configurations</strong></p>
 <p>In this lab the author uses a CRC (CodeReady Container) which is a lightweight version of OpenShift and is only for development needs. However, the resources that will be used will be the same as production-ready OpenShift. For crc installation, see the official documentation link here <!-- raw HTML omitted --><a href="https://code-ready.github.io/crc/">https://code-ready.github.io/crc/</a><!-- raw HTML omitted --></p>
 <p>First, log into the cluster by using a user who has the cluster-admin role. Here I used a virtual user who has been generated during the CRC installation process, namely kubeadmin.</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<p>After successfully logging in, it’s time to create projects. The projects that will be made are dev (development), sim (simulation), and prod (production).</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<p>Then create a service account in each of these projects for Jenkins to use in order to manage the project.</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<p>Then give a role to the service account that has been created in each of these projects with role <strong>edit</strong> so that Jenkins can create, delete, and modify any resources in its project.</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<p>Now the last step from the openshift side is to create credentials from the image registry for each project. Here I used nexus which in part 1 has been configured to save the image. However, for this part 3 lab it is not yet used, it will be used on the last lab. It is the implementation of full CI / CD.</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<p><strong>Jenkins</strong></p>
-<p>First, Login as an admin to Jenkins<!-- raw HTML omitted --></p>
-<p><img src="https://cdn-images-1.medium.com/max/800/1*4vaLImsUarCKavH7gqg3BA.png" alt=""> <!-- raw HTML omitted --></p>
-<p>Install the required plugins on the <strong>Manage Jenkins menu</strong> -&gt; <strong>Manage Plugins</strong> -&gt; <strong>[TAB] Available</strong>. Then install the plugin below:<br>
-– OpenShift Login Plugin<br>
-– OpenShift Client Jenkins Plugin</p>
+<pre tabindex="0"><code>[oji@crc ~]$ oc login -u kubeadmin -p D4tTL-hJYdy-qe36Y-okTwh https://api.crc.testing:6443
+Login successful.
+You have access to 61 projects, the list has been suppressed. You can list all projects with ' projects'
+
+Using project &quot;default&quot;.&lt;/pre&gt;
+
+[oji@crc ~]$ oc whoami
+kube:admin
+</code></pre><p>After successfully logging in, it’s time to create projects. The projects that will be made are dev (development), sim (simulation), and prod (production).</p>
+<pre tabindex="0"><code>[oji@crc ~]$ oc new-project dev
+[oji@crc ~]$ oc new-project sim
+[oji@crc ~]$ oc new-project prod
+</code></pre><p>Then create a service account in each of these projects for Jenkins to use in order to manage the project.</p>
+<pre tabindex="0"><code>[oji@crc ~]$ oc create sa jenkins -n dev
+[oji@crc ~]$ oc create sa jenkins -n sim
+[oji@crc ~]$ oc create sa jenkins -n prod
+</code></pre><p>Then give a role to the service account that has been created in each of these projects with role <strong>edit</strong> so that Jenkins can create, delete, and modify any resources in its project.</p>
+<pre tabindex="0"><code>[oji@crc ~]$ oc policy add-role-to-user edit system:serviceaccount:dev:jenkins -n dev
+[oji@crc ~]$ oc policy add-role-to-user edit system:serviceaccount:sim:jenkins -n sim
+[oji@crc ~]$ oc policy add-role-to-user edit system:serviceaccount:prod:jenkins -n prod
+[oji@crc ~]$ oc policy add-role-to-group system:image-puller system:serviceaccounts:dev -n dev
+[oji@crc ~]$ oc policy add-role-to-group system:image-puller system:serviceaccounts:sim -n sim
+[oji@crc ~]$ oc policy add-role-to-group system:image-puller system:serviceaccounts:prod -n prod
+</code></pre><p>Now the last step from the openshift side is to create credentials from the image registry for each project. Here I used nexus which in part 1 has been configured to save the image. However, for this part 3 lab it is not yet used, it will be used on the last lab. It is the implementation of full CI / CD.</p>
+<pre tabindex="0"><code>[oji@crc ~]$ oc create secret docker-registry nexus-registry --docker-server=nexus-registry.lab.example.com:5000 --docker-username=admin --docker-password=admin -n dev
+
+[oji@crc ~]$ oc create secret docker-registry nexus-registry --docker-server=nexus-registry.lab.example.com:5000 --docker-username=admin --docker-password=admin -n sim
+
+[oji@crc ~]$ oc create secret docker-registry nexus-registry --docker-server=nexus-registry.lab.example.com:5000 --docker-username=admin --docker-password=admin -n prod
+</code></pre><pre tabindex="0"><code>[oji@crc ~]$ oc secrets link default nexus-registry –for=pull -n dev
+[oji@crc ~]$ oc secrets link default nexus-registry –for=pull -n sim
+[oji@crc ~]$ oc secrets link default nexus-registry –for=pull -n prod
+oji@crc ~]$ oc secrets link builder nexus-registry -n dev
+oji@crc ~]$ oc secrets link builder nexus-registry -n sim
+oji@crc ~]$ oc secrets link builder nexus-registry -n prod
+oji@crc ~]$ oc secrets link builder nexus-registry -n prod
+</code></pre><p><strong>Jenkins</strong></p>
+<p>First, Login as an admin to Jenkins</p>
+<p><img src="/images/ci-cd-labs-part3/1.png" alt="Scratchpad" title="Scratchpad"></p>
+<p>Install the required plugins on the <strong>Manage Jenkins menu</strong> -&gt; <strong>Manage Plugins</strong> -&gt; <strong>[TAB] Available</strong>. Then install the plugin below:</p>
+<ul>
+<li>OpenShift Login Plugin</li>
+<li>OpenShift Client Jenkins Plugin</li>
+</ul>
 <p>Then select <strong><em>Install without restarting</em></strong></p>
 <p>Now I will create a credential in jenkins using the token in the service account that was created in openshift. To view these tokens you can use the command below:</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<p>Perintah di atas akan menampilkan token. Selanjutnya <em>copy-paste</em> token tersebut untuk ditambahkan pada credential jenkins.</p>
+<pre tabindex="0"><code>[oji@crc ~]$ oc sa get-token jenkins -n dev
+[oji@crc ~]$ oc sa get-token jenkins -n sim
+[oji@crc ~]$ oc sa get-token jenkins -n prod
+</code></pre><p>Perintah di atas akan menampilkan token. Selanjutnya <em>copy-paste</em> token tersebut untuk ditambahkan pada credential jenkins.</p>
 <p><strong>Credential ocp-dev</strong></p>
-<!-- raw HTML omitted -->
+<p><img src="/images/ci-cd-labs-part3/2.png" alt="Scratchpad" title="Scratchpad"></p>
 <p><strong>Credential ocp-sim</strong></p>
-<!-- raw HTML omitted -->
+<p><img src="/images/ci-cd-labs-part3/3.png" alt="Scratchpad" title="Scratchpad"></p>
 <p><strong>Credential ocp-prod</strong></p>
-<!-- raw HTML omitted -->
+<p><img src="/images/ci-cd-labs-part3/4.png" alt="Scratchpad" title="Scratchpad"></p>
 <p>Next, I’ll integrate jenkins to bitbucket by going to the <strong>Manage Jenkins</strong> menu -&gt; <strong>Configure System</strong> -&gt; <strong>OpenShift Client Plugin</strong>. Provide the cluster name for openshift and the URL for the apiserver from openshift to integrate. Then for the token enter the token that was previously created. In this lab, because I’m using CRC, the environment will be simulated only with different projects but in the same cluster. At the time of its implementation, the best practice is to separate each environment with a different cluster.</p>
 <p>Then to test the connection, I made a job containing a pipeline to check the availability of each cluster.</p>
 <p>Select <strong>New Item</strong> -&gt; <strong>Pipeline</strong>, then name the job. Then the Pipeline field can be adjusted as shown below :</p>
 <!-- raw HTML omitted -->
 <p>Pipeline :</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<p>Then save.</p>
+<pre tabindex="0"><code>pipeline {
+    agent any
+    
+    stages {
+        stage('Connection Test for DEV') {
+            steps {
+                    script {
+                    openshift.withCluster( 'ocp-dev' ) {
+                        openshift.withProject( 'dev' ) {
+                            echo &quot;Hello from project ${openshift.project()} in cluster ${openshift.cluster()}&quot;
+                            }
+                        }   
+                    
+                }
+            }
+        }
+        
+        stage('Connection Test for SIM') {
+            steps {
+                    script {
+                    openshift.withCluster( 'ocp-sim' ) {
+                        openshift.withProject( 'sim' ) {
+                            echo &quot;Hello from project ${openshift.project()} in cluster ${openshift.cluster()}&quot;
+                            }
+                        }   
+                    
+                }
+            }
+        }
+        
+        stage('Connection Test for PROD') {
+            steps {
+                    script {
+                    openshift.withCluster( 'ocp-prod' ) {
+                        openshift.withProject( 'prod' ) {
+                            echo &quot;Hello from project ${openshift.project()} in cluster ${openshift.cluster()}&quot;
+                            }
+                        }   
+                    
+                }
+            }
+        }
+
+    }
+    
+}
+</code></pre><p>Then save.</p>
 <p>Then do a build. It can be seen that the pipeline was going well and successful.</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<p><img src="/images/ci-cd-labs-part3/5.png" alt="Scratchpad" title="Scratchpad"></p>
+<p><img src="/images/ci-cd-labs-part3/6.png" alt="Scratchpad" title="Scratchpad"></p>
+
         </p>
     </div>
 </div>
