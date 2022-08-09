@@ -7,30 +7,12 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language><atom:link href="https://fauzislami.github.io/thoughts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Blüdhaven</title>
-      <link>https://fauzislami.github.io/thoughts/bludhaven/</link>
+      <title>Trade-off</title>
+      <link>https://fauzislami.github.io/thoughts/trade-off/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://fauzislami.github.io/thoughts/bludhaven/</guid>
-      <description>History Blüdhaven was a former whaling town, which was officially incorporated as a &amp;ldquo;Commonwealth&amp;rdquo; in 1912. The town had a generally poor socio-economic populace, owing in part to failed efforts to transform itself into a manufacturing and shipping center.</description>
-    </item>
-    
-    <item>
-      <title>Hydra</title>
-      <link>https://fauzislami.github.io/thoughts/hydra/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://fauzislami.github.io/thoughts/hydra/</guid>
-      <description>Motto Cut off one head and two will take their place</description>
-    </item>
-    
-    <item>
-      <title>Tatooine</title>
-      <link>https://fauzislami.github.io/thoughts/tatooine/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://fauzislami.github.io/thoughts/tatooine/</guid>
-      <description>A long time ago in a galaxy far, far away&amp;hellip;. A project was planned, but never completed</description>
+      <guid>https://fauzislami.github.io/thoughts/trade-off/</guid>
+      <description>There was a light talk between me and one of my colleagues about trade-offs in software architecture (only touched its surface and not deep at all, lol) but that&amp;rsquo;s not the topic I&amp;rsquo;m going to talk about. Long story short, I was thinking the existence of &amp;ldquo;trade-off&amp;rdquo; in a wider scope. Do we realize that trade-offs are present in everything we do? Let&amp;rsquo;s take an interesting example, the most common and the thing that most people complain about is making everyone happy.</description>
     </item>
     
   </channel>
