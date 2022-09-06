@@ -3,13 +3,31 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://fauzislami.github.io/categories/blog/</loc>
-    <lastmod>2022-02-18T04:57:55+00:00</lastmod>
+    <lastmod>2022-09-06T09:45:27+07:00</lastmod>
   </url><url>
     <loc>https://fauzislami.github.io/</loc>
-    <lastmod>2022-02-18T04:57:55+00:00</lastmod>
+    <lastmod>2022-09-06T09:45:27+07:00</lastmod>
   </url><url>
     <loc>https://fauzislami.github.io/categories/</loc>
-    <lastmod>2022-02-18T04:57:55+00:00</lastmod>
+    <lastmod>2022-09-06T09:45:27+07:00</lastmod>
+  </url><url>
+    <loc>https://fauzislami.github.io/tags/golang/</loc>
+    <lastmod>2022-09-06T09:45:27+07:00</lastmod>
+  </url><url>
+    <loc>https://fauzislami.github.io/blog/linter-aggregator-golangci-lint/</loc>
+    <lastmod>2022-09-06T09:45:27+07:00</lastmod>
+  </url><url>
+    <loc>https://fauzislami.github.io/tags/linter/</loc>
+    <lastmod>2022-09-06T09:45:27+07:00</lastmod>
+  </url><url>
+    <loc>https://fauzislami.github.io/posts/</loc>
+    <lastmod>2022-09-06T09:45:27+07:00</lastmod>
+  </url><url>
+    <loc>https://fauzislami.github.io/categories/progamming/</loc>
+    <lastmod>2022-09-06T09:45:27+07:00</lastmod>
+  </url><url>
+    <loc>https://fauzislami.github.io/tags/</loc>
+    <lastmod>2022-09-06T09:45:27+07:00</lastmod>
   </url><url>
     <loc>https://fauzislami.github.io/categories/devops/</loc>
     <lastmod>2022-02-18T04:57:55+00:00</lastmod>
@@ -24,12 +42,6 @@
     <lastmod>2022-02-18T04:57:55+00:00</lastmod>
   </url><url>
     <loc>https://fauzislami.github.io/categories/lesson-learned/</loc>
-    <lastmod>2022-02-18T04:57:55+00:00</lastmod>
-  </url><url>
-    <loc>https://fauzislami.github.io/posts/</loc>
-    <lastmod>2022-02-18T04:57:55+00:00</lastmod>
-  </url><url>
-    <loc>https://fauzislami.github.io/tags/</loc>
     <lastmod>2022-02-18T04:57:55+00:00</lastmod>
   </url><url>
     <loc>https://fauzislami.github.io/tags/iac/</loc>

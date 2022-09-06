@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        :root {
+            --accent-color: #FF4D4D;
+        }
+    </style>
+
+    
+    
+    
+    
+    
+    
+
+    
+    <title>Golang&#39;s Linter Aggregator: Golangci-lint</title>
+    <meta name="description" content="/home/fauzislami/blog">
+    <meta name="keywords" content='blog, gokarna, hugo, Golang, Linter'>
+
+    <meta property="og:url" content="https://fauzislami.github.io/blog/linter-aggregator-golangci-lint/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Golang&#39;s Linter Aggregator: Golangci-lint">
+    <meta property="og:description" content="/home/fauzislami/blog">
+    <meta property="og:image" content="/images/logo-blog-oji.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Golang&#39;s Linter Aggregator: Golangci-lint">
+    <meta name="twitter:description" content="/home/fauzislami/blog">
+    <meta property="twitter:domain" content="https://fauzislami.github.io/blog/linter-aggregator-golangci-lint/">
+    <meta property="twitter:url" content="https://fauzislami.github.io/blog/linter-aggregator-golangci-lint/">
+    <meta name="twitter:image" content="/images/logo-blog-oji.png">
+
+    
+    <link rel="canonical" href="https://fauzislami.github.io/blog/linter-aggregator-golangci-lint/" />
+
+    <link rel="stylesheet" type="text/css" href="/css/normalize.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link disabled id="dark-theme" rel="stylesheet" href="/css/dark.css">
+
+    <script src="/js/svg-injector.min.js"></script>
+    <script src="/js/feather-icons.min.js"></script>
+    <script src="/js/main.js"></script>
+
+    
+    
+        <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.16/dist/katex.min.css" integrity="sha384-6LkG2wmY8FK9E0vU9OOr8UvLwsaqUg9SETfpq4uTCN1agNe8HRdE9ABlk+fVx6gZ" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.16/dist/katex.min.js" integrity="sha384-31El76TwmbHj4rF9DyLsygbq6xoIobG0W+jqXim+a3dU9W53tdH3A/ngRPxOzzaB" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.16/dist/contrib/auto-render.min.js" integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+  
+    
+</head>
+<body>
+        <script type="text/javascript">
+            
+            setThemeByUserPref();
+        </script><header class="header">
+    <nav class="header-nav">
+
+        
+        <div class="avatar">
+            <a href="https://fauzislami.github.io/">
+                <img src="/images/logo-blog-oji.png" alt="avatar" />
+            </a>
+        </div>
+        
+
+        <div class="nav-title">
+            <a class="nav-brand" href="https://fauzislami.github.io/">Blog · Muhammad Fauzi Islami</a>
+        </div>
+
+        <div class="nav-links">
+            
+            <div class="nav-link">
+                <a href="/"> Home </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="/posts/"> Posts </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="/thoughts/"> Thoughts </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="https://about.me/fauzislami"> About Me </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="/tags/"> Tags </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="https://github.com/fauzislami"><span data-feather='github'></span>  </a>
+            </div>
+            
+
+            <span class="nav-icons-divider"></span>
+            <div class="nav-link dark-theme-toggle">
+                <a>
+                    <span id="theme-toggle-icon" data-feather="moon"></span>
+                </a>
+            </div>
+
+            <div class="nav-link" id="hamburger-menu-toggle">
+                <a>
+                    <span data-feather="menu"></span>
+                </a>
+            </div>
+
+            
+            <ul class="nav-hamburger-list visibility-hidden">
+                
+                <li class="nav-item">
+                    <a href="/"> Home </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="/posts/"> Posts </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="/thoughts/"> Thoughts </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="https://about.me/fauzislami"> About Me </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="/tags/"> Tags </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="https://github.com/fauzislami"><span data-feather='github'></span>  </a>
+                </li>
+                
+                <li class="nav-item dark-theme-toggle">
+                    <a>
+                        <span id="theme-toggle-icon" data-feather="moon"></span>
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+</header>
+<main id="content">
+    <div class="post container">
+
+    <div class="post-header-section">
+        <h1>Golang&#39;s Linter Aggregator: Golangci-lint</h1>
+        <small role="doc-subtitle"></small>
+        <p class="post-date">
+            September 6, 2022
+        </p>
+
+        <ul class="post-tags">
+        
+            <li class="post-tag"><a href="/tags/golang">Golang</a></li>
+        
+            <li class="post-tag"><a href="/tags/linter">Linter</a></li>
+        
+        </ul>
+    </div>
+
+    <div class="post-content">
+        <p>
+            <style type="text/css">.notice{padding:18px;line-height:24px;margin-bottom:24px;border-radius:4px;color:#444;background:#e7f2fa}.notice p:last-child{margin-bottom:0}.notice-title{margin:-18px -18px 12px;padding:4px 18px;border-radius:4px 4px 0 0;font-weight:700;color:#fff;background:#6ab0de}.notice.warning .notice-title{background:rgba(217,83,79,.9)}.notice.warning{background:#fae2e2}.notice.info .notice-title{background:#f0b37e}.notice.info{background:#fff2db}.notice.note .notice-title{background:#6ab0de}.notice.note{background:#e7f2fA}.notice.tip .notice-title{background:rgba(92,184,92,.8)}.notice.tip{background:#e6f9e6}.icon-notice{display:inline-flex;align-self:center;margin-right:8px}.icon-notice img,.icon-notice svg{height:1em;width:1em;fill:currentColor}.icon-notice img,.icon-notice.baseline svg{top:0.125em;position:relative}</style>
+<div><svg width="0" height="0" display="none" xmlns="http://www.w3.org/2000/svg"><symbol id="tip-notice" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"/></symbol><symbol id="note-notice" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet"><path d="M504 256c0 136.997-111.043 248-248 248S8 392.997 8 256C8 119.083 119.043 8 256 8s248 111.083 248 248zm-248 50c-25.405 0-46 20.595-46 46s20.595 46 46 46 46-20.595 46-46-20.595-46-46-46zm-43.673-165.346l7.418 136c.347 6.364 5.609 11.346 11.982 11.346h48.546c6.373 0 11.635-4.982 11.982-11.346l7.418-136c.375-6.874-5.098-12.654-11.982-12.654h-63.383c-6.884 0-12.356 5.78-11.981 12.654z"/></symbol><symbol id="warning-notice" viewBox="0 0 576 512" preserveAspectRatio="xMidYMid meet"><path d="M569.517 440.013C587.975 472.007 564.806 512 527.94 512H48.054c-36.937 0-59.999-40.055-41.577-71.987L246.423 23.985c18.467-32.009 64.72-31.951 83.154 0l239.94 416.028zM288 354c-25.405 0-46 20.595-46 46s20.595 46 46 46 46-20.595 46-46-20.595-46-46-46zm-43.673-165.346l7.418 136c.347 6.364 5.609 11.346 11.982 11.346h48.546c6.373 0 11.635-4.982 11.982-11.346l7.418-136c.375-6.874-5.098-12.654-11.982-12.654h-63.383c-6.884 0-12.356 5.78-11.981 12.654z"/></symbol><symbol id="info-notice" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet"><path d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z"/></symbol></svg></div><div class="notice note" >
+<p class="first notice-title"><span class="icon-notice baseline"><svg><use href="#note-notice"></use></svg></span>Note</p><p><strong>Disclaimer:</strong> I&rsquo;m not a Golang developer 😄</p></div>
+
+<h1 id="intro">Intro</h1>
+<p>A few days ago I had something to research regarding linter in Golang. Some says there&rsquo;s a linter which has stricter checking and a faster process than any common linter like <em>golint</em>. It&rsquo;s <em>golangci-lint</em>. Hence, I was curiously looking up some theoretically information of it and having some hands-on practice to see how it works and how to use it.</p>
+<p>Golangci-lint is actually a linter aggregator and not a standalone linter. It’s developed to aggregate and run several individual linters in parallel for convenience and performance reasons. It has 98 linters included (at the time of this writing) by referring to this <a href="https://golangci-lint.run/usage/linters/">official page</a> and we may pick and choose which ones are suitable for our project. Hence, I began to think it would be beneficial for us since  we don’t need to download each individual linters and manage their versions ourselves.
+As it consists of many linters, I think that’s the reason why golangci-lint is considered as more rigorous tool than the standalone linter.</p>
+<p>It turned out, the common issues while running linters in sequence can make the process too slow. Fortunately, golangci-lint comes to the rescue, it runs linters in parallel, reuses the Go build cache and caches analysis results for much improved performance on subsequent runs.</p>
+<p>While I researched about golangci-lint, I found some claims that it runs faster than other linter aggregator, it’s easy to use, has nice output, flexible because we can enable or disable linters that we need and it has a minimum number of false positives. As of now, I have done some practices on it but I don’t know yet how to measure it for the claim of bringing less false positives.</p>
+<p>Here are the differences between typical linter and golangci-linter (linter aggregator):</p>
+<ul>
+<li><strong>Typical Linter</strong></li>
+</ul>
+<p>[<strong>Linter#1</strong> (<em>80% code parsing and loading + 20% linting</em>)] + [<strong>Linter#2</strong> (<em>80% code parsing and loading + 20% linting</em>)] + <strong>Linter#n</strong> —&gt; <em>Time</em></p>
+<ul>
+<li>
+<p><strong>Golangci-lint</strong></p>
+<p>[<em>Code parsing and loading only one time</em> + <em>linting</em> + <em>linting</em> + <em>linting</em> + &hellip;. + <em>linting</em>] —&gt; Time*</p>
+</li>
+</ul>
+<p>It parses codes only once then it performs analysis with all linters within less time. It directly calls linters and reuses 80% of work by parsing codes only once. This makes golangci-lint so fast.</p>
+<h1 id="install-golangci-lint">Install Golangci-lint</h1>
+<h2 id="local-machine">Local Machine</h2>
+<p>Golangci-lint provides several options to install it in local machines such as using brew, docker, directly download and install the binary, and even install it from source. Regarding a complete installation guide we may refer to this <a href="https://golangci-lint.run/usage/install/#local-installation">link</a>.</p>
+<h2 id="github-action">Github Action</h2>
+<p>In order to add golangci-lint into our workflow in Github, golang-ci has its own action and we simply add it into the workflow and make some modifications to fit our needs in the project. It shouldn’t be complicated to use. Visit <a href="https://github.com/marketplace/actions/run-golangci-lint">here</a> for more information.</p>
+<div class="notice note" >
+<p class="first notice-title"><span class="icon-notice baseline"><svg><use href="#note-notice"></use></svg></span>Note</p><p>For both installation type, it’s advised to periodically update the version of golangci-lint as the project is under active and is constantly being improved.</p></div>
+
+<h1 id="findings">Findings</h1>
+<h2 id="configurations">Configurations</h2>
+<p>I tried to use golangci-lint in my personal repo <a href="https://github.com/fauzislami/test-go">here</a> and added it to the github workflow to see what it can do and how it works. My first impression was quite impressed because of its quick process while inspecting the codes with many linters at once and it also enabled us to have control with how golangci-lint will behave and what kind of linters it would call during the test by defining custom configurations in a file which could be in several format like below:</p>
+<ul>
+<li>.golangci.yml</li>
+<li>.golangci.yaml</li>
+<li>.golangci.toml</li>
+<li>.golangci.json</li>
+</ul>
+<p>We may specify the configuration file in YAML, TOML or JSON format but it’s recommended to stick with YAML format since that’s what is being on the official documentation pages. Even though we may also configure it with putting some arguments in CLI way but configuring golangci-lint for a project is best done through a configuration file because we’ll be able to configure specific linter options which is not possible via command-line options. Keep in mind that some linters perform similar functions, hence, we need to enable linters deliberately to avoid redundant entries.
+The configuration example looks like the following:</p>
+<pre tabindex="0"><code>linters-settings:
+  errcheck:
+    check-type-assertions: true
+  goconst:
+    min-len: 2
+    min-occurrences: 3
+  gocritic:
+    enabled-tags:
+      - diagnostic
+      - experimental
+      - opinionated
+      - performance
+      - style
+  govet:
+    check-shadowing: true
+    enable:
+      - fieldalignment
+  nolintlint:
+    require-explanation: true
+    require-specific: true
+
+linters:
+  disable-all: true
+  enable:
+    - bodyclose
+    - deadcode
+    - depguard
+    - dogsled
+    - dupl
+    - errcheck
+    - exportloopref
+    - exhaustive
+    - goconst
+    - gocritic
+    - gofmt
+    - goimports
+    - gomnd
+    - gocyclo
+    - gosec
+    - gosimple
+    - govet
+    - ineffassign
+    - misspell
+    - nolintlint
+    - nakedret
+    - prealloc
+    - predeclared
+    - revive
+    - staticcheck
+    - structcheck
+    - stylecheck
+    - thelper
+    - tparallel
+    - typecheck
+    - unconvert
+    - unparam
+    - varcheck
+    - whitespace
+    - wsl
+
+run:
+  issues-exit-code: 1
+
+</code></pre><h2 id="suppressing-linting-errors">Suppressing Linting Errors</h2>
+<h3 id="disable-all-linters-for-certain-code">Disable All Linters For Certain Code</h3>
+<p>Sometimes there will be some errors found by certain linters unnecessarily but we don’t actually have to fix as long as it has no negative impact to the application, we are aware the tradeoff (if any) and we can assure what thing should be false positive and what thing should be the real problem. Let’s take a look at the code snippet below:</p>
+<p><img src="/images/golangci-lint/1.png" alt="1" title="1"></p>
+<p><img src="/images/golangci-lint/2.png" alt="2" title="2"></p>
+<p>The pictures above will be noticed by a linter in golangci-lint and produces the following errors:</p>
+<p><img src="/images/golangci-lint/3.png" alt="3" title="3"></p>
+<p>It’s gosimple, a linter that specializes in simplifying a code. It’s encouraging the use of simpler syntax by using !err instead of having comparison operator to do the same thing. If we consider this as unnecessary error, we can ignore the error by adding a nolint directive on the necessary line like the following:</p>
+<p><img src="/images/golangci-lint/4.png" alt="4" title="4"></p>
+<p><img src="/images/golangci-lint/5.png" alt="5" title="5"></p>
+<p>And it will result no error:</p>
+<p><img src="/images/golangci-lint/6.png" alt="6" title="6"></p>
+<div class="notice note" >
+<p class="first notice-title"><span class="icon-notice baseline"><svg><use href="#note-notice"></use></svg></span>Note</p><p>By Go convention, machine-readable comments should have no spaces, so use <strong>//nolint</strong> instead of <strong>// nolint</strong></p></div>
+
+<h3 id="disable-some-linters-for-certain-code">Disable Some Linters For Certain Code</h3>
+<p>The usage of nolint causes all the linting issues detected for that line to be disabled or ignored. We can also disable the issues from a specific linter by specifying its name in the directive (recommended). This allows issues raised on that line by other linters to come through. For instance:</p>
+<p>This will disable gosec only for that line</p>
+<p><img src="/images/golangci-lint/7.png" alt="7" title="7"></p>
+<p>This will disable multiple linters like gosec,gosimple,govet and errcheck only for that line</p>
+<p><img src="/images/golangci-lint/8.png" alt="8" title="8"></p>
+<h3 id="disable-some-linters-for-certain-code-block">Disable Some Linters For Certain Code Block</h3>
+<p>We can also exclude potential errors for a block of code (such as a function), by using a nolint directive at the beginner of the block.</p>
+<p>This will prevent golangci-lint pick this block of code to be tested by its linters</p>
+<p><img src="/images/golangci-lint/9.png" alt="9" title="9"></p>
+<p>We’re also able to exclude a whole certain file to be skipped from linting by using nolint directive at the top of the file</p>
+<p><img src="/images/golangci-lint/10.png" alt="10" title="10"></p>
+<h2 id="annotations-in-pull-request-github-action">Annotations in Pull Request (Github Action)</h2>
+<p>This is how annotations look in my personal repo:</p>
+<p><img src="/images/golangci-lint/11.png" alt="11" title="11"></p>
+<p>They look like an advisor to give some advices how to prevent potential bug in the future. It only appeared in Files Changed tab, though I thought it would be appeared in Conversation as well. Overall, it looks good and almost covers all I imaged before.</p>
+<h2 id="false-positives">False Positives</h2>
+<p>Since golangci-lint consists of so many linters. Therefore, it’s potentially raise something we call False Positives. Almost every linter has each own configuration and that could be a cause for false positive. Hence, it’s recommended to check and make sure we configure it well. We can minimize the false positive by configuring and using the linter we’re using correctly, such as excluding/skipping some linters for certain files. One of several ways we can refer to is the usage of nolint directive on some particular codes that we feel there’s nothing to do with it. We may go to this link to see about False Positives that potentially will happen in golangci-lint.</p>
+<p>Thanks for visiting! Hope this will be helpful! 😁</p>
+<p>References:</p>
+<ul>
+<li><a href="https://golangci-lint.run/usage/">https://golangci-lint.run/usage/</a></li>
+<li><a href="https://freshman.tech/linting-golang/">https://freshman.tech/linting-golang/</a></li>
+</ul>
+
+        </p>
+    </div>
+</div>
+
+
+
+    
+
+        </main><footer class="footer">
+    <span>&copy; 2022 Fauzi Islami</span>
+</footer>
+</body>
+</html>
