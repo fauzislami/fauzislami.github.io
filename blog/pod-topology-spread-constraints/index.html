@@ -215,7 +215,28 @@
 </ul>
 <p><img src="/images/podTopologySpreadConstraints/8.png" alt="8" title="8"></p>
 <p>As we may see all of the pods deployment above, it&rsquo;s evenly spread out across nodes in the multiple of 4 replicas (since I have 4 nodes) and it&rsquo;s (almost) evenly spread out across nodes if the replica in non-multiple of 4 - to guarantee high availability and scheduling flexibility of the services, I have set the maxSkew to 1 and whenUnsatisfiable to ScheduleAnyway, this combination ensures that the scheduler gives higher precedence to topologies that help reducing the skew but will not led to pods in pending state that cannot satisfy the pods topology spread constraints due to the maxSkew setting.</p>
-<p>This document might be useful to get the full context : <a href="https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/">https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/</a></p>
+<p>Let&rsquo;s have a look how topologySpreadConstraints sits at the following deployment which I used in my case:</p>
+<pre tabindex="0"><code>
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  ...
+spec:
+  ...
+  template:
+  ...
+    spec:
+      topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: kubernetes.io/hostname
+        whenUnsatisfiable: ScheduleAnyway
+        labelSelector:
+          matchLabels:
+            app: my-app
+      containers:
+      ...
+
+</code></pre><p>For those who are interested to learn further, this document might be useful to get the full context : <a href="https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/">https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/</a></p>
 
         </p>
     </div>
