@@ -13,7 +13,7 @@
       <pubDate>Tue, 01 Nov 2022 13:31:39 +0700</pubDate>
       
       <guid>https://fauzislami.github.io/blog/pod-topology-spread-constraints/</guid>
-      <description>Intro I had several works related to evenly spreading out pods across nodes in order to prevent potentially Kubernetes schedule the replicas of pods on the same node which will lead into a problem if that particular node falls over. I comprehended the case because there are some ways to schedule pods and the solution must be suitable with the environment in that case. As we might already knew, Kubernetes has its own built-in mechanism to schdule a pod into a node named scheduler.</description>
+      <description>Intro I had several works related to evenly spreading out pods across nodes in order to prevent potentially Kubernetes schedule the replicas of pods on the same node which will lead into a problem if that particular node falls over. I comprehended the case because there are some ways to schedule pods and the solution must be suitable with the environment in that case. As we might already know, Kubernetes has its own built-in mechanism to schedule a pod into a node named scheduler.</description>
     </item>
     
   </channel>
