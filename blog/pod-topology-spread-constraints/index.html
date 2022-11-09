@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        :root {
+            --accent-color: #FF4D4D;
+        }
+    </style>
+
+    
+    
+    
+    
+    
+    
+
+    
+    <title>Distribute Pods Across Nodes With topologySpreadConstraints</title>
+    <meta name="description" content="/home/fauzislami/blog">
+    <meta name="keywords" content='blog, gokarna, hugo, Kubernetes'>
+
+    <meta property="og:url" content="https://fauzislami.github.io/blog/pod-topology-spread-constraints/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Distribute Pods Across Nodes With topologySpreadConstraints">
+    <meta property="og:description" content="/home/fauzislami/blog">
+    <meta property="og:image" content="/images/logo-blog-oji.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Distribute Pods Across Nodes With topologySpreadConstraints">
+    <meta name="twitter:description" content="/home/fauzislami/blog">
+    <meta property="twitter:domain" content="https://fauzislami.github.io/blog/pod-topology-spread-constraints/">
+    <meta property="twitter:url" content="https://fauzislami.github.io/blog/pod-topology-spread-constraints/">
+    <meta name="twitter:image" content="/images/logo-blog-oji.png">
+
+    
+    <link rel="canonical" href="https://fauzislami.github.io/blog/pod-topology-spread-constraints/" />
+
+    <link rel="stylesheet" type="text/css" href="/css/normalize.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link disabled id="dark-theme" rel="stylesheet" href="/css/dark.css">
+
+    <script src="/js/svg-injector.min.js"></script>
+    <script src="/js/feather-icons.min.js"></script>
+    <script src="/js/main.js"></script>
+
+    
+    
+        <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.16/dist/katex.min.css" integrity="sha384-6LkG2wmY8FK9E0vU9OOr8UvLwsaqUg9SETfpq4uTCN1agNe8HRdE9ABlk+fVx6gZ" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.16/dist/katex.min.js" integrity="sha384-31El76TwmbHj4rF9DyLsygbq6xoIobG0W+jqXim+a3dU9W53tdH3A/ngRPxOzzaB" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.16/dist/contrib/auto-render.min.js" integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+  
+    
+</head>
+<body>
+        <script type="text/javascript">
+            
+            setThemeByUserPref();
+        </script><header class="header">
+    <nav class="header-nav">
+
+        
+        <div class="avatar">
+            <a href="https://fauzislami.github.io/">
+                <img src="/images/logo-blog-oji.png" alt="avatar" />
+            </a>
+        </div>
+        
+
+        <div class="nav-title">
+            <a class="nav-brand" href="https://fauzislami.github.io/">Blog · Muhammad Fauzi Islami</a>
+        </div>
+
+        <div class="nav-links">
+            
+            <div class="nav-link">
+                <a href="/"> Home </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="/posts/"> Posts </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="/thoughts/"> Thoughts </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="https://about.me/fauzislami"> About Me </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="/tags/"> Tags </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="https://github.com/fauzislami"><span data-feather='github'></span>  </a>
+            </div>
+            
+
+            <span class="nav-icons-divider"></span>
+            <div class="nav-link dark-theme-toggle">
+                <a>
+                    <span id="theme-toggle-icon" data-feather="moon"></span>
+                </a>
+            </div>
+
+            <div class="nav-link" id="hamburger-menu-toggle">
+                <a>
+                    <span data-feather="menu"></span>
+                </a>
+            </div>
+
+            
+            <ul class="nav-hamburger-list visibility-hidden">
+                
+                <li class="nav-item">
+                    <a href="/"> Home </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="/posts/"> Posts </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="/thoughts/"> Thoughts </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="https://about.me/fauzislami"> About Me </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="/tags/"> Tags </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="https://github.com/fauzislami"><span data-feather='github'></span>  </a>
+                </li>
+                
+                <li class="nav-item dark-theme-toggle">
+                    <a>
+                        <span id="theme-toggle-icon" data-feather="moon"></span>
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+</header>
+<main id="content">
+    <div class="post container">
+
+    <div class="post-header-section">
+        <h1>Distribute Pods Across Nodes With topologySpreadConstraints</h1>
+        <small role="doc-subtitle"></small>
+        <p class="post-date">
+            November 1, 2022
+        </p>
+
+        <ul class="post-tags">
+        
+            <li class="post-tag"><a href="/tags/kubernetes">Kubernetes</a></li>
+        
+        </ul>
+    </div>
+
+    <div class="post-content">
+        <p>
+            <p><img src="/images/podTopologySpreadConstraints/main.png" alt="main picture" title="main picture"></p>
+<h1 id="intro">Intro</h1>
+<p>I had several works related to evenly spreading out pods across nodes in order to prevent potentially Kubernetes schedule the replicas of pods on the same node which will lead into a problem if that particular node falls over. I comprehended the case because there are some ways to schedule pods and the solution must be suitable with the environment in that case. As we might already knew, Kubernetes has its own built-in mechanism to schdule a pod into a node named <strong>scheduler</strong>. But kubernetes gives us flexibility on how and where a pod scheduled on which node, it depends on our needs. Let&rsquo;s take an example such as <strong>taints &amp; tolerations</strong>, <strong>nodeSelector</strong>, and even a more advanced way like <strong>podAntiAffinity</strong>. Basically, it allows us to dictate the scheduler on where pods should be put on.</p>
+<p>Long story short, I was thinking adding podAntiAffinity would solve the problem but it didn&rsquo;t work as I thought. In my case, podAntiAffinity will cause a pending status for some particular pods when the replica of pods exceed the number of nodes. After having a discussion with one of my colleagues, I got informed that there&rsquo;s a must-try solution as it should fit my case, it&rsquo;s <strong>topologySpreadConstraints</strong>. I just knew that feature and found it interesting after reading its documentation. Finally, <strong>topologySpreadConstraints</strong> was the most appropriate workaround.</p>
+<h1 id="what-is-topologyspreadconstraints">What is topologySpreadConstraints?</h1>
+<p>This is one of many features that Kubernetes provides starting from v1.19 (if I&rsquo;m not mistaken). podTopologySpreadConstraints is like a pod anti-affinity but in a more advanced way I think. It relies on failure-domain like regions, zones, nodes, and any other custom defined topology domains which needs to be defined as node labels. That mechanism aims to spread pods evenly onto multiple node topologies. We can imagine that we have a cluster with dozens of nodes and we want the workload of each node automatically scales. There could be a possibility those workloads unevenly distributed across nodes. Suppose there are only as few as 3 pods or as many as 10 pods, we&rsquo;d prefer not to have those pods run on the same node, right? otherwise, it would run the risk if the involved nodes falls over and take the workload offline.</p>
+<h1 id="question-why-does-podtopologyconstraints-is-preferred-over-podantiaffinity">Question: Why does podTopologyConstraints is preferred over podAntiAffinity?</h1>
+<p>I think the question above is biassed against my case 🤣. Let me clarify that it&rsquo;s not always true if podTopologyConstraints fits every case. Probably, the explanation below will lead us to understand more. Here I&rsquo;m using GKE.</p>
+<ol>
+<li><strong>Using podAntiAffinity</strong></li>
+</ol>
+<p><img src="/images/podTopologySpreadConstraints/1.png" alt="1" title="1"></p>
+<p>The number of nodes is 3 in the first place and it was increased to 6 nodes as I increased the replica of pods from 3 to 6. <strong>It happened because the cluster autoscaler was active</strong> and its number would keep increasing to accommodate the workload which is scheduling the pod with a certain label onto the new node rather than doing it onto existing nodes. Meanwhile, suppose we don’t use autoscaler, the common behavior is there will be a pending pod waiting for the node which is not running a pod with the same label. Nevertheless, we’re using autoscaler and that won’t be the problem for us but we absolutely don’t want to be charged for more cost for letting the cluster unnecessarily scales out for only accommodating one pod. Therefore, we better not use podAntiAffinity 😄</p>
+<ol start="2">
+<li><strong>Using topologySpreadConstraints</strong></li>
+</ol>
+<p><img src="/images/podTopologySpreadConstraints/2.png" alt="2" title="2"></p>
+<p>After scaling out the pods to be 6 replicas, the number of nodes remained at 3. With this, the pods would be evenly distributed across nodes but won’t cause the pods to be pending due to unmatched criteria with the nodes.</p>
+<p>In addition, I have also had experiments in my local machine related to topologySpreadConstraints. I had a cluster with 4 nodes and tried to deploy simple nginx pods with various amount of replicas as follows:</p>
+<ul>
+<li><strong>4 replicas</strong></li>
+</ul>
+<p><img src="/images/podTopologySpreadConstraints/3.png" alt="3" title="3"></p>
+<ul>
+<li><strong>8 replicas</strong></li>
+</ul>
+<p><img src="/images/podTopologySpreadConstraints/4.png" alt="4" title="4"></p>
+<ul>
+<li><strong>12 replicas</strong></li>
+</ul>
+<p><img src="/images/podTopologySpreadConstraints/5.png" alt="5" title="5"></p>
+<p>it also still spreads out across nodes (almost) evenly in non-multiple of 4 replicas (since I have 4 nodes) like the picture below:</p>
+<ul>
+<li><strong>10 replicas</strong></li>
+</ul>
+<p><img src="/images/podTopologySpreadConstraints/6.png" alt="6" title="6"></p>
+<ul>
+<li><strong>9 replicas</strong></li>
+</ul>
+<p><img src="/images/podTopologySpreadConstraints/7.png" alt="7" title="7"></p>
+<ul>
+<li><strong>5 replicas</strong></li>
+</ul>
+<p><img src="/images/podTopologySpreadConstraints/8.png" alt="8" title="8"></p>
+<p>As we may see all of the pods deployment above, it&rsquo;s evenly spread out across nodes in the multiple of 4 replicas (since I have 4 nodes) and it&rsquo;s (almost) evenly spread out across nodes if the replica in non-multiple of 4 - to guarantee high availability and scheduling flexibility of the services, I have set the maxSkew to 1 and whenUnsatisfiable to ScheduleAnyway, this combination ensures that the scheduler gives higher precedence to topologies that help reducing the skew but will not led to pods in pending state that cannot satisfy the pods topology spread constraints due to the maxSkew setting.</p>
+<p>This document might be useful to get the full context : <a href="https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/">https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/</a></p>
+
+        </p>
+    </div>
+</div>
+
+
+
+    
+
+        </main><footer class="footer">
+    <span>&copy; 2022 Fauzi Islami</span>
+</footer>
+</body>
+</html>
