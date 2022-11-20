@@ -28,6 +28,17 @@ Disclaimer: I&amp;rsquo;m not a Golang developer 😄
     </item>
     
     <item>
+      <title>Terratest: Introduction to Automation Test For Infrastructure-as-Code</title>
+      <link>https://fauzislami.github.io/blog/terratest-golang-for-infrastructure-e2e-testing/</link>
+      <pubDate>Sun, 07 Aug 2022 14:42:02 +0700</pubDate>
+      
+      <guid>https://fauzislami.github.io/blog/terratest-golang-for-infrastructure-e2e-testing/</guid>
+      <description>.notice{padding:18px;line-height:24px;margin-bottom:24px;border-radius:4px;color:#444;background:#e7f2fa}.notice p:last-child{margin-bottom:0}.notice-title{margin:-18px -18px 12px;padding:4px 18px;border-radius:4px 4px 0 0;font-weight:700;color:#fff;background:#6ab0de}.notice.warning .notice-title{background:rgba(217,83,79,.9)}.notice.warning{background:#fae2e2}.notice.info .notice-title{background:#f0b37e}.notice.info{background:#fff2db}.notice.note .notice-title{background:#6ab0de}.notice.note{background:#e7f2fA}.notice.tip .notice-title{background:rgba(92,184,92,.8)}.notice.tip{background:#e6f9e6}.icon-notice{display:inline-flex;align-self:center;margin-right:8px}.icon-notice img,.icon-notice svg{height:1em;width:1em;fill:currentColor}.icon-notice img,.icon-notice.baseline svg{top:0.125em;position:relative} Note
+Disclaimer: I&amp;rsquo;m not a Golang developer 😄
+ Treating Infrastructure as a Product Setting up infrastructure could be a tedious tasks nowadays. The reason is there will be some more steps to do the same thing on the different environment. Imagine that there are needs to deploy multiple kubernetes cluster with different specification into different kind of environment as well.</description>
+    </item>
+    
+    <item>
       <title>JCasC (Jenkins Configuration as Code) : Setting up Jenkins in a fully reproducible way</title>
       <link>https://fauzislami.github.io/blog/2022/02/18/jcasc-jenkins-configuration-as-code-setting-up-jenkins-in-a-fully-reproducible-way/</link>
       <pubDate>Fri, 18 Feb 2022 04:57:55 +0000</pubDate>
