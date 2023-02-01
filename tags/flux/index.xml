@@ -13,7 +13,7 @@
       <pubDate>Wed, 01 Feb 2023 10:25:36 +0700</pubDate>
       
       <guid>https://fauzislami.github.io/blog/fluxcd-image-watcher/</guid>
-      <description>This time I want to bring up a cool GitOps tool beside ArgoCD named FluxCD. But I won&amp;rsquo;t discuss about what it is and the comparison between ArgoCD and FluxCD just yet. Instead, I find FluxCD has a cool feature of many features it provides which I don&amp;rsquo;t find this in ArgoCD (at least as the time as I write this topic). Probably, the introduction topic of FluxCD itself is worth having later on and it&amp;rsquo;s generally similar to ArgoCD as both work in the same area for Continous Deployment.</description>
+      <description>This time I want to bring up a cool GitOps tool beside ArgoCD named FluxCD. But I won&amp;rsquo;t discuss about what it is and the comparison between ArgoCD and FluxCD just yet. Instead, I find FluxCD has a cool feature of many features it provides which I don&amp;rsquo;t find this in ArgoCD (at least as the time as I write this topic). Probably, the introduction topic of FluxCD itself is worth having later on and it&amp;rsquo;s generally similar to ArgoCD as both work in the same area for Continuous Deployment.</description>
     </item>
     
   </channel>

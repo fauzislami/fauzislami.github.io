@@ -174,7 +174,7 @@
 
     <div class="post-content">
         <p>
-            <p>This time I want to bring up a cool GitOps tool beside ArgoCD named <a href="https://fluxcd.io/"><strong>FluxCD</strong></a>. But I won&rsquo;t discuss about what it is and the comparison between ArgoCD and FluxCD just yet. Instead, I find FluxCD has a cool feature of many features it provides which I don&rsquo;t find this in ArgoCD (at least as the time as I write this topic). Probably, the introduction topic of FluxCD itself is worth having later on and it&rsquo;s generally similar to ArgoCD as both work in the same area for Continous Deployment. But yet again, now let&rsquo;s have a go with one of its sophisticated feature 😄</p>
+            <p>This time I want to bring up a cool GitOps tool beside ArgoCD named <a href="https://fluxcd.io/"><strong>FluxCD</strong></a>. But I won&rsquo;t discuss about what it is and the comparison between ArgoCD and FluxCD just yet. Instead, I find FluxCD has a cool feature of many features it provides which I don&rsquo;t find this in ArgoCD (at least as the time as I write this topic). Probably, the introduction topic of FluxCD itself is worth having later on and it&rsquo;s generally similar to ArgoCD as both work in the same area for Continuous Deployment. But yet again, now let&rsquo;s have a go with one of its sophisticated feature 😄</p>
 <h1 id="about-image-watcher">About Image Watcher</h1>
 <p>In this occasion, we will focus on how Image Watcher works in FluxCD. Image Watcher consists of two components. They are <strong>Image Reflector Controller</strong> and <strong>Image Automation Controller</strong>. Both have their own tasks in order to automate the flow of automatic deployment whenever some particular images are pushed to the image registry. Take a quick look at the diagram below:</p>
 <p><img src="/images/flux-image-watcher/1.png" alt="main picture" title="main picture"></p>
@@ -251,7 +251,7 @@ spec:
 <p class="first notice-title"><span class="icon-notice baseline"><svg><use href="#note-notice"></use></svg></span>Note</p><p>Marker is required to trigger the ImageAutomation to work.</p></div>
 
 <h1 id="how-to-work-with-image-watcher">How to work with Image Watcher</h1>
-<p>Image Watcher plays an important role to make the deployment runs automatically and gives us the benefit of a more seamless process from CI (Continous Integration) to CD (Continous Deployment). Actually, by implementing Image Watcher we want to minimize manual processes that should be better if it’s automated. If the preceding process still involves a manual touch which is changing the image version directly to the manifest, after implementing Image Watcher we actually try to eliminate that manual process and let the Image Watcher does it. The diagram below may depict how it will work:</p>
+<p>Image Watcher plays an important role to make the deployment runs automatically and gives us the benefit of a more seamless process from CI (Continuous Integration) to CD (Continuous Deployment). Actually, by implementing Image Watcher we want to minimize manual processes that should be better if it’s automated. If the preceding process still involves a manual touch which is changing the image version directly to the manifest, after implementing Image Watcher we actually try to eliminate that manual process and let the Image Watcher does it. The diagram below may depict how it will work:</p>
 <p><img src="/images/flux-image-watcher/4.png" alt="Image Automation" title="Image Automation"></p>
 <p><strong>Descriptions:</strong></p>
 <ul>
