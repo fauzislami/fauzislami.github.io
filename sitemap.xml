@@ -3,27 +3,36 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://fauzislami.github.io/categories/blog/</loc>
-    <lastmod>2022-11-01T13:31:39+07:00</lastmod>
+    <lastmod>2023-02-01T10:25:36+07:00</lastmod>
   </url><url>
     <loc>https://fauzislami.github.io/</loc>
-    <lastmod>2022-11-01T13:31:39+07:00</lastmod>
+    <lastmod>2023-02-01T10:25:36+07:00</lastmod>
   </url><url>
     <loc>https://fauzislami.github.io/categories/</loc>
-    <lastmod>2022-11-01T13:31:39+07:00</lastmod>
+    <lastmod>2023-02-01T10:25:36+07:00</lastmod>
   </url><url>
-    <loc>https://fauzislami.github.io/blog/pod-topology-spread-constraints/</loc>
-    <lastmod>2022-11-01T13:31:39+07:00</lastmod>
+    <loc>https://fauzislami.github.io/tags/flux/</loc>
+    <lastmod>2023-02-01T10:25:36+07:00</lastmod>
+  </url><url>
+    <loc>https://fauzislami.github.io/blog/fluxcd-image-watcher/</loc>
+    <lastmod>2023-02-01T10:25:36+07:00</lastmod>
+  </url><url>
+    <loc>https://fauzislami.github.io/tags/iac/</loc>
+    <lastmod>2023-02-01T10:25:36+07:00</lastmod>
   </url><url>
     <loc>https://fauzislami.github.io/categories/infrastructure/</loc>
-    <lastmod>2022-11-01T13:31:39+07:00</lastmod>
+    <lastmod>2023-02-01T10:25:36+07:00</lastmod>
   </url><url>
     <loc>https://fauzislami.github.io/tags/kubernetes/</loc>
-    <lastmod>2022-11-01T13:31:39+07:00</lastmod>
+    <lastmod>2023-02-01T10:25:36+07:00</lastmod>
   </url><url>
     <loc>https://fauzislami.github.io/posts/</loc>
-    <lastmod>2022-11-01T13:31:39+07:00</lastmod>
+    <lastmod>2023-02-01T10:25:36+07:00</lastmod>
   </url><url>
     <loc>https://fauzislami.github.io/tags/</loc>
+    <lastmod>2023-02-01T10:25:36+07:00</lastmod>
+  </url><url>
+    <loc>https://fauzislami.github.io/blog/pod-topology-spread-constraints/</loc>
     <lastmod>2022-11-01T13:31:39+07:00</lastmod>
   </url><url>
     <loc>https://fauzislami.github.io/tags/golang/</loc>
@@ -61,9 +70,6 @@
   </url><url>
     <loc>https://fauzislami.github.io/categories/lesson-learned/</loc>
     <lastmod>2022-02-18T04:57:55+00:00</lastmod>
-  </url><url>
-    <loc>https://fauzislami.github.io/tags/iac/</loc>
-    <lastmod>2022-02-06T09:50:38+00:00</lastmod>
   </url><url>
     <loc>https://fauzislami.github.io/blog/2022/02/06/immutable-infrastructure-treating-servers-like-cattle-does-it-sound-ridiculous/</loc>
     <lastmod>2022-02-06T09:50:38+00:00</lastmod>

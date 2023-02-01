@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        :root {
+            --accent-color: #FF4D4D;
+        }
+    </style>
+
+    
+    
+    
+    
+    
+    
+
+    
+    <title>FluxCD: Image Watcher</title>
+    <meta name="description" content="/home/fauzislami/blog">
+    <meta name="keywords" content='blog, gokarna, hugo, Kubernetes, Flux, IaC'>
+
+    <meta property="og:url" content="https://fauzislami.github.io/blog/fluxcd-image-watcher/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="FluxCD: Image Watcher">
+    <meta property="og:description" content="/home/fauzislami/blog">
+    <meta property="og:image" content="/images/logo-blog-oji.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="FluxCD: Image Watcher">
+    <meta name="twitter:description" content="/home/fauzislami/blog">
+    <meta property="twitter:domain" content="https://fauzislami.github.io/blog/fluxcd-image-watcher/">
+    <meta property="twitter:url" content="https://fauzislami.github.io/blog/fluxcd-image-watcher/">
+    <meta name="twitter:image" content="/images/logo-blog-oji.png">
+
+    
+    <link rel="canonical" href="https://fauzislami.github.io/blog/fluxcd-image-watcher/" />
+
+    <link rel="stylesheet" type="text/css" href="/css/normalize.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link disabled id="dark-theme" rel="stylesheet" href="/css/dark.css">
+
+    <script src="/js/svg-injector.min.js"></script>
+    <script src="/js/feather-icons.min.js"></script>
+    <script src="/js/main.js"></script>
+
+    
+    
+        <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.16/dist/katex.min.css" integrity="sha384-6LkG2wmY8FK9E0vU9OOr8UvLwsaqUg9SETfpq4uTCN1agNe8HRdE9ABlk+fVx6gZ" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.16/dist/katex.min.js" integrity="sha384-31El76TwmbHj4rF9DyLsygbq6xoIobG0W+jqXim+a3dU9W53tdH3A/ngRPxOzzaB" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.16/dist/contrib/auto-render.min.js" integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+  
+    
+</head>
+<body>
+        <script type="text/javascript">
+            
+            setThemeByUserPref();
+        </script><header class="header">
+    <nav class="header-nav">
+
+        
+        <div class="avatar">
+            <a href="https://fauzislami.github.io/">
+                <img src="/images/logo-blog-oji.png" alt="avatar" />
+            </a>
+        </div>
+        
+
+        <div class="nav-title">
+            <a class="nav-brand" href="https://fauzislami.github.io/">Blog · Muhammad Fauzi Islami</a>
+        </div>
+
+        <div class="nav-links">
+            
+            <div class="nav-link">
+                <a href="/"> Home </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="/posts/"> Posts </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="/thoughts/"> Thoughts </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="https://about.me/fauzislami"> About Me </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="/tags/"> Tags </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="https://github.com/fauzislami"><span data-feather='github'></span>  </a>
+            </div>
+            
+
+            <span class="nav-icons-divider"></span>
+            <div class="nav-link dark-theme-toggle">
+                <a>
+                    <span id="theme-toggle-icon" data-feather="moon"></span>
+                </a>
+            </div>
+
+            <div class="nav-link" id="hamburger-menu-toggle">
+                <a>
+                    <span data-feather="menu"></span>
+                </a>
+            </div>
+
+            
+            <ul class="nav-hamburger-list visibility-hidden">
+                
+                <li class="nav-item">
+                    <a href="/"> Home </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="/posts/"> Posts </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="/thoughts/"> Thoughts </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="https://about.me/fauzislami"> About Me </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="/tags/"> Tags </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="https://github.com/fauzislami"><span data-feather='github'></span>  </a>
+                </li>
+                
+                <li class="nav-item dark-theme-toggle">
+                    <a>
+                        <span id="theme-toggle-icon" data-feather="moon"></span>
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+</header>
+<main id="content">
+    <div class="post container">
+
+    <div class="post-header-section">
+        <h1>FluxCD: Image Watcher</h1>
+        <small role="doc-subtitle"></small>
+        <p class="post-date">
+            February 1, 2023
+        </p>
+
+        <ul class="post-tags">
+        
+            <li class="post-tag"><a href="/tags/kubernetes">Kubernetes</a></li>
+        
+            <li class="post-tag"><a href="/tags/flux">Flux</a></li>
+        
+            <li class="post-tag"><a href="/tags/iac">IaC</a></li>
+        
+        </ul>
+    </div>
+
+    <div class="post-content">
+        <p>
+            <p>This time I want to bring up a cool GitOps tool beside ArgoCD named <a href="https://fluxcd.io/"><strong>FluxCD</strong></a>. But I won&rsquo;t discuss about what it is and the comparison between ArgoCD and FluxCD just yet. Instead, I find FluxCD has a cool feature of many features it provides which I don&rsquo;t find this in ArgoCD (at least as the time as I write this topic). Probably, the introduction topic of FluxCD itself is worth having later on and it&rsquo;s generally similar to ArgoCD as both work in the same area for Continous Deployment. But yet again, now let&rsquo;s have a go with one of its sophisticated feature 😄</p>
+<h1 id="about-image-watcher">About Image Watcher</h1>
+<p>In this occasion, we will focus on how Image Watcher works in FluxCD. Image Watcher consists of two components. They are <strong>Image Reflector Controller</strong> and <strong>Image Automation Controller</strong>. Both have their own tasks in order to automate the flow of automatic deployment whenever some particular images are pushed to the image registry. Take a quick look at the diagram below:</p>
+<p><img src="/images/flux-image-watcher/1.png" alt="main picture" title="main picture"></p>
+<p>As depicted on the above picture, the Image Reflector Controller will periodically monitor the image registry to fetch the latest metadata from certain images such as which one has the latest image tag. Afterward, it will get the necessary string format from the metadata that matches the pattern we define for the image, and then Image Automation will use that string format to get written in the repository. Finally, that change should be applied to the cluster as FluxCD continuously monitors the repository. It yields every image that has been pushed to the image registry which will affect the service deployment to be rolled out in a matter of minutes.</p>
+<p>Since FluxCD is a Continuous Deployment solution tool for Kubernetes, it has some of its own object resources that should be applied after FluxCD installation, including Image Watcher. Regarding the Image Watcher object resources, they consist of:</p>
+<h2 id="image-repository">Image Repository</h2>
+<p>Here we define the image registry we want the Image Reflector monitor to. For instance:</p>
+<pre tabindex="0"><code>apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImageRepository
+metadata:
+  name: &lt;APP_NAME&gt;
+  namespace: &lt;NS_NAME&gt;
+spec:
+  image: &lt;IMAGE&gt;
+  interval: 1m0s
+  secretRef:
+    name: &lt;CREDENTIAL_SECRET&gt;
+</code></pre><p>It means, we want the Image Reflector to monitor an image in every minute.</p>
+<h2 id="image-policy">Image Policy</h2>
+<p>In a nutshell, we can define a rule for selecting the latest image from the scan result from ImageRepository. It’s used to drive the automation that will be done by Image Automation Controller. For instance:</p>
+<pre tabindex="0"><code>apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImagePolicy
+metadata:
+  name: &lt;POLICY_NAME&gt;
+  namespace: &lt;NS_NAME&gt;
+spec:
+  imageRepositoryRef:
+    name: &lt;IMAGE_REPOSITORY_NAME&gt;
+  filterTags:
+    pattern: ^v(?P&lt;ver&gt;(\d+\.)?(\d+\.)?(\*|\d+))-[a-fA-F0-9]+.*-&lt;NS_NAME&gt;
+    extract: &quot;$ver&quot;
+  policy:
+    semver:
+      range: '&gt;=1.0.0'
+</code></pre><p>It means, we want the Image Reflector to fetch the tag of the image as we can see in the above definition. It filters out the latest image tag that has been pushed to the image registry with a pattern like this: ^v(?P<!-- raw HTML omitted -->(\d+.)?(\d+.)?(*|\d+))-[a-fA-F0-9]+.*-&lt;NS_NAME&gt; and that would be matched with the image tag like <em><strong>v1.20.1-356340cv1cd16eetty670di854abm467agsbn-test-&lt;NS_NAME&gt;</strong></em>.</p>
+<p>Notice the extracted group ?P<!-- raw HTML omitted --> in the regex. This value will be extracted into group $ver and will be used by flux in semantic version policy defined earlier to find and matches the latest image.</p>
+<p><img src="/images/flux-image-watcher/3.png" alt="regex" title="regex"></p>
+<p>We can adjust the FilterTags pattern to match our needs. Before applying policies in-cluster, we can validate our filters using a regex tester such as: <a href="https://regex101.com/">regex101</a></p>
+<style type="text/css">.notice{padding:18px;line-height:24px;margin-bottom:24px;border-radius:4px;color:#444;background:#e7f2fa}.notice p:last-child{margin-bottom:0}.notice-title{margin:-18px -18px 12px;padding:4px 18px;border-radius:4px 4px 0 0;font-weight:700;color:#fff;background:#6ab0de}.notice.warning .notice-title{background:rgba(217,83,79,.9)}.notice.warning{background:#fae2e2}.notice.info .notice-title{background:#f0b37e}.notice.info{background:#fff2db}.notice.note .notice-title{background:#6ab0de}.notice.note{background:#e7f2fA}.notice.tip .notice-title{background:rgba(92,184,92,.8)}.notice.tip{background:#e6f9e6}.icon-notice{display:inline-flex;align-self:center;margin-right:8px}.icon-notice img,.icon-notice svg{height:1em;width:1em;fill:currentColor}.icon-notice img,.icon-notice.baseline svg{top:0.125em;position:relative}</style>
+<div><svg width="0" height="0" display="none" xmlns="http://www.w3.org/2000/svg"><symbol id="tip-notice" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"/></symbol><symbol id="note-notice" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet"><path d="M504 256c0 136.997-111.043 248-248 248S8 392.997 8 256C8 119.083 119.043 8 256 8s248 111.083 248 248zm-248 50c-25.405 0-46 20.595-46 46s20.595 46 46 46 46-20.595 46-46-20.595-46-46-46zm-43.673-165.346l7.418 136c.347 6.364 5.609 11.346 11.982 11.346h48.546c6.373 0 11.635-4.982 11.982-11.346l7.418-136c.375-6.874-5.098-12.654-11.982-12.654h-63.383c-6.884 0-12.356 5.78-11.981 12.654z"/></symbol><symbol id="warning-notice" viewBox="0 0 576 512" preserveAspectRatio="xMidYMid meet"><path d="M569.517 440.013C587.975 472.007 564.806 512 527.94 512H48.054c-36.937 0-59.999-40.055-41.577-71.987L246.423 23.985c18.467-32.009 64.72-31.951 83.154 0l239.94 416.028zM288 354c-25.405 0-46 20.595-46 46s20.595 46 46 46 46-20.595 46-46-20.595-46-46-46zm-43.673-165.346l7.418 136c.347 6.364 5.609 11.346 11.982 11.346h48.546c6.373 0 11.635-4.982 11.982-11.346l7.418-136c.375-6.874-5.098-12.654-11.982-12.654h-63.383c-6.884 0-12.356 5.78-11.981 12.654z"/></symbol><symbol id="info-notice" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet"><path d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z"/></symbol></svg></div><div class="notice note" >
+<p class="first notice-title"><span class="icon-notice baseline"><svg><use href="#note-notice"></use></svg></span>Note</p><p>In this example we define the range &lsquo;&gt;=1.0.0&rsquo;, so flux will fetch the latest image version that are newer or same as 1.0.0</p></div>
+
+<p>We can also adjust the semver range based on our needs, for example it can be define with 1.0.x (patch versions only) or &gt;=1.0.0 &lt;2.0.0 (minor and patch versions). Please have a look at fluxcd documentation for the other policy <a href="https://fluxcd.io/docs/components/image/imagepolicies/#examples">examples</a>.</p>
+<h2 id="image-update-automation">Image Update Automation</h2>
+<p>It contains the configuration for how Image Automation Controller behaves to automate the image tag replacement in the git repository according to what we have defined in the ImagePolicy object. And the most important thing regarding this ImageUpdateAutomation, it’s used by the ImagePolicy marker in order to work. For instance:</p>
+<pre tabindex="0"><code>apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImageUpdateAutomation
+metadata:
+  name: &lt;APP_NAME&gt;
+  namespace: &lt;NS_NAME&gt;
+spec:
+  interval: 1m0s
+  sourceRef:
+    kind: GitRepository
+    name: &lt;GIT_REPO_NAME&gt;
+  git:
+    checkout:
+      ref:
+        branch: master
+    commit:
+      author:
+        email: fluxcdbot@fauzislami.com
+        name: fluxcdbot
+      messageTemplate: &quot;{{range .Updated.Images}}{{println .}}{{end}}&quot;
+    push:
+      branch: master
+  update:
+    path: ./${CUSTOMER_NAME}/${PROJECT_NAME}/${ENVIRONMENT_NAME}/tenants/&lt;NS_NAME&gt;
+    strategy: Setters
+</code></pre><p>The pathand the marker should look like below:</p>
+<pre tabindex="0"><code>APP_VERSION: v1.20.1-356340cv1cd16eetty670di854abm467agsbn-test-&lt;NS_NAME&gt; # {&quot;$imagepolicy&quot;: &quot;&lt;APP_NAME&gt;:&lt;IMAGE_POLICY_NAME&gt;:tag&quot;}
+</code></pre><p>The updates are governed by marking fields to be updated in certain YAML files. For each marked field, the automation process will check the image policy name and update the field value if there is a new image matches with the policy. It means, we want the Image Automation Controller to update the selected image with the latest tag to the git repository whenever it matches the policy.</p>
+<div class="notice note" >
+<p class="first notice-title"><span class="icon-notice baseline"><svg><use href="#note-notice"></use></svg></span>Note</p><p>Marker is required to trigger the ImageAutomation to work.</p></div>
+
+<h1 id="how-to-work-with-image-watcher">How to work with Image Watcher</h1>
+<p>Image Watcher plays an important role to make the deployment runs automatically and gives us the benefit of a more seamless process from CI (Continous Integration) to CD (Continous Deployment). Actually, by implementing Image Watcher we want to minimize manual processes that should be better if it’s automated. If the preceding process still involves a manual touch which is changing the image version directly to the manifest, after implementing Image Watcher we actually try to eliminate that manual process and let the Image Watcher does it. The diagram below may depict how it will work:</p>
+<p><img src="/images/flux-image-watcher/4.png" alt="Image Automation" title="Image Automation"></p>
+<p><strong>Descriptions:</strong></p>
+<ul>
+<li><strong>CI Pipeline</strong>: Push Image</li>
+</ul>
+<p>Container Image is the final output of the CI process and it will be immediately stored in Image Registry.</p>
+<ul>
+<li><strong>Image Reflector</strong>: Scan Registry</li>
+</ul>
+<p>Image Reflector Controller keeps monitoring the target Image, fetches its latest metadata, and only picks the tag version.</p>
+<ul>
+<li><strong>Image Automation</strong>: Overwrite Image Tag</li>
+</ul>
+<p>Image Automation Controller will then take the tag version from Image Reflector Controller and use it to replace the old image tag of the manifest that resides on the Repository.</p>
+<ul>
+<li><strong>Source Controller</strong>: Reconcile with Repo</li>
+</ul>
+<p>Source Controller periodically reconciles with the Repository and the new deployment will occur eventually.</p>
+<h1 id="create-image-repository">Create Image Repository</h1>
+<p>To create an Image Repository definition, follow the command below:</p>
+<pre tabindex="0"><code>flux create image repository &lt;IMAGE_REPOSITORY_NAME&gt; \
+--namespace=&lt;NAMESPACE&gt;
+--image=&lt;IMAGE_REPOSITORY/IMAGE_NAME:TAG&gt; \                                   
+--interval=&lt;TIME&gt; \            
+--secret-ref=&lt;SECRET&gt;              
+--export &gt;&gt; &lt;PATH/TO/SERVICE_DEPLOYMENT&gt;
+</code></pre><p><strong>Descriptions:</strong></p>
+<ul>
+<li>
+<p><strong>IMAGE_REPOSITORY_NAME</strong> = the Image Repository name of each service. Example: test-website.</p>
+</li>
+<li>
+<p><strong>NAMESPACE</strong> = the namespace of Image Repository object will reside.</p>
+</li>
+<li>
+<p><strong>IMAGE_REPOSITORY/IMAGE_NAME:TAG</strong> = the target image of each service. Example: 12345678.dckr.ecr.us-west-2.amazonaws.com/test-website.</p>
+</li>
+<li>
+<p><strong>TIME</strong> = the interval at which the metadata of the defined Image Repository must be fetched. <strong>Default</strong>: 1m0s. Example: 1m0s, which means Image Reflector will fetch the metadata in every minute. ( The value must be in a <a href="https://pkg.go.dev/time#ParseDuration">Go recognized duration string format</a> ).</p>
+</li>
+<li>
+<p><strong>SECRET</strong> = the name of a registry secret to be used for authentication.</p>
+</li>
+<li>
+<p><strong>PATH/TO/SERVICE_DEPLOYMENT</strong> = in order to prevent a bunch of unnecessary new files, it&rsquo;s better to append the Image Repository definition in each service deployment.</p>
+</li>
+</ul>
+<p><strong>Example output:</strong></p>
+<pre tabindex="0"><code>---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImageRepository
+metadata:
+  name: test-website
+  namespace: testing
+spec:
+  image: 12345678.dckr.ecr.us-west-2.amazonaws.com/test-website
+  interval: 1m0s
+  secretRef:
+    name: imagerepo-credentials
+</code></pre><h1 id="create-image-policy">Create Image Policy</h1>
+<p>To create an Image Policy definition, follow the command below:</p>
+<pre tabindex="0"><code>flux create image policy &lt;IMAGE_POLICY_NAME&gt; \
+--namespace=&lt;NAMESPACE&gt;
+--image-ref=&lt;IMAGE_REPOSITORY_REF&gt; \
+--select-semver=&lt;SEMVER&gt; \
+--filter-regex=&lt;REGEX&gt; \
+--filter-extract=&lt;EXTRACT&gt; \
+--export &gt;&gt; &lt;PATH/TO/SERVICE_DEPLOYMENT&gt;
+
+</code></pre><p><strong>Descriptions:</strong></p>
+<ul>
+<li>
+<p><strong>IMAGE_POLICY_NAME</strong> = the Image Policy name of each service. Example: test-website-policy</p>
+</li>
+<li>
+<p><strong>NAMESPACE</strong> = the namespace of Image Policy object will reside.</p>
+</li>
+<li>
+<p><strong>IMAGE_REPOSITORY_REF</strong> = the Image Repository that Image Policy refers to. Example: test-website</p>
+</li>
+<li>
+<p><strong>SEMVER</strong> = a semver (semantic version) range to apply to tags. Example: &gt;=1.0.0.</p>
+</li>
+<li>
+<p><strong>REGEX</strong> = a regular expression pattern used to filter the image tags. Example: ^v(?P<!-- raw HTML omitted -->(\d+.)?(\d+.)?(*|\d+))-[a-fA-F0-9]+.*-&lt;NS_NAME&gt;.</p>
+</li>
+<li>
+<p><strong>EXTRACT</strong> = replacement pattern (using capture groups from &ndash;filter-regex) to use for sorting. Example: $ver, take a look at the example in REGEX.</p>
+</li>
+<li>
+<p><strong>PATH/TO/SERVICE_DEPLOYMENT</strong> = in order to prevent a bunch of unnecessary new files, we prefer to append the Image Policy definition in each service deployment.</p>
+</li>
+</ul>
+<p><strong>Example output:</strong></p>
+<pre tabindex="0"><code>---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImagePolicy
+metadata:
+  name: test-website-policy
+  namespace: testing
+spec:
+  imageRepositoryRef:
+    name: test-website
+  filterTags:
+    pattern: ^v(?P&lt;ver&gt;(\d+\.)?(\d+\.)?(\*|\d+))-[a-fA-F0-9]+.*-testing
+    extract: &quot;$ver&quot;
+  policy:
+    semver:
+      range: '&gt;=1.0.0'
+</code></pre><h1 id="create-image-update-automation">Create Image Update Automation</h1>
+<p>To create an Image Update Automation definition, follow the command below:</p>
+<pre tabindex="0"><code>flux create image update &lt;IMAGE_UPDATE_AUTOMATION_NAME&gt; \
+--namespace=&lt;NAMESPACE&gt;
+--git-repo-ref=&lt;REPOSITORY_REF&gt; \
+--git-repo-path=&lt;REPOSITORY_PATH&gt; \
+--checkout-branch=&lt;CHECKOUT_BRANCH&gt; \
+--push-branch=&lt;PUSH_BRANCH&gt; \
+--author-name=&lt;AUTHOR_NAME&gt; \
+--author-email=&lt;AUTHOR_EMAIL&gt; \
+--commit-template=&lt;MESSAGE&gt; \
+--interval=&lt;TIME&gt; \
+--export &gt;&gt; &lt;PATH/TO/SERVICE_DEPLOYMENT&gt;
+</code></pre><ul>
+<li>
+<p><strong>IMAGE_UPDATE_AUTOMATION_NAME</strong> = the Image Update Automation name of each service. Example: test-website.</p>
+</li>
+<li>
+<p><strong>NAMESPACE</strong> = namespace the Image Update Automation object will reside.</p>
+</li>
+<li>
+<p><strong>REPOSITORY_REF</strong> = the name of a GitRepository resource with details of the upstream Git repository. Example: deployments-repo.</p>
+</li>
+<li>
+<p><strong>REPOSITORY_PATH</strong> = path to the directory containing the manifests to be updated. Defaults to the repository root.</p>
+</li>
+<li>
+<p><strong>CHECKOUT_BRANCH</strong> = the branch to checkout. Example: master.</p>
+</li>
+<li>
+<p><strong>PUSH_BRANCH</strong> = the branch to push commits to. Defaults to the checkout branch if not specified. Example: master.</p>
+</li>
+<li>
+<p><strong>AUTHOR_NAME</strong> = the name to use for committing. Example: fluxcdbot.</p>
+</li>
+<li>
+<p><strong>AUTHOR_EMAIL</strong> = the email to use for committing. Example: <a href="mailto:fluxcdbot@fauzislami.com">fluxcdbot@fauzislami.com</a>.</p>
+</li>
+<li>
+<p><strong>MESSAGE</strong> = a template for commit messages. Example: &ldquo;{{range .Updated.Images}}{{println .}}{{end}}&rdquo;.</p>
+</li>
+<li>
+<p><strong>TIME</strong> = source sync interval. Default: 1m0s. Example: 1m0s ( The value must be in a <a href="https://pkg.go.dev/time#ParseDuration">Go recognized duration string format</a> ).</p>
+</li>
+<li>
+<p><strong>PATH/TO/SERVICE_DEPLOYMENT</strong> = in order to prevent a bunch of unnecessary new files, we prefer to append the Image Update Automation definition in each service deployment.</p>
+</li>
+</ul>
+<p><strong>Example output:</strong></p>
+<pre tabindex="0"><code>---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImageUpdateAutomation
+metadata:
+  name: test-website
+  namespace: testing
+spec:
+  interval: 1m0s
+  sourceRef:
+    kind: GitRepository
+    name: deployments-repo
+  git:
+    checkout:
+      ref:
+        branch: master
+    commit:
+      author:
+        email: fluxcdbot@fauzislami.com
+        name: fluxcdbot
+      messageTemplate: &quot;{{range .Updated.Images}}{{println .}}{{end}}&quot;
+    push:
+      branch: master
+  update:
+    path: ./${CUSTOMER_NAME}/${PROJECT_NAME}/${ENVIRONMENT_NAME}/tenants/testing
+    strategy: Setters
+
+</code></pre>
+        </p>
+    </div>
+</div>
+
+
+
+    
+
+        </main><footer class="footer">
+    <span>&copy; 2023 Fauzi Islami</span>
+</footer>
+</body>
+</html>
