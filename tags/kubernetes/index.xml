@@ -6,7 +6,17 @@
     <description>Recent content in Kubernetes on Blog · Muhammad Fauzi Islami</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 01 Feb 2023 10:25:36 +0700</lastBuildDate><atom:link href="https://fauzislami.github.io/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 27 Feb 2023 11:26:52 +0700</lastBuildDate><atom:link href="https://fauzislami.github.io/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>K8S-thing: How Linux Namespace Plays a Role in Kubernetes</title>
+      <link>https://fauzislami.github.io/blog/k8s-thing-how-linux-namespace-Plays-a-role-in-Kubernetes/</link>
+      <pubDate>Mon, 27 Feb 2023 11:26:52 +0700</pubDate>
+      
+      <guid>https://fauzislami.github.io/blog/k8s-thing-how-linux-namespace-Plays-a-role-in-Kubernetes/</guid>
+      <description>Linux Network Namespace Before we look into how Linux Network Namespace works in Kubernetes Pod, we need to know from the basic what it is and what the purpose of it. Network namespace in linux provides an isolated system resources associated with networking-related stuff within a single host such as IP (Internet Protocol) either it is IPv4 or IPv6, NAT rules, firewall rules, and routing table.
+Let&amp;rsquo;s imagine you are a parent who have children and live in a house.</description>
+    </item>
+    
     <item>
       <title>FluxCD: Image Watcher</title>
       <link>https://fauzislami.github.io/blog/fluxcd-image-watcher/</link>

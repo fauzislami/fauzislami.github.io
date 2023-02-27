@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        :root {
+            --accent-color: #FF4D4D;
+        }
+    </style>
+
+    
+    
+    
+    
+    
+    
+
+    
+    <title>K8S-thing: How Linux Namespace Plays a Role in Kubernetes</title>
+    <meta name="description" content="/home/fauzislami/blog">
+    <meta name="keywords" content='blog, gokarna, hugo, Kubernetes, K8S-thing'>
+
+    <meta property="og:url" content="https://fauzislami.github.io/blog/k8s-thing-how-linux-namespace-Plays-a-role-in-Kubernetes/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="K8S-thing: How Linux Namespace Plays a Role in Kubernetes">
+    <meta property="og:description" content="/home/fauzislami/blog">
+    <meta property="og:image" content="/images/logo-blog-oji.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="K8S-thing: How Linux Namespace Plays a Role in Kubernetes">
+    <meta name="twitter:description" content="/home/fauzislami/blog">
+    <meta property="twitter:domain" content="https://fauzislami.github.io/blog/k8s-thing-how-linux-namespace-Plays-a-role-in-Kubernetes/">
+    <meta property="twitter:url" content="https://fauzislami.github.io/blog/k8s-thing-how-linux-namespace-Plays-a-role-in-Kubernetes/">
+    <meta name="twitter:image" content="/images/logo-blog-oji.png">
+
+    
+    <link rel="canonical" href="https://fauzislami.github.io/blog/k8s-thing-how-linux-namespace-Plays-a-role-in-Kubernetes/" />
+
+    <link rel="stylesheet" type="text/css" href="/css/normalize.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link disabled id="dark-theme" rel="stylesheet" href="/css/dark.css">
+
+    <script src="/js/svg-injector.min.js"></script>
+    <script src="/js/feather-icons.min.js"></script>
+    <script src="/js/main.js"></script>
+
+    
+    
+        <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.16/dist/katex.min.css" integrity="sha384-6LkG2wmY8FK9E0vU9OOr8UvLwsaqUg9SETfpq4uTCN1agNe8HRdE9ABlk+fVx6gZ" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.16/dist/katex.min.js" integrity="sha384-31El76TwmbHj4rF9DyLsygbq6xoIobG0W+jqXim+a3dU9W53tdH3A/ngRPxOzzaB" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.16/dist/contrib/auto-render.min.js" integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+  
+    
+</head>
+<body>
+        <script type="text/javascript">
+            
+            setThemeByUserPref();
+        </script><header class="header">
+    <nav class="header-nav">
+
+        
+        <div class="avatar">
+            <a href="https://fauzislami.github.io/">
+                <img src="/images/logo-blog-oji.png" alt="avatar" />
+            </a>
+        </div>
+        
+
+        <div class="nav-title">
+            <a class="nav-brand" href="https://fauzislami.github.io/">Blog · Muhammad Fauzi Islami</a>
+        </div>
+
+        <div class="nav-links">
+            
+            <div class="nav-link">
+                <a href="/"> Home </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="/posts/"> Posts </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="/thoughts/"> Thoughts </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="https://about.me/fauzislami"> About Me </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="/tags/"> Tags </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="https://github.com/fauzislami"><span data-feather='github'></span>  </a>
+            </div>
+            
+
+            <span class="nav-icons-divider"></span>
+            <div class="nav-link dark-theme-toggle">
+                <a>
+                    <span id="theme-toggle-icon" data-feather="moon"></span>
+                </a>
+            </div>
+
+            <div class="nav-link" id="hamburger-menu-toggle">
+                <a>
+                    <span data-feather="menu"></span>
+                </a>
+            </div>
+
+            
+            <ul class="nav-hamburger-list visibility-hidden">
+                
+                <li class="nav-item">
+                    <a href="/"> Home </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="/posts/"> Posts </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="/thoughts/"> Thoughts </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="https://about.me/fauzislami"> About Me </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="/tags/"> Tags </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="https://github.com/fauzislami"><span data-feather='github'></span>  </a>
+                </li>
+                
+                <li class="nav-item dark-theme-toggle">
+                    <a>
+                        <span id="theme-toggle-icon" data-feather="moon"></span>
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+</header>
+<main id="content">
+    <div class="post container">
+
+    <div class="post-header-section">
+        <h1>K8S-thing: How Linux Namespace Plays a Role in Kubernetes</h1>
+        <small role="doc-subtitle"></small>
+        <p class="post-date">
+            February 27, 2023
+        </p>
+
+        <ul class="post-tags">
+        
+            <li class="post-tag"><a href="/tags/kubernetes">Kubernetes</a></li>
+        
+            <li class="post-tag"><a href="/tags/k8s-thing">K8S-thing</a></li>
+        
+        </ul>
+    </div>
+
+    <div class="post-content">
+        <p>
+            <h1 id="linux-network-namespace">Linux Network Namespace</h1>
+<p>Before we look into how Linux Network Namespace works in Kubernetes Pod, we need to know from the basic what it is and what the purpose of it. Network namespace in linux provides an isolated system resources associated with networking-related stuff within a single host such as IP (Internet Protocol) either it is IPv4 or IPv6, NAT rules, firewall rules, and routing table.</p>
+<p><img src="/images/k8s-thing-how-namespace-work-in-pod/host.png" alt="main picture" title="main picture"></p>
+<p>Let&rsquo;s imagine you are a parent who have children and live in a house. Take the computer host as a house and namespaces are rooms within that house. You assign those rooms to each of your children. They have their own privacy, so each child can only see what&rsquo;s within his or her room and they can&rsquo;t see what happens outside their room. However, as a parent you have a visibility to all rooms in the house. If you wish, you can visit each room.</p>
+<h1 id="how-linux-namespace-plays-a-role-in-kubernetes">How Linux Namespace Plays a Role in Kubernetes</h1>
+<p>Hopefully, the previous explanation is good enough for us to understand what Namespace does in System Operation level. Now we&rsquo;re gonna be paying more attention on how Namespace plays an essential role in Kubernetes. Basically, containers we deploy to Kubernetes are making use of Namespace ability to separate process/make logical space and network from the underlying host. I would say Kubernetes consists of a bunch of namespaces within containers it orchestrates over time. Therefore, from now we may understand that the &ldquo;container&rdquo; term we usually hear nowadays isn&rsquo;t a standalone entity that making up (potentially) multiple processes into a single separated process within a host, yet it utilizes Namespace to do that isolation and package it up to a blueprint (a.k.a container images). Afterward, we may use it anywhere as long as there is container runtime, it could be docker, containerd, cri-o, and so on. Up to this point, we may think of the network namespace is like taking the physical network interface and then slicing it into smaller independent parts.</p>
+<p>Here I put a Pod manifest that contains multiple containers as an example:</p>
+<pre tabindex="0"><code>apiVersion: v1
+kind: Pod
+metadata:
+  name: multi-containers-pod
+spec:
+  containers:
+    - name: container-1
+      image: busybox
+      command: ['/bin/sh', '-c', 'sleep 1d']
+    - name: container-2
+      image: nginx
+</code></pre><p><em>What will happen when it gets deployed?</em></p>
+<p>The following things happen:</p>
+<ul>
+<li>The pod gains its own network namespace on the node</li>
+<li>The pod will then be assigned with an IP Address. The IP Address will be shared between those two containers except the port where each container is running on.</li>
+<li>Since both containers are sharing the same networking namespace, they can communicate with each other as they live in the same Pod (localhost-alike concept)</li>
+</ul>
+<p>All packets will be sent to the physical interface in the end, as such, it&rsquo;s also responsible to create a virtual interface that will be used by all namespaces to talk to.</p>
+<p>Let&rsquo;s have a look to the following illustration:</p>
+<ol>
+<li><img src="/images/k8s-thing-how-namespace-work-in-pod/1.png" alt="1" title="1"></li>
+</ol>
+<p>See that the physical network interface has the root Network Namespace</p>
+<ol start="2">
+<li><img src="/images/k8s-thing-how-namespace-work-in-pod/2.png" alt="2" title="2"></li>
+</ol>
+<p>It depicts the Network Namespaces can create isolated networks. Each of them is independent and not able to communicate with each other unless we desire to.</p>
+<ol start="3">
+<li><img src="/images/k8s-thing-how-namespace-work-in-pod/3.png" alt="3" title="3"></li>
+</ol>
+<p>When we create a Pod, the container runtime will create a Network Namespace for containers to use.</p>
+<ol start="4">
+<li><img src="/images/k8s-thing-how-namespace-work-in-pod/4.png" alt="4" title="4"></li>
+</ol>
+<p>After that, The <a href="https://github.com/containernetworking/cni">CNI</a> assigns the Pod an IP Address</p>
+<ol start="5">
+<li><img src="/images/k8s-thing-how-namespace-work-in-pod/5.png" alt="5" title="5">
+As the final step, CNI will immediately attach that container to the whole network by establishing a connection to root Network Namespace through Virtual Interface</li>
+</ol>
+<p>Probably, you&rsquo;re still wondering what happens with the node that running namespace and container. I&rsquo;ll try to provide you some information regarding that.</p>
+<p>First thing first, we need to come inside the container by using SSH. But in my case, I&rsquo;ll use <code>docker exec</code> since I&rsquo;m running local kubernetes inside Docker container (see: <a href="https://kind.sigs.k8s.io/docs/user/quick-start/">Kind</a>)</p>
+<ul>
+<li>We can look at some Network Namespaces as listed below:</li>
+</ul>
+<pre tabindex="0"><code>root@k8s-playground-worker:/# ip netns list
+
+cni-d5d2156f-e4aa-9e5c-c8c3-d930d8892f2b (id: 1)
+</code></pre><p>Those list of Network Namespaces can be managed by <code>ip netns</code> utility. From the above output, I did list them to assure that Pod manifest I applied on the prior step was created Namespace in the System Operation level.</p>
+<style type="text/css">.notice{padding:18px;line-height:24px;margin-bottom:24px;border-radius:4px;color:#444;background:#e7f2fa}.notice p:last-child{margin-bottom:0}.notice-title{margin:-18px -18px 12px;padding:4px 18px;border-radius:4px 4px 0 0;font-weight:700;color:#fff;background:#6ab0de}.notice.warning .notice-title{background:rgba(217,83,79,.9)}.notice.warning{background:#fae2e2}.notice.info .notice-title{background:#f0b37e}.notice.info{background:#fff2db}.notice.note .notice-title{background:#6ab0de}.notice.note{background:#e7f2fA}.notice.tip .notice-title{background:rgba(92,184,92,.8)}.notice.tip{background:#e6f9e6}.icon-notice{display:inline-flex;align-self:center;margin-right:8px}.icon-notice img,.icon-notice svg{height:1em;width:1em;fill:currentColor}.icon-notice img,.icon-notice.baseline svg{top:0.125em;position:relative}</style>
+<div><svg width="0" height="0" display="none" xmlns="http://www.w3.org/2000/svg"><symbol id="tip-notice" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"/></symbol><symbol id="note-notice" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet"><path d="M504 256c0 136.997-111.043 248-248 248S8 392.997 8 256C8 119.083 119.043 8 256 8s248 111.083 248 248zm-248 50c-25.405 0-46 20.595-46 46s20.595 46 46 46 46-20.595 46-46-20.595-46-46-46zm-43.673-165.346l7.418 136c.347 6.364 5.609 11.346 11.982 11.346h48.546c6.373 0 11.635-4.982 11.982-11.346l7.418-136c.375-6.874-5.098-12.654-11.982-12.654h-63.383c-6.884 0-12.356 5.78-11.981 12.654z"/></symbol><symbol id="warning-notice" viewBox="0 0 576 512" preserveAspectRatio="xMidYMid meet"><path d="M569.517 440.013C587.975 472.007 564.806 512 527.94 512H48.054c-36.937 0-59.999-40.055-41.577-71.987L246.423 23.985c18.467-32.009 64.72-31.951 83.154 0l239.94 416.028zM288 354c-25.405 0-46 20.595-46 46s20.595 46 46 46 46-20.595 46-46-20.595-46-46-46zm-43.673-165.346l7.418 136c.347 6.364 5.609 11.346 11.982 11.346h48.546c6.373 0 11.635-4.982 11.982-11.346l7.418-136c.375-6.874-5.098-12.654-11.982-12.654h-63.383c-6.884 0-12.356 5.78-11.981 12.654z"/></symbol><symbol id="info-notice" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet"><path d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z"/></symbol></svg></div><div class="notice note" >
+<p class="first notice-title"><span class="icon-notice baseline"><svg><use href="#note-notice"></use></svg></span>Note</p><p>Notice that <code>cni-</code> prefix, that means the Namespace creation has been taken care of by CNI. If a pod contains multiple containers, they will reside in the same namespace.</p></div>
+
+<ul>
+<li>IP Assignment to each Namespaces</li>
+</ul>
+<p>We have seen that each Pod have been assigned an IP Address by the CNI. Here is what we see in Kubernetes User&rsquo;s perspective:</p>
+<pre tabindex="0"><code>➜  test-nginx k get pods -o wide
+#truncated output
+
+ multi-containers-pod  2/2     Running   0          55m   10.244.1.5   k8s-playground-worker   &lt;none&gt;           &lt;none&gt;
+
+</code></pre><p>IP Address <code>10.244.1.5</code> represents the Network Namespace IP Address running on the worker node. Let&rsquo;s prove it!</p>
+<pre tabindex="0"><code>root@k8s-playground-worker:/# ip netns exec cni-1ddde74d-9d1d-ef8c-aaab-919e9237ffcb ip address
+#truncated output
+
+2: eth0@if6: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP group default 
+    link/ether 6e:87:6f:bb:91:c8 brd ff:ff:ff:ff:ff:ff link-netnsid 0
+    inet 10.244.1.5/24 brd 10.244.1.255 scope global eth0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::6c87:6fff:febb:91c8/64 scope link 
+       valid_lft forever preferred_lft forever
+</code></pre><p>Focus on <code>eth0@if6</code>, that&rsquo;s actually a virtual interface for the Pod to be used for establishing network connection to the root Network Namespace. What we just saw here is the underlying stuff of Pod&rsquo;s IP Address that appears when we make an API call against Kubernetes for listing Pods in details. It does verify that the Network Namespace plays an important role in Kubernetes. Hence, we won&rsquo;t think of the container as the only underlying and standalone entity under Kubernetes. Keep in mind that container is the implementation of Network Namespace and not the other way around.</p>
+
+        </p>
+    </div>
+</div>
+
+
+
+    
+
+        </main><footer class="footer">
+    <span>&copy; 2023 Fauzi Islami</span>
+</footer>
+</body>
+</html>
