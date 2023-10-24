@@ -2,10 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://fauzislami.github.io/categories/blog/</loc>
-    <lastmod>2023-02-27T11:26:52+07:00</lastmod>
-  </url><url>
     <loc>https://fauzislami.github.io/</loc>
+    <lastmod>2023-10-24T12:49:56+07:00</lastmod>
+  </url><url>
+    <loc>https://fauzislami.github.io/thoughts/</loc>
+    <lastmod>2023-10-24T12:49:56+07:00</lastmod>
+  </url><url>
+    <loc>https://fauzislami.github.io/thoughts/upon-midst-of-war/</loc>
+    <lastmod>2023-10-24T12:49:56+07:00</lastmod>
+  </url><url>
+    <loc>https://fauzislami.github.io/categories/blog/</loc>
     <lastmod>2023-02-27T11:26:52+07:00</lastmod>
   </url><url>
     <loc>https://fauzislami.github.io/categories/</loc>
@@ -179,8 +185,6 @@
     <loc>https://fauzislami.github.io/tags/ci/cd/</loc>
   </url><url>
     <loc>https://fauzislami.github.io/categories/ci/cd/</loc>
-  </url><url>
-    <loc>https://fauzislami.github.io/thoughts/</loc>
   </url><url>
     <loc>https://fauzislami.github.io/thoughts/trade-off/</loc>
   </url>
