@@ -1,21 +1,3 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Istio on Blog · Muhammad Fauzi Islami</title>
-    <link>https://fauzislami.github.io/tags/istio/</link>
-    <description>Recent content in Istio on Blog · Muhammad Fauzi Islami</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Sun, 01 Aug 2021 12:18:13 +0000</lastBuildDate><atom:link href="https://fauzislami.github.io/tags/istio/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Service Mesh : Istio and Kiali Setup</title>
-      <link>https://fauzislami.github.io/blog/2021/08/01/service-mesh-istio-and-kiali-setup/</link>
-      <pubDate>Sun, 01 Aug 2021 12:18:13 +0000</pubDate>
-      
-      <guid>https://fauzislami.github.io/blog/2021/08/01/service-mesh-istio-and-kiali-setup/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://fauzislami.github.io/images/service-mesh-istio-kiali-setup/1.png&#34; alt=&#34;Scratchpad&#34; title=&#34;Scratchpad&#34;&gt;&lt;/p&gt;
-&lt;p&gt;It’s the first time for me to learn what service mesh is, how it works, and how to start the lab to deep dive on this stuff. In this article, there will be some of my notes about how to install Istio and see the visualization of some microservices that will have been monitored by Istio and I’m going to write it up now.&lt;/p&gt;</description>
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Istio on Blog · Muhammad Fauzi Islami</title><link>https://fauzislami.github.io/tags/istio/</link><description>Recent content in Istio on Blog · Muhammad Fauzi Islami</description><generator>Hugo</generator><language>en</language><lastBuildDate>Sun, 01 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://fauzislami.github.io/tags/istio/index.xml" rel="self" type="application/rss+xml"/><item><title>Service Mesh : Istio and Kiali Setup</title><link>https://fauzislami.github.io/blog/2021/08/01/service-mesh-istio-and-kiali-setup/</link><pubDate>Sun, 01 Aug 2021 00:00:00 +0000</pubDate><guid>https://fauzislami.github.io/blog/2021/08/01/service-mesh-istio-and-kiali-setup/</guid><description>&lt;p&gt;&lt;img src="https://fauzislami.github.io/images/service-mesh-istio-kiali-setup/1.png" alt="Scratchpad" title="Scratchpad"&gt;&lt;/p&gt;
+&lt;p&gt;It’s the first time for me to learn what service mesh is, how it works, and how to start the lab to deep dive on this stuff. In this article, there will be some of my notes about how to install Istio and see the visualization of some microservices that will have been monitored by Istio and I’m going to write it up now.&lt;/p&gt;
+&lt;p&gt;As usual, it would be better if we have good comprehension on what we’re going to learn.&lt;/p&gt;</description></item></channel></rss>

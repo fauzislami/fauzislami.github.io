@@ -1,21 +1,7 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>K8S-thing on Blog · Muhammad Fauzi Islami</title>
-    <link>https://fauzislami.github.io/tags/k8s-thing/</link>
-    <description>Recent content in K8S-thing on Blog · Muhammad Fauzi Islami</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Mon, 27 Feb 2023 11:26:52 +0700</lastBuildDate><atom:link href="https://fauzislami.github.io/tags/k8s-thing/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>K8S-thing: How Linux Namespace Plays a Role in Kubernetes</title>
-      <link>https://fauzislami.github.io/blog/k8s-thing-how-linux-namespace-Plays-a-role-in-Kubernetes/</link>
-      <pubDate>Mon, 27 Feb 2023 11:26:52 +0700</pubDate>
-      
-      <guid>https://fauzislami.github.io/blog/k8s-thing-how-linux-namespace-Plays-a-role-in-Kubernetes/</guid>
-      <description>Linux Network Namespace Before we look into how Linux Network Namespace works in Kubernetes Pod, we need to know from the basic what it is and what the purpose of it. Network namespace in linux provides an isolated system resources associated with networking-related stuff within a single host such as IP (Internet Protocol) either it is IPv4 or IPv6, NAT rules, firewall rules, and routing table.
-Let&amp;rsquo;s imagine you are a parent who have children and live in a house.</description>
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>K8S-Thing on Blog · Muhammad Fauzi Islami</title><link>https://fauzislami.github.io/tags/k8s-thing/</link><description>Recent content in K8S-Thing on Blog · Muhammad Fauzi Islami</description><generator>Hugo</generator><language>en</language><lastBuildDate>Mon, 27 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://fauzislami.github.io/tags/k8s-thing/index.xml" rel="self" type="application/rss+xml"/><item><title>K8S-thing: How Linux Namespace Plays a Role in Kubernetes</title><link>https://fauzislami.github.io/blog/k8s-thing-how-linux-namespace-Plays-a-role-in-Kubernetes/</link><pubDate>Mon, 27 Feb 2023 00:00:00 +0000</pubDate><guid>https://fauzislami.github.io/blog/k8s-thing-how-linux-namespace-Plays-a-role-in-Kubernetes/</guid><description>&lt;h1 id="linux-network-namespace"&gt;Linux Network Namespace&lt;/h1&gt;
+&lt;p&gt;Before we look into how Linux Network Namespace works in Kubernetes Pod, we need to know from the basic what it is and what the purpose of it. Network namespace in linux provides an isolated system resources associated with networking-related stuff within a single host such as IP (Internet Protocol) either it is IPv4 or IPv6, NAT rules, firewall rules, and routing table.&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://fauzislami.github.io/images/k8s-thing-how-namespace-work-in-pod/host.png" alt="main picture" title="main picture"&gt;&lt;/p&gt;
+&lt;p&gt;Let’s imagine you are a parent who have children and live in a house. Take the computer host as a house and namespaces are rooms within that house. You assign those rooms to each of your children. They have their own privacy, so each child can only see what’s within his or her room and they can’t see what happens outside their room. However, as a parent you have a visibility to all rooms in the house. If you wish, you can visit each room.&lt;/p&gt;</description></item><item><title>K8S-thing: How Linux Namespace Works in a Pod</title><link>https://fauzislami.github.io/blog/k8s-thing-how-linux-namespace-works-in-a-pod/</link><pubDate>Mon, 27 Feb 2023 00:00:00 +0000</pubDate><guid>https://fauzislami.github.io/blog/k8s-thing-how-linux-namespace-works-in-a-pod/</guid><description>&lt;h1 id="linux-network-namespace"&gt;Linux Network Namespace&lt;/h1&gt;
+&lt;p&gt;Before we look into how Linux Network Namespace works in Kubernetes Pod, we need to know from the basic what it is and what the purpose of it. Network namespace in linux provides an isolated system resources associated with networking-related stuff within a single host such as IP (Internet Protocol) either it is IPv4 or IPv6, NAT rules, firewall rules, and routing table.&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://fauzislami.github.io/images/k8s-thing-how-namespace-work-in-pod/host.png" alt="main picture" title="main picture"&gt;&lt;/p&gt;
+&lt;p&gt;Let’s imagine you are a parent who have children and live in a house. Take the computer host as a house and namespaces are rooms within that house. You assign those rooms to each of your children. They have their own privacy, so each child can only see what’s within his or her room and they can’t see what happens outside their room. However, as a parent you have a visibility to all rooms in the house. If you wish, you can visit each room.&lt;/p&gt;</description></item></channel></rss>

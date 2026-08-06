@@ -1,32 +1,20 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>OpenShift on Blog · Muhammad Fauzi Islami</title>
-    <link>https://fauzislami.github.io/tags/openshift/</link>
-    <description>Recent content in OpenShift on Blog · Muhammad Fauzi Islami</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Fri, 26 Mar 2021 09:34:00 +0000</lastBuildDate><atom:link href="https://fauzislami.github.io/tags/openshift/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>CI/CD Labs Part 3: Integrate Jenkins with Openshift</title>
-      <link>https://fauzislami.github.io/blog/2021/03/26/ci-cd-labs-part-3-integrate-jenkins-with-openshift/</link>
-      <pubDate>Fri, 26 Mar 2021 09:34:00 +0000</pubDate>
-      
-      <guid>https://fauzislami.github.io/blog/2021/03/26/ci-cd-labs-part-3-integrate-jenkins-with-openshift/</guid>
-      <description>In this part 3 CI / CD lab the author will document how to integrate Jenkins with the OpenShift.
-What should be prepared:
-  1 VM Jenkins
-Spec:
-OS: Centos 7.9 (optional)
-• RAM: 16GB (this will be used until labs finish)
-• CPU: 4vCPU
-• HDD: 100GB
-• Internet connection
-  1 VM CRC (CodeReady Container) Mini OpenShift
-Spec:
-OS: Centos 7.9 (optional)
-• RAM: 16GB (this will be used until labs finish)</description>
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>OpenShift on Blog · Muhammad Fauzi Islami</title><link>https://fauzislami.github.io/tags/openshift/</link><description>Recent content in OpenShift on Blog · Muhammad Fauzi Islami</description><generator>Hugo</generator><language>en</language><lastBuildDate>Fri, 26 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://fauzislami.github.io/tags/openshift/index.xml" rel="self" type="application/rss+xml"/><item><title>CI/CD Labs Part 3: Integrate Jenkins with Openshift</title><link>https://fauzislami.github.io/blog/2021/03/26/ci-cd-labs-part-3-integrate-jenkins-with-openshift/</link><pubDate>Fri, 26 Mar 2021 00:00:00 +0000</pubDate><guid>https://fauzislami.github.io/blog/2021/03/26/ci-cd-labs-part-3-integrate-jenkins-with-openshift/</guid><description>&lt;p&gt;In this part 3 CI / CD lab the author will document how to integrate Jenkins with the OpenShift.&lt;/p&gt;
+&lt;p&gt;What should be prepared:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;1 VM Jenkins&lt;br&gt;
+Spec:&lt;br&gt;
+OS: Centos 7.9 (optional)&lt;br&gt;
+• RAM: 16GB (this will be used until labs finish)&lt;br&gt;
+• CPU: 4vCPU&lt;br&gt;
+• HDD: 100GB&lt;br&gt;
+• Internet connection&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;1 VM CRC (CodeReady Container) Mini OpenShift&lt;br&gt;
+Spec:&lt;br&gt;
+OS: Centos 7.9 (optional)&lt;br&gt;
+• RAM: 16GB (this will be used until labs finish)&lt;br&gt;
+• CPU: 4vCPU&lt;br&gt;
+• HDD: 100GB&lt;br&gt;
+• Internet connection&lt;/p&gt;</description></item></channel></rss>

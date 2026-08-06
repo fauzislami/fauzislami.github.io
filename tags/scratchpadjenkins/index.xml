@@ -1,21 +1,3 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>ScratchpadJenkins on Blog · Muhammad Fauzi Islami</title>
-    <link>https://fauzislami.github.io/tags/scratchpadjenkins/</link>
-    <description>Recent content in ScratchpadJenkins on Blog · Muhammad Fauzi Islami</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Wed, 10 Mar 2021 05:23:00 +0000</lastBuildDate><atom:link href="https://fauzislami.github.io/tags/scratchpadjenkins/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Menambahkan Trusted Certificate Pada JVM di Jenkins</title>
-      <link>https://fauzislami.github.io/blog/2021/03/10/menambahkan-trusted-certificate-pada-jvm-di-jenkins/</link>
-      <pubDate>Wed, 10 Mar 2021 05:23:00 +0000</pubDate>
-      
-      <guid>https://fauzislami.github.io/blog/2021/03/10/menambahkan-trusted-certificate-pada-jvm-di-jenkins/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://fauzislami.github.io/images/add-trusted-certificate-in-jvm/1.png&#34; alt=&#34;Scratchpad&#34; title=&#34;Scratchpad&#34;&gt;&lt;/p&gt;
-&lt;p&gt;Pada tulisan ini membahas sebuah kendala yang dialami penulis ketika melakukan integrasi Jenkins dengan Jira, Bitbucket dan Nexus yang menggunakan HTTPS sebagai protokolnya. Pada saat melakukan test connection terdapat error : &lt;strong&gt;&lt;em&gt;“&lt;/em&gt;&lt;/strong&gt;_ &lt;strong&gt;unable to find valid certification path to requested target jenkins&lt;/strong&gt;_ “&lt;/p&gt;</description>
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ScratchpadJenkins on Blog · Muhammad Fauzi Islami</title><link>https://fauzislami.github.io/tags/scratchpadjenkins/</link><description>Recent content in ScratchpadJenkins on Blog · Muhammad Fauzi Islami</description><generator>Hugo</generator><language>en</language><lastBuildDate>Wed, 10 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://fauzislami.github.io/tags/scratchpadjenkins/index.xml" rel="self" type="application/rss+xml"/><item><title>Menambahkan Trusted Certificate Pada JVM di Jenkins</title><link>https://fauzislami.github.io/blog/2021/03/10/menambahkan-trusted-certificate-pada-jvm-di-jenkins/</link><pubDate>Wed, 10 Mar 2021 00:00:00 +0000</pubDate><guid>https://fauzislami.github.io/blog/2021/03/10/menambahkan-trusted-certificate-pada-jvm-di-jenkins/</guid><description>&lt;p&gt;&lt;img src="https://fauzislami.github.io/images/add-trusted-certificate-in-jvm/1.png" alt="Scratchpad" title="Scratchpad"&gt;&lt;/p&gt;
+&lt;p&gt;Pada tulisan ini membahas sebuah kendala yang dialami penulis ketika melakukan integrasi Jenkins dengan Jira, Bitbucket dan Nexus yang menggunakan HTTPS sebagai protokolnya. Pada saat melakukan test connection terdapat error : &lt;strong&gt;&lt;em&gt;“&lt;/em&gt;&lt;/strong&gt;_ &lt;strong&gt;unable to find valid certification path to requested target jenkins&lt;/strong&gt;_ “&lt;/p&gt;
+&lt;p&gt;Error itu berasal JVM ( Java Virtual Machine ). Ini karena environment pada Java tidak mempunyai informasi tentang HTTPS server yang ada pada Jira, Bitbucket dan Nexus tersebut untuk dilakukan verifikasi apakah itu merupakan website valid atau tidak. Biasanya sertifikat dapat diperoleh dari internal Root CA atau secara Self-Signed dan hal ini yang biasanya seolah membuat JVM bingung karena tidak satupun yang masuk “trusted list” nya. Oleh karena itu kita perlu melakukan import sertifikat secara manual pada JVM. Dengan begitu, artinya kita memberitahu JVM bahwa sertifikat tersebut terpercaya.&lt;/p&gt;</description></item></channel></rss>
