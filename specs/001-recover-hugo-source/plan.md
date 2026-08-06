@@ -84,7 +84,10 @@ scripts/recovery/verify.mjs        driver: diffs public/ build against $MASTER_R
   and a minimal `hugo.toml` (`theme = "gokarna"`, `baseURL`, `title`) that Task 2 will
   extend with the full param/menu set.
 
-- [ ] **Step 1: Create `.gitignore`**
+- [ ] **Step 1: Add to `.gitignore`**
+
+A `.gitignore` already exists (with a `.superpowers/` entry used by the execution
+tooling — leave that line alone). Append these lines to it:
 
 ```
 /public/
