@@ -51,6 +51,10 @@ const turndownService = new TurndownService({
 
 export function htmlToMarkdownWithNotices($, contentEl) {
   const $content = $(contentEl).clone();
+  // Some pages embed a per-post <style> (notice CSS) or <script> inside
+  // .post-content; Turndown doesn't strip these by default, so their raw
+  // text would otherwise leak into the converted markdown body.
+  $content.find('style, script').remove();
   $content.find('div.notice').each((_, el) => {
     const $el = $(el);
     const classAttr = $el.attr('class') || '';
