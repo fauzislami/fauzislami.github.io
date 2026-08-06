@@ -1,5 +1,5 @@
 ---
-title: "Golang's Linter Aggregator: Golangci-lint"
+title: "Golang\\'s Linter Aggregator: Golangci-lint"
 date: 2022-09-06
 type: post
 url: "/blog/linter-aggregator-golangci-lint/"
