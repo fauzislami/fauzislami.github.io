@@ -70,3 +70,11 @@ test('htmlToMarkdownWithNotices leaves normal content untouched', () => {
   assert.match(markdown, /# Intro/);
   assert.match(markdown, /Hello \*\*world\*\*/);
 });
+
+test('htmlToMarkdownWithNotices strips style and script elements', () => {
+  const html = '<div class="post-content"><style>.notice{padding:18px}</style><p>Hello world</p></div>';
+  const $ = cheerio.load(html);
+  const markdown = htmlToMarkdownWithNotices($, $('.post-content'));
+  assert.doesNotMatch(markdown, /padding:18px/);
+  assert.match(markdown, /Hello world/);
+});

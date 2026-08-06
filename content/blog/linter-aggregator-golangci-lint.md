@@ -1,4 +1,8 @@
 ---
+# The \\' below is a deliberate CommonMark-escaped apostrophe: without it, Hugo's
+# markdownify typographer would curl it into a smart quote in the rendered <h1>,
+# mismatching the live page. Known side effect: the literal backslash leaks
+# as-is into the RSS/Atom feeds (which skip markdownify) — cosmetic, accepted.
 title: "Golang\\'s Linter Aggregator: Golangci-lint"
 date: 2022-09-06
 type: post
