@@ -1,0 +1,44 @@
+name: Build and Publish
+
+on:
+  push:
+    branches: [source]
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: '0.152.2'
+          extended: true
+
+      - name: Build site
+        run: hugo --minify
+
+      - name: Publish to master
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git fetch origin master
+          git worktree add /tmp/master-publish origin/master
+          rsync -a --delete --exclude='.git' public/ /tmp/master-publish/
+          cd /tmp/master-publish
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to publish"
+          else
+            git commit -m "Publish site from source@${GITHUB_SHA}"
+            git push origin HEAD:master
+          fi
