@@ -10,12 +10,12 @@ the user can continue writing new posts, with an automated pipeline that publish
 **Architecture:** A standard Hugo project (`hugo.toml`, `content/`, `themes/gokarna` as a
 git submodule, a small custom shortcode) reconstructed from scratch on the orphan
 `source` branch. A one-time Node.js recovery script reads the existing rendered HTML from
-a read-only reference checkout of `master` (already available at
-`/tmp/claude-72518314/-home-fauzi-accelbyte-net-accelbyte-personal-github-fauzislami-github-io/af324ece-d41e-41b6-bda7-0fcfa72ef185/scratchpad/master-ref`,
-a `git worktree` of `master`) and emits Markdown + front matter for every real post. A
-verification script then diffs a fresh Hugo build against that same reference to confirm
-nothing was lost in translation. A GitHub Actions workflow (created but not triggered as
-part of this plan) builds `source` and publishes to `master` on every future push.
+a read-only reference checkout of `master` (a `git worktree` of `master`, referred to
+throughout this plan as `$MASTER_REF`) and emits Markdown + front matter for every real
+post. A verification script then diffs a fresh Hugo build against that same reference to
+confirm nothing was lost in translation. A GitHub Actions workflow (created but not
+triggered as part of this plan) builds `source` and publishes to `master` on every
+future push.
 
 **Tech Stack:** Hugo (binary at `hugo`, v0.152.2, confirmed installed), Gokarna theme
 (`gokarna-theme/gokarna-hugo`) as a git submodule, Node.js 18 with `cheerio` +
@@ -27,10 +27,12 @@ for its unit tests — no test framework dependency needed).
 - Everything in this plan happens on the `source` branch. Do not modify `master` by hand
   at any point — only the (separately-triggered) GitHub Actions workflow may ever write
   to `master`, and only after Task 7's local verification has passed.
-- The read-only reference checkout of `master`'s current content lives at
-  `$MASTER_REF` = `/tmp/claude-72518314/-home-fauzi-accelbyte-net-accelbyte-personal-github-fauzislami-github-io/af324ece-d41e-41b6-bda7-0fcfa72ef185/scratchpad/master-ref`
-  (a `git worktree`). If it's missing when you start (e.g. new session), recreate it from
-  the repo root with: `git worktree add $MASTER_REF master`.
+- `$MASTER_REF` refers to a read-only reference checkout of `master`'s content (a
+  `git worktree` of `master`, created in a scratch location outside the repo for the
+  duration of this work). This plan's work is complete and the worktree has since been
+  removed; if this plan is ever re-run from scratch, recreate it first with
+  `git worktree add <some-scratch-path> master` and substitute that path for
+  `$MASTER_REF` throughout.
 - Do not recreate `posts/` (theme demo content), the `projects/` section, or
   `thoughts/hydra`, `thoughts/bludhaven`, `thoughts/tatooine` (unedited theme demo
   placeholders) — confirmed non-goals in `specs/001-recover-hugo-source/spec.md`.

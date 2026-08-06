@@ -11,7 +11,6 @@ pygmentsStyle = "monokai"
   avatarURL = "/images/logo-blog-oji.png"
   avatarAltText = "avatar"
   avatarSize = "size-m"
-  description = "/home/fauzislami/blog"
   footer = "Fauzi Islami"
   metaKeywords = ["blog", "gokarna", "hugo"]
   showBackToTopButton = true
