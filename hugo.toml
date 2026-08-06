@@ -1,0 +1,4 @@
+baseURL = "https://fauzislami.github.io/"
+languageCode = "en"
+title = "Blog · Muhammad Fauzi Islami"
+theme = "gokarna"
