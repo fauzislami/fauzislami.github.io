@@ -17,23 +17,44 @@ can continue writing new posts.
 - Generator meta tag: `Hugo 0.92.2`. Theme identified via
   `<meta name="keywords" content='blog, gokarna, hugo'>` and site structure as the
   **Gokarna** theme, real repo: `https://github.com/gokarna-theme/gokarna-hugo`.
-- Real content lives under `blog/`, `thoughts/`, `projects/`. `posts/` contains only
-  Gokarna's theme-demo/starter content (`lorem-ipsum`, `hello`, `emoji-support`,
-  `testing-post`, `markdown-syntax`, `theme-documentation-basics`,
+- Real content lives under `blog/` and (partially — see below) `thoughts/`. `posts/`
+  contains only Gokarna's theme-demo/starter content (`lorem-ipsum`, `hello`,
+  `emoji-support`, `testing-post`, `markdown-syntax`, `theme-documentation-basics`,
   `theme-documentation-advanced`) — not the user's writing, and will not be recreated.
-- ~30 real posts to recover, e.g.:
-  - Flat-slug permalinks: `blog/pod-topology-spread-constraints/`,
+- **`projects/hydra`, `projects/bludhaven`, `projects/tatooine`, and their `thoughts/`
+  namesakes (`thoughts/hydra`, `thoughts/bludhaven`, `thoughts/tatooine`) are unedited
+  Gokarna theme demo placeholders**, confirmed by diffing them word-for-word against the
+  theme's own `exampleSite/content/projects/{hydra,bludhaven,tatooine}.md` — identical
+  text (e.g. "A project was planned, but never completed."). The `projects/` section is
+  also not linked from the site nav at all. Decision (user-approved): drop the entire
+  `projects/` section and these 3 `thoughts/` entries from the recovery — they are not
+  the user's writing.
+- **28 real posts to recover**: 23 under `blog/` + 5 under `thoughts/`
+  (`thoughts/trade-off`, `thoughts/daring-echo`, `thoughts/generational-dispute`,
+  `thoughts/upon-midst-of-war`, `thoughts/pewaris-atau-perintis` — confirmed real by
+  matching recent genuine commits, e.g. "add new article: Daring Echo"). Full list of the
+  23 real `blog/` posts (exact current paths, confirmed via `find`):
+  - Flat-slug: `blog/pod-topology-spread-constraints/`,
     `blog/terratest-golang-for-infrastructure-e2e-testing/`,
     `blog/k8s-thing-how-linux-namespace-Plays-a-role-in-Kubernetes/`,
-    `blog/fluxcd-image-watcher/`, `blog/linter-aggregator-golangci-lint/`, etc.
-  - Date-path permalinks: `blog/2021/03/03/ci-cd-labs-part-1-integrate-jenkins-with-nexus-repository-oss/`,
+    `blog/k8s-thing-how-linux-namespace-works-in-a-pod/`, `blog/fluxcd-image-watcher/`,
+    `blog/flux-image-watcher/`, `blog/linter-aggregator-golangci-lint/`.
+  - Date-path (`/blog/YYYY/MM/DD/slug/`): `blog/2021/01/18/automating-k8s-cluster-installation-with-kubespray/`,
+    `blog/2021/03/03/ci-cd-labs-part-1-integrate-jenkins-with-nexus-repository-oss/`,
+    `blog/2021/03/05/ci-cd-labs-part-2-integrate-jenkins-with-bitbucket-server/`,
+    `blog/2021/03/10/menambahkan-trusted-certificate-pada-jvm-di-jenkins/`,
+    `blog/2021/03/10/namespace-openshift-tidak-dapat-dihapus/`,
+    `blog/2021/03/10/storagecluster-ocs-tidak-dapat-dihapus/`,
+    `blog/2021/03/20/machineconfigpool-degraded-saat-updating-error-when-evicting-pod/`,
+    `blog/2021/03/26/ci-cd-labs-part-3-integrate-jenkins-with-openshift/`,
+    `blog/2021/07/23/collecting-network-traffic-using-tcpdump-on-pod-level-in-openshift/`,
+    `blog/2021/08/01/service-mesh-istio-and-kiali-setup/`,
+    `blog/2021/09/26/secure-k8s-secret-object-using-sealedsecret/`,
+    `blog/2021/10/08/proxying-pypi-repository-in-nexus-repository-manager/`,
+    `blog/2021/10/14/proxying-docker-registry-through-nexus-repository-manager/`,
     `blog/2021/10/17/highly-available-kubernetes-cluster-with-haproxy-and-keepalived/`,
     `blog/2022/02/06/immutable-infrastructure-treating-servers-like-cattle-does-it-sound-ridiculous/`,
-    and others under `blog/2021/*` and `blog/2022/*`.
-  - `thoughts/hydra`, `thoughts/bludhaven`, `thoughts/tatooine`, `thoughts/trade-off`,
-    `thoughts/daring-echo`, `thoughts/generational-dispute`, `thoughts/upon-midst-of-war`,
-    `thoughts/pewaris-atau-perintis`.
-  - `projects/hydra`, `projects/bludhaven`, `projects/tatooine`.
+    `blog/2022/02/18/jcasc-jenkins-configuration-as-code-setting-up-jenkins-in-a-fully-reproducible-way/`.
   - Two posts (`blog/2022/02/06/immutable-infrastructure-...`,
     `blog/2022/02/18/jcasc-jenkins-configuration-as-code-...`) contain a `.notice info`
     callout box in their body (from a shortcode not native to Gokarna) with the text
@@ -80,12 +101,14 @@ can continue writing new posts.
    future posts — write markdown on `source`, push, done.
 3. **Theme**: the real Gokarna theme (`gokarna-theme/gokarna-hugo`) added as a **git
    submodule** at `themes/gokarna`, latest release — not a hand-copied recreation.
-4. **Demo content**: `posts/` (Gokarna's starter/demo posts) is **not** recreated.
-5. **Content conversion**: the ~30 real posts under `blog/`, `thoughts/`, `projects/`
-   **are** converted from their existing rendered HTML into Markdown (best-effort
-   automated script), since Hugo cannot build without markdown source and this content
-   doesn't exist anywhere else. The user will do a light proofread pass afterward rather
-   than requiring a line-by-line manual conversion.
+4. **Demo content**: `posts/` (Gokarna's starter/demo posts), the entire `projects/`
+   section, and the 3 unedited `thoughts/` demo entries (`hydra`, `bludhaven`,
+   `tatooine`) are **not** recreated — none of it is the user's writing.
+5. **Content conversion**: the 28 real posts under `blog/` and `thoughts/` **are**
+   converted from their existing rendered HTML into Markdown (best-effort automated
+   script), since Hugo cannot build without markdown source and this content doesn't
+   exist anywhere else. The user will do a light proofread pass afterward rather than
+   requiring a line-by-line manual conversion.
 6. **Permalinks**: each converted post gets an explicit `url:` front matter field set to
    its current published path (taken directly from the existing HTML's location), so the
    rebuilt site's URLs are guaranteed to match today's — this avoids having to reverse-
@@ -99,7 +122,8 @@ can continue writing new posts.
 - Pixel-perfect visual reproduction of the 2022-era theme (typewriter animation, old CSS
   class names) — explicitly out of scope per decision above.
 - Fixing the "corrupted data" notices in the two flagged posts — carried over as-is.
-- Recreating the `posts/` demo/starter content.
+- Recreating the `posts/` demo/starter content, the `projects/` section, or the 3
+  unedited demo `thoughts/` entries (`hydra`, `bludhaven`, `tatooine`).
 - Any changes to `master`'s current published content until the rebuilt source's output
   has been verified to match.
 
