@@ -30,21 +30,25 @@ the 28 recovered posts, to freeze their exact legacy URLs (some of which use
 the old `/blog/YYYY/MM/DD/slug/` permalink shape). New posts get a clean
 `/blog/<slug>/` or `/thoughts/<slug>/` URL automatically.
 
-## Warning: first push has an immediate effect on the live site
+## Warning: publishing has an immediate effect on the live site
 
-Pushing `source` to the remote triggers `.github/workflows/build-deploy.yml`,
-which builds the site with Hugo and immediately commits and pushes the output
-straight to `master` — the live, published branch. There is no staging step.
+`.github/workflows/build-deploy.yml` builds the site with Hugo and, when it
+publishes, commits and pushes the output straight to `master` — the live,
+published branch. There is no staging step in that publish path.
 
-On the first run after this reconstruction, that publish will remove the
+On the first real publish after this reconstruction, it will remove the
 theme-demo leftovers currently live on `master`: `/posts/`, `/projects/`,
 three unedited demo pages under `/thoughts/`, stale demo tag pages, and the
 old asset paths `/icons/`, `/css/`, `/js/` (replaced by new theme-provided
 paths). This is intentional cleanup per the recovery spec, not a regression,
 but it is a real and immediate change to the live site, so it's worth being
-aware of before pushing.
+aware of before it happens.
 
-If you'd rather inspect a build before it goes live: temporarily remove the
-`on: push` trigger from `build-deploy.yml` so only `workflow_dispatch`
-remains, push `source`, run the workflow manually and inspect its build
-artifact/logs, then restore the `on: push` trigger once you're satisfied.
+**The workflow's `on: push` trigger is currently disabled** (commented out
+in `build-deploy.yml`) so that pushing `source` does not, by itself, publish
+anything. Only `workflow_dispatch` (manual run) is active, and it defaults
+to `dry_run: true` — a manual run in that mode builds the site and uploads
+the result as a downloadable Actions artifact instead of touching `master`.
+To do a real publish: either run the workflow manually with `dry_run` set to
+`false`, or uncomment the `on: push` block once you're ready for every future
+push to `source` to auto-publish.

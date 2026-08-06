@@ -1,9 +1,18 @@
 name: Build and Publish
 
+# NOTE: the `push` trigger is temporarily disabled below (see comment) for
+# the initial inspection of this recovered site before it goes live. Once
+# you've inspected a dry run and are ready for every future push to `source`
+# to auto-publish to `master`, uncomment the `push:` block.
 on:
-  push:
-    branches: [source]
-  workflow_dispatch: {}
+  # push:
+  #   branches: [source]
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Build only and upload as an artifact; do not publish to master'
+        type: boolean
+        default: true
 
 permissions:
   contents: write
@@ -27,7 +36,16 @@ jobs:
       - name: Build site
         run: hugo --minify
 
+      - name: Upload build artifact (dry run)
+        if: github.event_name == 'workflow_dispatch' && inputs.dry_run == true
+        uses: actions/upload-artifact@v4
+        with:
+          name: hugo-build-output
+          path: public/
+          retention-days: 7
+
       - name: Publish to master
+        if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.dry_run == false)
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
