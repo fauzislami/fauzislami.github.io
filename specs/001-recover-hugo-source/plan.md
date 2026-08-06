@@ -63,6 +63,7 @@ content/thoughts/*.md              5 real posts (Task 6)
 scripts/recovery/package.json      cheerio + turndown deps (Task 5)
 scripts/recovery/lib.mjs           date parsing, front matter, HTML->MD+notice conversion (Task 5)
 scripts/recovery/lib.test.mjs      unit tests for lib.mjs (Task 5)
+scripts/recovery/posts.mjs         the authoritative 28-post path list, shared by convert.mjs and verify.mjs (Task 6)
 scripts/recovery/convert.mjs       driver: walks 28 posts, writes content/*.md (Task 6)
 scripts/recovery/verify.mjs        driver: diffs public/ build against $MASTER_REF (Task 7)
 .github/workflows/build-deploy.yml build `source` -> publish to `master` (Task 8)
@@ -591,35 +592,24 @@ git commit -m "feat: add recovery-script library with tests (dates, front matter
 ### Task 6: Conversion driver — generate all 28 real posts
 
 **Files:**
+- Create: `scripts/recovery/posts.mjs`
 - Create: `scripts/recovery/convert.mjs`
 - Creates (as output, not hand-written): `content/blog/*.md` (23 files),
   `content/thoughts/*.md` (5 files)
 
 **Interfaces:**
 - Consumes: `lib.mjs`'s four exports from Task 5; reads HTML from `$MASTER_REF`.
-- Produces: `content/blog/<slug>.md` and `content/thoughts/<slug>.md` for all 28 real
+- Produces: `scripts/recovery/posts.mjs` exporting `BLOG_POSTS: string[]`,
+  `THOUGHTS_POSTS: string[]`, and `DATE_FALLBACK: Record<string, string>` — this is the
+  ONE authoritative copy of the 28-post path list. Task 7's `verify.mjs` imports
+  `BLOG_POSTS`/`THOUGHTS_POSTS` from this same file rather than re-declaring its own copy.
+  Also produces `content/blog/<slug>.md` and `content/thoughts/<slug>.md` for all 28 real
   posts — consumed by Task 7's build + verification.
 
-- [ ] **Step 1: Write `convert.mjs`**
+- [ ] **Step 1: Write `posts.mjs`**
 
 ```js
-#!/usr/bin/env node
-import fs from 'node:fs';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-import * as cheerio from 'cheerio';
-import { parsePostDate, parseRssPubDate, buildFrontMatter, htmlToMarkdownWithNotices } from './lib.mjs';
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const REPO_ROOT = path.resolve(__dirname, '../..');
-
-const masterRef = process.argv[2];
-if (!masterRef) {
-  console.error('Usage: node convert.mjs <path-to-master-worktree>');
-  process.exit(1);
-}
-
-const BLOG_POSTS = [
+export const BLOG_POSTS = [
   'blog/pod-topology-spread-constraints',
   'blog/terratest-golang-for-infrastructure-e2e-testing',
   'blog/k8s-thing-how-linux-namespace-Plays-a-role-in-Kubernetes',
@@ -645,7 +635,7 @@ const BLOG_POSTS = [
   'blog/2022/02/18/jcasc-jenkins-configuration-as-code-setting-up-jenkins-in-a-fully-reproducible-way',
 ];
 
-const THOUGHTS_POSTS = [
+export const THOUGHTS_POSTS = [
   'thoughts/trade-off',
   'thoughts/daring-echo',
   'thoughts/generational-dispute',
@@ -654,10 +644,31 @@ const THOUGHTS_POSTS = [
 ];
 
 // Fallback for posts with no .post-date AND no real RSS <pubDate> — see spec.md.
-const DATE_FALLBACK = {
+export const DATE_FALLBACK = {
   'thoughts/trade-off': '2021-09-27',
   'thoughts/daring-echo': '2024-02-26',
 };
+```
+
+- [ ] **Step 2: Write `convert.mjs`**
+
+```js
+#!/usr/bin/env node
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import * as cheerio from 'cheerio';
+import { parsePostDate, parseRssPubDate, buildFrontMatter, htmlToMarkdownWithNotices } from './lib.mjs';
+import { BLOG_POSTS, THOUGHTS_POSTS, DATE_FALLBACK } from './posts.mjs';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const REPO_ROOT = path.resolve(__dirname, '../..');
+
+const masterRef = process.argv[2];
+if (!masterRef) {
+  console.error('Usage: node convert.mjs <path-to-master-worktree>');
+  process.exit(1);
+}
 
 function extractRssDate(rssContent, urlPath) {
   const guid = `https://fauzislami.github.io${urlPath}`;
@@ -703,17 +714,17 @@ for (const relPath of THOUGHTS_POSTS) convertOne(relPath, 'thoughts', rssContent
 console.log(`\nConverted ${BLOG_POSTS.length + THOUGHTS_POSTS.length} posts.`);
 ```
 
-- [ ] **Step 2: Run it against the reference worktree**
+- [ ] **Step 3: Run it against the reference worktree**
 
 Run: `node scripts/recovery/convert.mjs "$MASTER_REF"`
 Expected: 28 `wrote ...` lines followed by `Converted 28 posts.`, no errors thrown.
 
-- [ ] **Step 3: Verify the expected file counts**
+- [ ] **Step 4: Verify the expected file counts**
 
 Run: `ls content/blog/*.md | wc -l && ls content/thoughts/*.md | wc -l`
 Expected: `23` then `5`.
 
-- [ ] **Step 4: Spot-check one flat-permalink post's front matter**
+- [ ] **Step 5: Spot-check one flat-permalink post's front matter**
 
 Run: `head -8 content/blog/pod-topology-spread-constraints.md`
 Expected:
@@ -728,15 +739,15 @@ draft: false
 ---
 ```
 
-- [ ] **Step 5: Spot-check a date-fallback thoughts post**
+- [ ] **Step 6: Spot-check a date-fallback thoughts post**
 
 Run: `head -8 content/thoughts/trade-off.md`
 Expected: `date: 2021-09-27` and `url: "/thoughts/trade-off/"` present.
 
-- [ ] **Step 6: Commit**
+- [ ] **Step 7: Commit**
 
 ```bash
-git add scripts/recovery/convert.mjs content/
+git add scripts/recovery/posts.mjs scripts/recovery/convert.mjs content/
 git commit -m "feat: convert all 28 real posts from published HTML into Markdown content"
 ```
 
@@ -748,8 +759,9 @@ git commit -m "feat: convert all 28 real posts from published HTML into Markdown
 - Create: `scripts/recovery/verify.mjs`
 
 **Interfaces:**
-- Consumes: `public/` (from `hugo --minify`, using everything from Tasks 1-6) and
-  `$MASTER_REF`.
+- Consumes: `public/` (from `hugo --minify`, using everything from Tasks 1-6), `$MASTER_REF`,
+  and `BLOG_POSTS`/`THOUGHTS_POSTS` imported from Task 6's `scripts/recovery/posts.mjs`
+  (the single authoritative post list — do not re-declare it here).
 - Produces: a pass/fail report. This is the gate before Task 8's workflow is ever allowed
   to run for real.
 
@@ -761,6 +773,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as cheerio from 'cheerio';
+import { BLOG_POSTS, THOUGHTS_POSTS } from './posts.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, '../..');
@@ -772,36 +785,7 @@ if (!masterRef) {
   process.exit(1);
 }
 
-const ALL_POSTS = [
-  'blog/pod-topology-spread-constraints',
-  'blog/terratest-golang-for-infrastructure-e2e-testing',
-  'blog/k8s-thing-how-linux-namespace-Plays-a-role-in-Kubernetes',
-  'blog/k8s-thing-how-linux-namespace-works-in-a-pod',
-  'blog/fluxcd-image-watcher',
-  'blog/flux-image-watcher',
-  'blog/linter-aggregator-golangci-lint',
-  'blog/2021/01/18/automating-k8s-cluster-installation-with-kubespray',
-  'blog/2021/03/03/ci-cd-labs-part-1-integrate-jenkins-with-nexus-repository-oss',
-  'blog/2021/03/05/ci-cd-labs-part-2-integrate-jenkins-with-bitbucket-server',
-  'blog/2021/03/10/menambahkan-trusted-certificate-pada-jvm-di-jenkins',
-  'blog/2021/03/10/namespace-openshift-tidak-dapat-dihapus',
-  'blog/2021/03/10/storagecluster-ocs-tidak-dapat-dihapus',
-  'blog/2021/03/20/machineconfigpool-degraded-saat-updating-error-when-evicting-pod',
-  'blog/2021/03/26/ci-cd-labs-part-3-integrate-jenkins-with-openshift',
-  'blog/2021/07/23/collecting-network-traffic-using-tcpdump-on-pod-level-in-openshift',
-  'blog/2021/08/01/service-mesh-istio-and-kiali-setup',
-  'blog/2021/09/26/secure-k8s-secret-object-using-sealedsecret',
-  'blog/2021/10/08/proxying-pypi-repository-in-nexus-repository-manager',
-  'blog/2021/10/14/proxying-docker-registry-through-nexus-repository-manager',
-  'blog/2021/10/17/highly-available-kubernetes-cluster-with-haproxy-and-keepalived',
-  'blog/2022/02/06/immutable-infrastructure-treating-servers-like-cattle-does-it-sound-ridiculous',
-  'blog/2022/02/18/jcasc-jenkins-configuration-as-code-setting-up-jenkins-in-a-fully-reproducible-way',
-  'thoughts/trade-off',
-  'thoughts/daring-echo',
-  'thoughts/generational-dispute',
-  'thoughts/upon-midst-of-war',
-  'thoughts/pewaris-atau-perintis',
-];
+const ALL_POSTS = [...BLOG_POSTS, ...THOUGHTS_POSTS];
 
 function normalizeText(text) {
   return text.replace(/\s+/g, ' ').trim();
