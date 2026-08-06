@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
     inputs:
       dry_run:
-        description: 'Build only and upload as an artifact; do not publish to gh-pages'
+        description: 'dry-run'
         type: boolean
         default: true
 
