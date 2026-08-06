@@ -55,16 +55,32 @@ can continue writing new posts.
     `blog/2021/10/17/highly-available-kubernetes-cluster-with-haproxy-and-keepalived/`,
     `blog/2022/02/06/immutable-infrastructure-treating-servers-like-cattle-does-it-sound-ridiculous/`,
     `blog/2022/02/18/jcasc-jenkins-configuration-as-code-setting-up-jenkins-in-a-fully-reproducible-way/`.
-  - Two posts (`blog/2022/02/06/immutable-infrastructure-...`,
-    `blog/2022/02/18/jcasc-jenkins-configuration-as-code-...`) contain a `.notice info`
-    callout box in their body (from a shortcode not native to Gokarna) with the text
-    "This post has some corrupted data. Will fix it soon!" — carry this over verbatim,
-    it's the user's own existing published caveat, not something to fix now.
+  - Three posts contain a `.notice` callout box in their body (from a shortcode not
+    native to Gokarna, matching the well-known `hugo-notice` module's markup —
+    `<div class="notice {type}">` + an inline SVG icon sprite + `.notice-title`):
+    `blog/2022/02/06/immutable-infrastructure-...` and
+    `blog/2022/02/18/jcasc-jenkins-configuration-as-code-...` each have a `notice info`
+    box with the text "This post has some corrupted data. Will fix it soon!" (carry over
+    verbatim — it's the user's own existing published caveat, not something to fix now).
+    `blog/k8s-thing-how-linux-namespace-Plays-a-role-in-Kubernetes/` has a `notice note`
+    box with real substantive content ("Notice that `cni-` prefix...").
   - No post actually uses the `categories/` taxonomy despite `categories/*` list pages
     existing (confirmed via grep across all post HTML) — so front matter only needs
     `tags`, not `categories`.
 - Per-post metadata available directly in the rendered HTML: title (`<h1>`), date
-  (`.post-date`), tags (`.post-tags a` links), and full body (`.post-content`).
+  (`.post-date`, format `Month D, YYYY`), tags (`.post-tags a` link text, e.g. `CI/CD`,
+  `Jenkins`, `Kubernetes`), and full body (`.post-content`).
+- 2 of the 5 real `thoughts/` posts (`trade-off`, `daring-echo`) have **no** `.post-date`
+  in their HTML and no real `<pubDate>` in `index.xml` (shows the Hugo zero-date
+  `Mon, 01 Jan 0001`) — meaning their original front matter never had a `date:` set. The
+  other 3 `thoughts/` posts *do* have a real `<pubDate>` in the root `index.xml` RSS feed
+  (confirmed: `pewaris-atau-perintis` → 2024-06-29, `generational-dispute` → 2023-11-24,
+  `upon-midst-of-war` → 2023-10-24) even though it's not shown on the page — use that as
+  the date source for `thoughts/` posts instead of `.post-date`. For `trade-off` and
+  `daring-echo`, fall back to the date of the commit that first added that page to
+  `master` (`git log master --follow --diff-filter=A --format=%ad --date=short --
+  thoughts/<slug>/index.html`, take the oldest): `trade-off` → 2021-09-27, `daring-echo`
+  → 2024-02-26.
 - Homepage/site params observed live and matched against the real theme's exampleSite
   config (`/tmp/gokarna-check/exampleSite/hugo.toml`, confirms param names):
   - `title = "Blog · Muhammad Fauzi Islami"`
