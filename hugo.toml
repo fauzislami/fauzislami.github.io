@@ -2,3 +2,79 @@ baseURL = "https://fauzislami.github.io/"
 languageCode = "en"
 title = "Blog · Muhammad Fauzi Islami"
 theme = "gokarna"
+enableEmoji = true
+enableRobotsTXT = true
+pygmentsStyle = "monokai"
+
+[params]
+  accentColor = "#FF4D4D"
+  avatarURL = "/images/logo-blog-oji.png"
+  avatarAltText = "avatar"
+  avatarSize = "size-m"
+  description = "/home/fauzislami/blog"
+  footer = "Fauzi Islami"
+  metaKeywords = ["blog", "gokarna", "hugo"]
+  showBackToTopButton = true
+
+  socialIcons = [
+    { name = "github", url = "https://github.com/fauzislami" },
+    { name = "linkedin", url = "https://www.linkedin.com/in/fauzislami/" },
+    { name = "instagram", url = "https://www.instagram.com/fauzislami/" },
+  ]
+
+  customHeadHTML = """
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" integrity="sha384-5TcZemv2l/9On385z///+d7MSYlvIEw9FuZTIdZ14vJLqWphw7e7ZPuOiCHJcFCP" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js" integrity="sha384-cMkvdD8LoxVzGF/RPUKAcvmm49FQ0oxwDF3BGKtDXcEc+T1b2N+teh/OJfpU0jr6" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/contrib/auto-render.min.js" integrity="sha384-hCXGrW6PitJEwbkoStFjeJxv+fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh" crossorigin="anonymous"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false},
+          ],
+          throwOnError: false
+        });
+      });
+    </script>
+  """
+
+[[menu.main]]
+  name = "Home"
+  url = "/"
+  weight = 1
+
+[[menu.main]]
+  name = "Posts"
+  url = "/blog/"
+  weight = 2
+
+[[menu.main]]
+  name = "Thoughts"
+  url = "/thoughts/"
+  weight = 3
+
+[[menu.main]]
+  name = "About Me"
+  url = "https://about.me/fauzislami"
+  weight = 4
+
+[[menu.main]]
+  name = "Tags"
+  url = "/tags/"
+  weight = 5
+
+[[menu.main]]
+  identifier = "github"
+  pre = "<span data-feather='github'></span>"
+  url = "https://github.com/fauzislami"
+  weight = 6
+
+[markup.tableOfContents]
+  startLevel = 1
+  endLevel = 4
+  ordered = false
+
+[minify]
+  minifyOutput = true
