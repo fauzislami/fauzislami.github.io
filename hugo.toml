@@ -55,20 +55,25 @@ pygmentsStyle = "monokai"
   weight = 3
 
 [[menu.main]]
+  name = "Scratchpad"
+  url = "/scratchpad/"
+  weight = 4
+
+[[menu.main]]
   name = "About Me"
   url = "https://about.me/fauzislami"
-  weight = 4
+  weight = 5
 
 [[menu.main]]
   name = "Tags"
   url = "/tags/"
-  weight = 5
+  weight = 6
 
 [[menu.main]]
   identifier = "github"
   pre = "<span data-feather='github'></span>"
   url = "https://github.com/fauzislami"
-  weight = 6
+  weight = 7
 
 [markup.tableOfContents]
   startLevel = 1
