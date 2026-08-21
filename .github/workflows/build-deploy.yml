@@ -5,8 +5,8 @@ name: Build and Publish
 # you've inspected a dry run and are ready for every future push to `master`
 # to auto-publish to `gh-pages`, uncomment the `push:` block.
 on:
-  # push:
-  #   branches: [master]
+  push:
+    branches: [master]
   workflow_dispatch:
     inputs:
       dry_run:
